@@ -1,0 +1,117 @@
+Login
+send the user to 
+
+Registration
+Top Level Contact
+Name
+Image
+Email (allow more than one with labels)
+Home Address
+Work Address
+Hometown
+Phone (allow more than one with labels)
+Facebook
+Twitter
+Linked-In
+Gender
+Birth Date
+Hair Color
+Hair Length
+Eye Color
+Work Info
+Company
+Position
+Education
+College (allow more than one with labels)
+High School
+Family Members (allow more than one with labels) or add by searching existing members (see Search section below)
+Name
+Image
+Date of Birth
+Relationship: spouse/child
+spouse
+Email (allow more than one with labels)
+Phone (allow more than one with labels)
+Company
+Position
+Invite to join and populate/expand with their own data
+child
+grade
+Invite to join and populate/expand with their own data
+
+
+Manage Communities
+Per Community Setting
+all user view (members/admins)
+Info Share Status - full/partial
+Contact - in-mail/email/both
+Note: communities will inherit the settings of their parent community so a user need not update these settings constantly unless they need to tweak for a specific community
+admin view (only owner of a community)
+name
+description
+image
+manage members
+invite members
+from current users
+search (see Discover Central below) - only show members of communities in which you are a member
+browse - only show members of communities in which you are a member
+external - new member
+from contacts (with permission from user)
+free-form by name/email
+an email directing them to download the app and register
+a unique code to enter once in the app to securely join the community
+archive members
+member is removed from the active list, but date and membership is kept along with start/end date for future search purposes.
+Request New Community
+send a request for the creation of a community to the admin of the parent community
+provide name of new community and description of purpose
+
+
+Request Center
+Community Requests
+owner of community view
+view new community requests, accept/deny with comment
+requester view
+view pending requests with status
+
+
+Communication Center
+view inbox
+private messages
+from
+message
+community broadcasts
+community name
+message
+send private message
+search within communities in which you are a member
+browse within communities in which you are a member
+
+
+Discover (Search) Center
+search/browse within communities in which you are a member
+filter on all/part of various registration criteria
+name
+email
+address
+phone
+gender
+birthday (month/day/year)
+hair (color/length)
+eye color
+physical Description
+company
+position
+college
+high school
+home town
+family member having:
+name
+birthday (month/day/year)
+gender
+grade
+company
+position
+college
+high school
+home town

@@ -1,0 +1,6 @@
+framework module Pods_communifime {
+  umbrella header "Pods-communifime-umbrella.h"
+
+  export *
+  module * { export * }
+}
