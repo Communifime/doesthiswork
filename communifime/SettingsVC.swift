@@ -64,7 +64,33 @@ class SettingsVC: UIViewController {
     {
         if(self.validateUpdateEmailForm())
         {
-            
+            let alert = UIAlertController(title: "Confirm", message: "Are you sure you want to update your email?", preferredStyle: .Alert)
+            let yesAction = UIAlertAction(title: "Yes", style: .Default, handler: { (action: UIAlertAction) in
+                let ref = Core.fireBaseRef
+                ref.changeEmailForUser(self.currentEmailLabel.text!, password: self.passwordTF.text!,
+                    toNewEmail: self.newEmailTF.text!, withCompletionBlock: { error in
+                        if error != nil
+                        {
+                            self.errorTextView.text = error.localizedDescription
+                            self.errorTextView.textColor = UIColor.redColor()
+                        }
+                        else
+                        {
+                            self.currentEmailLabel.text = self.newEmailTF.text!
+                            self.newEmailTF.text = ""
+                            self.confirmNewEmailTF.text = ""
+                            self.passwordTF.text = ""
+                            let successAlert = UIAlertController(title: "Success", message: "Your email has been successfully updated", preferredStyle: .Alert)
+                            let okAction = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+                            successAlert.addAction(okAction)
+                            self.presentViewController(successAlert, animated: true, completion: nil)
+                        }
+                })
+            })
+            let noAction = UIAlertAction(title: "No", style: .Cancel, handler: nil)
+            alert.addAction(yesAction)
+            alert.addAction(noAction)
+            self.presentViewController(alert, animated: true, completion: nil)
         }
     }
     
