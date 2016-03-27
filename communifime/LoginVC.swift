@@ -22,16 +22,20 @@ class LoginVC: UIViewController
         super.viewDidLoad()
         self.resetPasswordStackView.hidden = true
         self.errorTextView.text = ""
-        
+    }
+
+    override func viewDidAppear(animated: Bool)
+    {
         if(Core.fireBaseRef.authData != nil)
         {
             self.postLoginSetup()
         }
     }
-
+    
     func postLoginSetup()
     {
-        print("Post Login Setup")
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("TabBarController")
+        self.presentViewController(vc!, animated: true, completion: nil)
     }
     
     func validateLoginForm() -> Bool
