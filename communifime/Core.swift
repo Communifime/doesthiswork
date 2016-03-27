@@ -11,6 +11,7 @@ import Firebase
 
 class Core: NSObject
 {
+
     static var fireBaseRef = Firebase(url: "https://amber-fire-7588.firebaseio.com/")
     
     static func isValidEmail(testStr:String) -> Bool
