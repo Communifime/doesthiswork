@@ -12,7 +12,8 @@ class SettingsVC: UIViewController {
 
     @IBOutlet weak var confirmNewPasswordTF: UITextField!
     @IBOutlet weak var newPasswordTF: UITextField!
-    @IBOutlet weak var passwordTF: UITextField!
+    @IBOutlet weak var newEmailpasswordTF: UITextField!
+    @IBOutlet weak var newPasswordpasswordTF: UITextField!
     @IBOutlet weak var confirmNewEmailTF: UITextField!
     @IBOutlet weak var newEmailTF: UITextField!
     @IBOutlet weak var currentEmailLabel: UILabel!
@@ -25,6 +26,13 @@ class SettingsVC: UIViewController {
         self.errorTextView.text = ""
 
         // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func logoutButtonPressed(sender: AnyObject)
+    {
+        Core.fireBaseRef.unauth()
+        let loginViewController = self.storyboard!.instantiateViewControllerWithIdentifier("LoginVC")
+        UIApplication.sharedApplication().keyWindow?.rootViewController = loginViewController
     }
 
     func validateUpdateEmailForm() -> Bool
@@ -46,9 +54,42 @@ class SettingsVC: UIViewController {
         {
             errorMessage = "The email addresses must match"
         }
-        else if(self.passwordTF.text?.characters.count == 0)
+        else if(self.newEmailpasswordTF.text?.characters.count == 0)
         {
             errorMessage = "You must enter your password"
+        }
+        else
+        {
+            self.errorTextView.text = ""
+            return true
+        }
+        self.errorTextView.text = errorMessage
+        self.errorTextView.textColor = UIColor.redColor()
+        return false
+    }
+
+    func validateUpdatePasswordForm() -> Bool
+    {
+        var errorMessage = ""
+        if(self.newPasswordTF.text?.characters.count == 0)
+        {
+            errorMessage = "You must enter a new password"
+        }
+        else if(self.confirmNewPasswordTF.text?.characters.count == 0)
+        {
+            errorMessage = "You must confirm the new password"
+        }
+        else if(self.newPasswordTF.text! != self.confirmNewPasswordTF.text!)
+        {
+            errorMessage = "The passwords must match"
+        }
+        else if(self.newPasswordpasswordTF.text?.characters.count == 0)
+        {
+            errorMessage = "You must enter your password"
+        }
+        else if(self.newPasswordpasswordTF.text! == self.newPasswordTF.text!)
+        {
+            errorMessage = "New password matches the old password"
         }
         else
         {
@@ -67,7 +108,7 @@ class SettingsVC: UIViewController {
             let alert = UIAlertController(title: "Confirm", message: "Are you sure you want to update your email?", preferredStyle: .Alert)
             let yesAction = UIAlertAction(title: "Yes", style: .Default, handler: { (action: UIAlertAction) in
                 let ref = Core.fireBaseRef
-                ref.changeEmailForUser(self.currentEmailLabel.text!, password: self.passwordTF.text!,
+                ref.changeEmailForUser(self.currentEmailLabel.text!, password: self.newEmailpasswordTF.text!,
                     toNewEmail: self.newEmailTF.text!, withCompletionBlock: { error in
                         if error != nil
                         {
@@ -76,14 +117,36 @@ class SettingsVC: UIViewController {
                         }
                         else
                         {
-                            self.currentEmailLabel.text = self.newEmailTF.text!
-                            self.newEmailTF.text = ""
-                            self.confirmNewEmailTF.text = ""
-                            self.passwordTF.text = ""
-                            let successAlert = UIAlertController(title: "Success", message: "Your email has been successfully updated", preferredStyle: .Alert)
-                            let okAction = UIAlertAction(title: "Ok", style: .Default, handler: nil)
-                            successAlert.addAction(okAction)
-                            self.presentViewController(successAlert, animated: true, completion: nil)
+                            //re-authenticate so the update email is available
+                            Core.fireBaseRef.authUser(self.newEmailTF.text!, password: self.newEmailpasswordTF.text, withCompletionBlock: { error, authData in
+                                if(error == nil)
+                                {
+                                    self.currentEmailLabel.text = self.newEmailTF.text!
+                                    self.newEmailTF.text = ""
+                                    self.confirmNewEmailTF.text = ""
+                                    self.newEmailpasswordTF.text = ""
+                                    let successAlert = UIAlertController(title: "Success", message: "Your email has been successfully updated", preferredStyle: .Alert)
+                                    let okAction = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+                                    successAlert.addAction(okAction)
+                                    self.presentViewController(successAlert, animated: true, completion: nil)
+                                }
+                                else
+                                {
+                                    /*
+                                     should never happen if the previous worked, but just 
+                                     in case there is a network outage between the two 
+                                     calls this is to be safe.
+                                     */
+                                    let errorAlert = UIAlertController(title: "Failure", message: "Your email has been successfully updated, but re-authentication failed, please logout and log back in to finish the update.", preferredStyle: .Alert)
+                                    let okAction = UIAlertAction(title: "Ok", style: .Cancel, handler: { (action: UIAlertAction) in
+                                        Core.fireBaseRef.unauth()
+                                        self.dismissViewControllerAnimated(true, completion: nil)
+                                    })
+                                    errorAlert.addAction(okAction)
+                                    self.presentViewController(errorAlert, animated: true, completion: nil)
+                                }
+                            })
+                            
                         }
                 })
             })
@@ -94,7 +157,37 @@ class SettingsVC: UIViewController {
         }
     }
     
-    @IBAction func updatePasswordButtonPressed(sender: AnyObject) {
+    @IBAction func updatePasswordButtonPressed(sender: AnyObject)
+    {
+        if(self.validateUpdatePasswordForm())
+        {
+            let alert = UIAlertController(title: "Confirm", message: "Are you sure you want to update your password?", preferredStyle: .Alert)
+            let yesAction = UIAlertAction(title: "Yes", style: .Default, handler: { (action: UIAlertAction) in
+                let ref = Core.fireBaseRef
+                ref.changePasswordForUser(self.currentEmailLabel.text!, fromOld: self.newPasswordpasswordTF.text!, toNew: self.newPasswordTF.text!, withCompletionBlock: { (error:NSError!) in
+                    if error != nil
+                    {
+                        self.errorTextView.text = error.localizedDescription
+                        self.errorTextView.textColor = UIColor.redColor()
+                    }
+                    else
+                    {
+                        self.currentEmailLabel.text = self.newEmailTF.text!
+                        self.newPasswordTF.text = ""
+                        self.confirmNewPasswordTF.text = ""
+                        self.newPasswordpasswordTF.text = ""
+                        let successAlert = UIAlertController(title: "Success", message: "Your password has been successfully updated", preferredStyle: .Alert)
+                        let okAction = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+                        successAlert.addAction(okAction)
+                        self.presentViewController(successAlert, animated: true, completion: nil)
+                    }
+                })
+            })
+            let noAction = UIAlertAction(title: "No", style: .Cancel, handler: nil)
+            alert.addAction(yesAction)
+            alert.addAction(noAction)
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
     }
     
     override func didReceiveMemoryWarning() {
