@@ -20,4 +20,12 @@ class Core: NSObject
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailTest.evaluateWithObject(testStr)
     }
+    
+    static func makeViewACircle(v : UIView)
+    {
+        v.layer.cornerRadius = 37.5
+        v.layer.borderWidth = 1.0
+        v.layer.masksToBounds = true
+        v.layer.backgroundColor = UIColor.clearColor().CGColor
+    }
 }

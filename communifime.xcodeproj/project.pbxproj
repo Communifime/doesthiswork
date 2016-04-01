@@ -23,6 +23,8 @@
 		68FDF1701CA7481C0037B878 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FDF16F1CA7481C0037B878 /* RegisterVC.swift */; };
 		68FDF1721CA748C70037B878 /* Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FDF1711CA748C70037B878 /* Core.swift */; };
 		68FDF1741CA749D70037B878 /* UIViewController+Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FDF1731CA749D70037B878 /* UIViewController+Extras.swift */; };
+		B818DF761CAEBCCC00B22D10 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B818DF751CAEBCCC00B22D10 /* ProfileVC.swift */; };
+		B818DF781CAEBE0C00B22D10 /* GetImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B818DF771CAEBE0C00B22D10 /* GetImageVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +47,8 @@
 		68FDF16F1CA7481C0037B878 /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		68FDF1711CA748C70037B878 /* Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Core.swift; sourceTree = "<group>"; };
 		68FDF1731CA749D70037B878 /* UIViewController+Extras.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extras.swift"; sourceTree = "<group>"; };
+		B818DF751CAEBCCC00B22D10 /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
+		B818DF771CAEBE0C00B22D10 /* GetImageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetImageVC.swift; sourceTree = "<group>"; };
 		E44AEA3FD95E8E89CD3B6CE8 /* Pods-communifime.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-communifime.release.xcconfig"; path = "Pods/Target Support Files/Pods-communifime/Pods-communifime.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,9 +114,11 @@
 		68FDF16C1CA746F90037B878 /* Code Behinds */ = {
 			isa = PBXGroup;
 			children = (
+				B818DF751CAEBCCC00B22D10 /* ProfileVC.swift */,
 				68FDF16D1CA7475B0037B878 /* LoginVC.swift */,
 				68FDF16F1CA7481C0037B878 /* RegisterVC.swift */,
 				68148BE51CA89DBB0096E699 /* SettingsVC.swift */,
+				B818DF771CAEBE0C00B22D10 /* GetImageVC.swift */,
 			);
 			name = "Code Behinds";
 			sourceTree = "<group>";
@@ -264,10 +270,12 @@
 			files = (
 				68FDF1701CA7481C0037B878 /* RegisterVC.swift in Sources */,
 				68FDF16E1CA7475B0037B878 /* LoginVC.swift in Sources */,
+				B818DF761CAEBCCC00B22D10 /* ProfileVC.swift in Sources */,
 				68FDF1741CA749D70037B878 /* UIViewController+Extras.swift in Sources */,
 				68FDF1721CA748C70037B878 /* Core.swift in Sources */,
 				68FDF1591CA7438B0037B878 /* AppDelegate.swift in Sources */,
 				68148BE61CA89DBB0096E699 /* SettingsVC.swift in Sources */,
+				B818DF781CAEBE0C00B22D10 /* GetImageVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
