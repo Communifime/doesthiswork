@@ -10,11 +10,14 @@ import UIKit
 
 class ProfileVC: UIViewController {
 
+    @IBOutlet weak var profileSV: ProfileScrollView!
     @IBOutlet weak var profileImageButton: UIButton!
     override func viewDidLoad()
     {
         super.viewDidLoad()
         Core.makeViewACircle(self.profileImageButton)
+        Core.currentUserProfile.fillScrollView(profileSV)
+        
         // Do any additional setup after loading the view.
     }
 

@@ -14,6 +14,8 @@ class Core: NSObject
 
     static var fireBaseRef = Firebase(url: "https://amber-fire-7588.firebaseio.com/")
     
+    static var currentUserProfile = UserProfile()
+    
     static func isValidEmail(testStr:String) -> Bool
     {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"

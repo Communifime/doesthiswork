@@ -420,96 +420,40 @@
                                     <navigationItem title="Profile" id="Mu9-Bm-64c"/>
                                 </items>
                             </navigationBar>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lLd-u7-HCN">
-                                <rect key="frame" x="149" y="113" width="200" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2xk-C2-Qc3">
-                                <rect key="frame" x="149" y="151" width="200" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="MJ9-cK-27m">
-                                <rect key="frame" x="30" y="113" width="75" height="75"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="MJ9-cK-27m">
+                                <rect key="frame" x="145" y="76" width="125" height="125"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="125" id="QmE-wS-CGS"/>
+                                    <constraint firstAttribute="height" constant="125" id="o9g-bg-iau"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" backgroundImage="addProfileImage.png"/>
                                 <connections>
                                     <segue destination="VoX-Pq-LOa" kind="show" identifier="Set Profile Image" id="zhI-bB-iwF"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Facebook" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uo7-3e-o0u">
-                                <rect key="frame" x="149" y="227" width="200" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Twitter" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ddv-Gj-Qe4">
-                                <rect key="frame" x="149" y="265" width="200" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="LinkedIn" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NaJ-5y-V9C">
-                                <rect key="frame" x="149" y="303" width="200" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="High School" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c4Z-dY-zWh">
-                                <rect key="frame" x="149" y="341" width="200" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Home Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b6U-CO-e6p">
-                                <rect key="frame" x="149" y="379" width="200" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Education Collection" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pXR-yi-nd9">
-                                <rect key="frame" x="149" y="526" width="200" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Phone Collection" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dtN-3M-AqM">
-                                <rect key="frame" x="149" y="493" width="200" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Email Collection" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oHB-4O-pA0">
-                                <rect key="frame" x="173" y="637" width="200" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Home Town" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AnC-NM-zRb">
-                                <rect key="frame" x="149" y="189" width="200" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Family Member Collection" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jWz-T0-6ow">
-                                <rect key="frame" x="149" y="576" width="200" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Work Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rW2-DW-dw7">
-                                <rect key="frame" x="149" y="417" width="200" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Hometown" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hD6-Vy-fuD">
-                                <rect key="frame" x="149" y="455" width="200" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                            </textField>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6vA-xw-OUA" customClass="ProfileScrollView" customModule="communifime" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="209" width="414" height="478"/>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="hg0-aS-wJr" secondAttribute="trailing" id="6ER-3Q-Y2A"/>
-                            <constraint firstItem="hg0-aS-wJr" firstAttribute="top" secondItem="Lkz-ao-f5Q" secondAttribute="bottom" constant="8" id="BER-5R-dkQ"/>
-                            <constraint firstItem="hg0-aS-wJr" firstAttribute="leading" secondItem="lQT-ch-GXN" secondAttribute="leading" id="dTL-l1-gfD"/>
+                            <constraint firstItem="hg0-aS-wJr" firstAttribute="leading" secondItem="lQT-ch-GXN" secondAttribute="leading" id="2Mr-3O-svy"/>
+                            <constraint firstItem="hg0-aS-wJr" firstAttribute="centerX" secondItem="MJ9-cK-27m" secondAttribute="centerX" id="7B0-d6-AFK"/>
+                            <constraint firstItem="6vA-xw-OUA" firstAttribute="top" secondItem="MJ9-cK-27m" secondAttribute="bottom" constant="8" symbolic="YES" id="Pgv-Dj-j29"/>
+                            <constraint firstAttribute="trailing" secondItem="hg0-aS-wJr" secondAttribute="trailing" id="QiB-0n-PwK"/>
+                            <constraint firstItem="hg0-aS-wJr" firstAttribute="leading" secondItem="6vA-xw-OUA" secondAttribute="leading" id="ZKC-9Z-5wD"/>
+                            <constraint firstItem="hg0-aS-wJr" firstAttribute="top" secondItem="Lkz-ao-f5Q" secondAttribute="bottom" constant="8" id="dTi-yn-EG3"/>
+                            <constraint firstItem="hg0-aS-wJr" firstAttribute="trailing" secondItem="6vA-xw-OUA" secondAttribute="trailing" id="iIE-Ch-bRt"/>
+                            <constraint firstItem="MJ9-cK-27m" firstAttribute="top" secondItem="hg0-aS-wJr" secondAttribute="bottom" constant="4" id="kkg-5K-c6I"/>
+                            <constraint firstItem="6vA-xw-OUA" firstAttribute="bottom" secondItem="Lju-UA-z5U" secondAttribute="top" id="vno-HD-Kn1"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" image="profile_icon.png" id="JIc-OJ-MRK"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="profileImageButton" destination="MJ9-cK-27m" id="Ooj-Yh-Z01"/>
+                        <outlet property="profileSV" destination="6vA-xw-OUA" id="0eM-6d-QWu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bL3-d6-zDh" userLabel="First Responder" sceneMemberID="firstResponder"/>
