@@ -18,6 +18,12 @@
 		682733A91CB072B400DBD95B /* UserFamilyMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682733A81CB072B400DBD95B /* UserFamilyMember.swift */; };
 		682733AB1CB0748400DBD95B /* UserAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682733AA1CB0748400DBD95B /* UserAddress.swift */; };
 		682733AD1CB077F000DBD95B /* ProfileScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682733AC1CB077F000DBD95B /* ProfileScrollView.swift */; };
+		682733AF1CB3520900DBD95B /* AddressListTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682733AE1CB3520900DBD95B /* AddressListTVC.swift */; };
+		682733B21CB3525300DBD95B /* AddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682733B11CB3525300DBD95B /* AddressCell.swift */; };
+		682733B41CB355FD00DBD95B /* leftArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 682733B31CB355FD00DBD95B /* leftArrow.png */; };
+		682733B61CB3584B00DBD95B /* NewAddressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682733B51CB3584B00DBD95B /* NewAddressVC.swift */; };
+		682733B81CB3591B00DBD95B /* ManageAddressesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682733B71CB3591B00DBD95B /* ManageAddressesVC.swift */; };
+		682733BA1CB35A8700DBD95B /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682733B91CB35A8700DBD95B /* Address.swift */; };
 		68FDF1591CA7438B0037B878 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FDF1581CA7438B0037B878 /* AppDelegate.swift */; };
 		68FDF15E1CA7438B0037B878 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68FDF15C1CA7438B0037B878 /* Main.storyboard */; };
 		68FDF1601CA7438B0037B878 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68FDF15F1CA7438B0037B878 /* Assets.xcassets */; };
@@ -44,6 +50,12 @@
 		682733A81CB072B400DBD95B /* UserFamilyMember.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserFamilyMember.swift; sourceTree = "<group>"; };
 		682733AA1CB0748400DBD95B /* UserAddress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAddress.swift; sourceTree = "<group>"; };
 		682733AC1CB077F000DBD95B /* ProfileScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileScrollView.swift; sourceTree = "<group>"; };
+		682733AE1CB3520900DBD95B /* AddressListTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressListTVC.swift; sourceTree = "<group>"; };
+		682733B11CB3525300DBD95B /* AddressCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressCell.swift; sourceTree = "<group>"; };
+		682733B31CB355FD00DBD95B /* leftArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leftArrow.png; sourceTree = "<group>"; };
+		682733B51CB3584B00DBD95B /* NewAddressVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewAddressVC.swift; sourceTree = "<group>"; };
+		682733B71CB3591B00DBD95B /* ManageAddressesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageAddressesVC.swift; sourceTree = "<group>"; };
+		682733B91CB35A8700DBD95B /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		68FDF1551CA7438A0037B878 /* communifime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = communifime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68FDF1581CA7438B0037B878 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		68FDF15D1CA7438B0037B878 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -75,6 +87,7 @@
 		68148BDC1CA895F80096E699 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				682733B31CB355FD00DBD95B /* leftArrow.png */,
 				682733A31CAE09AD00DBD95B /* addProfileImage.png */,
 				68148BE71CA98FE10096E699 /* add-icon.png */,
 				68148BE31CA89AB50096E699 /* communities_icon.png */,
@@ -92,6 +105,18 @@
 				682733AA1CB0748400DBD95B /* UserAddress.swift */,
 			);
 			name = "Custom Objects";
+			sourceTree = "<group>";
+		};
+		682733B01CB3522700DBD95B /* AddressList */ = {
+			isa = PBXGroup;
+			children = (
+				682733AE1CB3520900DBD95B /* AddressListTVC.swift */,
+				682733B11CB3525300DBD95B /* AddressCell.swift */,
+				682733B51CB3584B00DBD95B /* NewAddressVC.swift */,
+				682733B71CB3591B00DBD95B /* ManageAddressesVC.swift */,
+				682733B91CB35A8700DBD95B /* Address.swift */,
+			);
+			name = AddressList;
 			sourceTree = "<group>";
 		};
 		68FDF14C1CA7438A0037B878 = {
@@ -133,6 +158,7 @@
 		68FDF16C1CA746F90037B878 /* Code Behinds */ = {
 			isa = PBXGroup;
 			children = (
+				682733B01CB3522700DBD95B /* AddressList */,
 				B818DF751CAEBCCC00B22D10 /* ProfileVC.swift */,
 				682733AC1CB077F000DBD95B /* ProfileScrollView.swift */,
 				68FDF16D1CA7475B0037B878 /* LoginVC.swift */,
@@ -223,6 +249,7 @@
 			files = (
 				68FDF1631CA7438B0037B878 /* LaunchScreen.storyboard in Resources */,
 				68FDF1601CA7438B0037B878 /* Assets.xcassets in Resources */,
+				682733B41CB355FD00DBD95B /* leftArrow.png in Resources */,
 				68FDF16B1CA743EB0037B878 /* TODO in Resources */,
 				682733A41CAE09AD00DBD95B /* addProfileImage.png in Resources */,
 				68148BE21CA89A330096E699 /* settings_icon.png in Resources */,
@@ -290,12 +317,17 @@
 			files = (
 				682733A91CB072B400DBD95B /* UserFamilyMember.swift in Sources */,
 				682733AB1CB0748400DBD95B /* UserAddress.swift in Sources */,
+				682733B81CB3591B00DBD95B /* ManageAddressesVC.swift in Sources */,
 				68FDF1701CA7481C0037B878 /* RegisterVC.swift in Sources */,
 				68FDF16E1CA7475B0037B878 /* LoginVC.swift in Sources */,
 				B818DF761CAEBCCC00B22D10 /* ProfileVC.swift in Sources */,
 				68FDF1741CA749D70037B878 /* UIViewController+Extras.swift in Sources */,
+				682733AF1CB3520900DBD95B /* AddressListTVC.swift in Sources */,
+				682733B61CB3584B00DBD95B /* NewAddressVC.swift in Sources */,
 				68FDF1721CA748C70037B878 /* Core.swift in Sources */,
+				682733B21CB3525300DBD95B /* AddressCell.swift in Sources */,
 				68FDF1591CA7438B0037B878 /* AppDelegate.swift in Sources */,
+				682733BA1CB35A8700DBD95B /* Address.swift in Sources */,
 				68148BE61CA89DBB0096E699 /* SettingsVC.swift in Sources */,
 				682733AD1CB077F000DBD95B /* ProfileScrollView.swift in Sources */,
 				B818DF781CAEBE0C00B22D10 /* GetImageVC.swift in Sources */,

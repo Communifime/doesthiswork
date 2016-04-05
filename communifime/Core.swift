@@ -30,4 +30,16 @@ class Core: NSObject
         v.layer.masksToBounds = true
         v.layer.backgroundColor = UIColor.clearColor().CGColor
     }
+    
+    static func underlineTextField(tf: UITextField)
+    {
+        let border = CALayer()
+        let width = CGFloat(1.0)
+        border.borderColor = UIColor.lightGrayColor().CGColor
+        border.frame = CGRect(x: 0, y: tf.frame.size.height - width, width:  tf.frame.size.width, height: tf.frame.size.height)
+        
+        border.borderWidth = width
+        tf.layer.addSublayer(border)
+        tf.layer.masksToBounds = true
+    }
 }
