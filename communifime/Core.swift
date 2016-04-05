@@ -11,7 +11,8 @@ import Firebase
 
 class Core: NSObject
 {
-
+    static var storyboard : UIStoryboard!
+    
     static var fireBaseRef = Firebase(url: "https://amber-fire-7588.firebaseio.com/")
     
     static var currentUserProfile = UserProfile()
@@ -23,23 +24,4 @@ class Core: NSObject
         return emailTest.evaluateWithObject(testStr)
     }
     
-    static func makeViewACircle(v : UIView)
-    {
-        v.layer.cornerRadius = 37.5
-        v.layer.borderWidth = 1.0
-        v.layer.masksToBounds = true
-        v.layer.backgroundColor = UIColor.clearColor().CGColor
-    }
-    
-    static func underlineTextField(tf: UITextField)
-    {
-        let border = CALayer()
-        let width = CGFloat(1.0)
-        border.borderColor = UIColor.lightGrayColor().CGColor
-        border.frame = CGRect(x: 0, y: tf.frame.size.height - width, width:  tf.frame.size.width, height: tf.frame.size.height)
-        
-        border.borderWidth = width
-        tf.layer.addSublayer(border)
-        tf.layer.masksToBounds = true
-    }
 }

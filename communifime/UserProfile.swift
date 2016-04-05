@@ -40,12 +40,11 @@ class UserProfile: NSObject
     {
         let names = ["First Name", "Last Name", "Hometown", "Facebook", "Twitter", "LinkedIn", "Gender", "Hair Color", "Hair Length", "Eye Color", "Company", "Position", "High School"]
         let values = [firstName, lastName, hometown, facebook, twitter, linkedIn, gender, hairColor, hairLength, eyeColor, company, position, highSchool]
-        
         for i in 0..<names.count
         {
-            sv.addTextFieldAtCurrentRow(names[i], placeholderText: names[i], value: values[i], x: 10, width: 250)
-            
-            sv.advanceToNextRow()
+            sv.addTextField(names[i], placeholderText: names[i], value: values[i], x: 10, width: 250)
         }
+        sv.addAddress()
+        sv.addAddress()
     }
 }

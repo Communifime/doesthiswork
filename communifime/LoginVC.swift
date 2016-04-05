@@ -20,6 +20,10 @@ class LoginVC: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        //make the storyboard available everywhere
+        Core.storyboard = self.storyboard
+        
         self.resetPasswordStackView.hidden = true
         self.errorTextView.text = ""
     }

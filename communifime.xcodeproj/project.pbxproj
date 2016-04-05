@@ -35,6 +35,8 @@
 		68FDF1741CA749D70037B878 /* UIViewController+Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FDF1731CA749D70037B878 /* UIViewController+Extras.swift */; };
 		B818DF761CAEBCCC00B22D10 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B818DF751CAEBCCC00B22D10 /* ProfileVC.swift */; };
 		B818DF781CAEBE0C00B22D10 /* GetImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B818DF771CAEBE0C00B22D10 /* GetImageVC.swift */; };
+		B818DF831CB3F62B00B22D10 /* AddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B818DF821CB3F62B00B22D10 /* AddressView.swift */; };
+		B818DF861CB3F99600B22D10 /* UIView+Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = B818DF851CB3F99600B22D10 /* UIView+Extras.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +71,8 @@
 		68FDF1731CA749D70037B878 /* UIViewController+Extras.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extras.swift"; sourceTree = "<group>"; };
 		B818DF751CAEBCCC00B22D10 /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		B818DF771CAEBE0C00B22D10 /* GetImageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetImageVC.swift; sourceTree = "<group>"; };
+		B818DF821CB3F62B00B22D10 /* AddressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressView.swift; sourceTree = "<group>"; };
+		B818DF851CB3F99600B22D10 /* UIView+Extras.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extras.swift"; sourceTree = "<group>"; };
 		E44AEA3FD95E8E89CD3B6CE8 /* Pods-communifime.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-communifime.release.xcconfig"; path = "Pods/Target Support Files/Pods-communifime/Pods-communifime.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -150,7 +154,6 @@
 				68FDF1611CA7438B0037B878 /* LaunchScreen.storyboard */,
 				68FDF1641CA7438B0037B878 /* Info.plist */,
 				68FDF16A1CA743EB0037B878 /* TODO */,
-				68FDF1731CA749D70037B878 /* UIViewController+Extras.swift */,
 			);
 			path = communifime;
 			sourceTree = "<group>";
@@ -158,9 +161,10 @@
 		68FDF16C1CA746F90037B878 /* Code Behinds */ = {
 			isa = PBXGroup;
 			children = (
+				B818DF871CB4048B00B22D10 /* Profile */,
+				B818DF841CB3F8E900B22D10 /* Class Extensions */,
+				B818DF811CB3F60400B22D10 /* Widget Views */,
 				682733B01CB3522700DBD95B /* AddressList */,
-				B818DF751CAEBCCC00B22D10 /* ProfileVC.swift */,
-				682733AC1CB077F000DBD95B /* ProfileScrollView.swift */,
 				68FDF16D1CA7475B0037B878 /* LoginVC.swift */,
 				68FDF16F1CA7481C0037B878 /* RegisterVC.swift */,
 				68148BE51CA89DBB0096E699 /* SettingsVC.swift */,
@@ -176,6 +180,32 @@
 				E44AEA3FD95E8E89CD3B6CE8 /* Pods-communifime.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		B818DF811CB3F60400B22D10 /* Widget Views */ = {
+			isa = PBXGroup;
+			children = (
+				B818DF821CB3F62B00B22D10 /* AddressView.swift */,
+			);
+			name = "Widget Views";
+			sourceTree = "<group>";
+		};
+		B818DF841CB3F8E900B22D10 /* Class Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				68FDF1731CA749D70037B878 /* UIViewController+Extras.swift */,
+				B818DF851CB3F99600B22D10 /* UIView+Extras.swift */,
+			);
+			name = "Class Extensions";
+			sourceTree = "<group>";
+		};
+		B818DF871CB4048B00B22D10 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				682733AC1CB077F000DBD95B /* ProfileScrollView.swift */,
+				B818DF751CAEBCCC00B22D10 /* ProfileVC.swift */,
+			);
+			name = Profile;
 			sourceTree = "<group>";
 		};
 		FFC441912A2276B219755557 /* Frameworks */ = {
@@ -320,6 +350,7 @@
 				682733B81CB3591B00DBD95B /* ManageAddressesVC.swift in Sources */,
 				68FDF1701CA7481C0037B878 /* RegisterVC.swift in Sources */,
 				68FDF16E1CA7475B0037B878 /* LoginVC.swift in Sources */,
+				B818DF831CB3F62B00B22D10 /* AddressView.swift in Sources */,
 				B818DF761CAEBCCC00B22D10 /* ProfileVC.swift in Sources */,
 				68FDF1741CA749D70037B878 /* UIViewController+Extras.swift in Sources */,
 				682733AF1CB3520900DBD95B /* AddressListTVC.swift in Sources */,
@@ -331,6 +362,7 @@
 				68148BE61CA89DBB0096E699 /* SettingsVC.swift in Sources */,
 				682733AD1CB077F000DBD95B /* ProfileScrollView.swift in Sources */,
 				B818DF781CAEBE0C00B22D10 /* GetImageVC.swift in Sources */,
+				B818DF861CB3F99600B22D10 /* UIView+Extras.swift in Sources */,
 				682733A71CB06FEC00DBD95B /* UserProfile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

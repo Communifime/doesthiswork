@@ -25,11 +25,11 @@ class NewAddressVC: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        Core.underlineTextField(self.street1TF)
-        Core.underlineTextField(self.street2TF)
-        Core.underlineTextField(self.cityTF)
-        Core.underlineTextField(self.stateTF)
-        Core.underlineTextField(self.zipTF)
+        self.street1TF.maskWithUnderline()
+        self.street2TF.maskWithUnderline()
+        self.cityTF.maskWithUnderline()
+        self.stateTF.maskWithUnderline()
+        self.zipTF.maskWithUnderline()
         self.errorTV.hidden = true
         self.street1TF.becomeFirstResponder()
     }

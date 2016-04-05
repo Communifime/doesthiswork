@@ -15,7 +15,7 @@ class ProfileVC: UIViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        Core.makeViewACircle(self.profileImageButton)
+        self.profileImageButton.maskAsCircle()
         Core.currentUserProfile.fillScrollView(profileSV)
         
         // Do any additional setup after loading the view.

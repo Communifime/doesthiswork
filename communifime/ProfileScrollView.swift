@@ -10,32 +10,34 @@ import UIKit
 
 class ProfileScrollView: UIScrollView
 {
-    var currY = CGFloat(0.0)
+    var currY = CGFloat(20.0)
     var theTFs : [String : UITextField] = [:]
     let gapBetweenRows = CGFloat(10.0)
     let heightOfTextField = CGFloat(30.0)
     
-    func addTextFieldAtCurrentRow(name: String, placeholderText: String, value: String = "", x: CGFloat, width: CGFloat)
+    func addTextField(name: String, placeholderText: String, value: String = "", x: CGFloat, width: CGFloat)
     {
         let frame = CGRectMake(x, self.currY, width, heightOfTextField)
         let tf = UITextField(frame: frame)
         tf.placeholder = placeholderText
         tf.text = value
-        let border = CALayer()
-        let width = CGFloat(1.0)
-        border.borderColor = UIColor.lightGrayColor().CGColor
-        border.frame = CGRect(x: 0, y: tf.frame.size.height - width, width:  tf.frame.size.width, height: tf.frame.size.height)
-        
-        border.borderWidth = width
-        tf.layer.addSublayer(border)
-        tf.layer.masksToBounds = true
-        self.addSubview(tf)
+        tf.maskWithUnderline()
+        self.addView(tf)
         self.theTFs[name] = tf
     }
     
-    func advanceToNextRow()
+    func addView(view : UIView)
     {
-        self.currY = self.currY + heightOfTextField + self.gapBetweenRows
-        self.contentSize = CGSizeMake(self.contentSize.width, self.currY + self.heightOfTextField)
+        print("adding at: X:\(view.frame.origin.x) Y:\(view.frame.origin.y) with height \(view.getHeight())")
+        self.addSubview(view)
+        self.currY += view.getHeight() + self.gapBetweenRows
+        self.contentSize = CGSizeMake(self.contentSize.width, self.currY + view.getHeight())
+    }
+    
+    func addAddress()
+    {
+        let vc = Core.storyboard.instantiateViewControllerWithIdentifier("AddressView") as! AddressView
+        vc.view.setPosition(10.0, y: self.currY)
+        self.addView(vc.view)
     }
 }

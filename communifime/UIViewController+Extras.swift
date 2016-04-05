@@ -18,5 +18,5 @@ extension UIViewController
     @IBAction func standardActionCancelButtonPressedNotAnimated(sender: AnyObject)
     {
         self.dismissViewControllerAnimated(false, completion: nil)
-    }
+    }    
 }
