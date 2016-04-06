@@ -12,6 +12,7 @@ class ProfileScrollView: UIScrollView
 {
     var currY = CGFloat(20.0)
     var theTFs : [String : UITextField] = [:]
+    var theAddresses : [String : AddressView] = [:]
     let gapBetweenRows = CGFloat(10.0)
     let heightOfTextField = CGFloat(30.0)
     
@@ -42,5 +43,6 @@ class ProfileScrollView: UIScrollView
         //vc.view.setPosition(10.0, y: self.currY)
         //vc.view.setHeight(110)
         self.addView(vc.view)
+        self.theAddresses[name] = vc
     }
 }

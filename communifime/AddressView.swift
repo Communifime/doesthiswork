@@ -24,16 +24,20 @@ class AddressView: UIViewController
     {
         super.viewDidLoad()
         self.navBar.topItem?.title = addressName
-        //self.view.setHeight(110)
         
-        if(address != nil)
+        if(address == nil)
         {
-            self.street1Label.text = address!.street1
-            self.street2Label.text = address!.street2
-            self.cityLabel.text = address!.city
-            self.stateLabel.text = address!.state
-            self.zipLabel.text = address!.zip
+            self.address = Address(street1: "", street2: "", city: "", state: "", zip: "")
         }
+    }
+    
+    func updateAddress()
+    {
+        self.street1Label.text = address!.street1
+        self.street2Label.text = address!.street2
+        self.cityLabel.text = address!.city
+        self.stateLabel.text = address!.state
+        self.zipLabel.text = address!.zip
     }
     
     override func didReceiveMemoryWarning()
@@ -43,14 +47,19 @@ class AddressView: UIViewController
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        if(segue.identifier == "manage address")
+        {
+            let vc = segue.destinationViewController as! ManageAddressVC
+            vc.parentAddressView = self
+            vc.addressName = self.addressName
+        }
     }
-    */
+    
 
 }

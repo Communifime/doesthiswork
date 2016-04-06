@@ -1,32 +1,29 @@
 //
-//  AddressListTVC.swift
+//  PairList.swift
 //  communifime
 //
-//  Created by Michael Litman on 4/4/16.
+//  Created by Michael Litman on 4/6/16.
 //  Copyright © 2016 Communifime. All rights reserved.
 //
 
 import UIKit
 
-class AddressListTVC: UITableViewController
+class PairList: UITableViewController
 {
-    var addresses : [Address]!
-    
+
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
-        //load current addresses or start from scratch
-        self.addresses = [Address]()
+
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
-    func addAddress(address: Address)
+    override func didReceiveMemoryWarning()
     {
-        self.addresses.append(address)
-        self.tableView.reloadData()
-    }
-    
-    override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
@@ -42,28 +39,26 @@ class AddressListTVC: UITableViewController
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         // #warning Incomplete implementation, return the number of rows
-        return self.addresses.count
+        return 10
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! AddressCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
 
         // Configure the cell...
-        let address = self.addresses[indexPath.row]
-        cell.street1.text = address.street1
-        if(address.street2 == "")
+        if(indexPath.row == 9)
         {
-            cell.street2.hidden = true
+            cell.textLabel?.text = ""
+            cell.detailTextLabel?.text = "Add New Email"
+            cell.detailTextLabel?.font = UIFont.boldSystemFontOfSize(16)
         }
         else
         {
-            cell.street2.text = address.street2
+            cell.textLabel?.text = "Name"
+            cell.detailTextLabel?.text = "value@value.com"
         }
-        cell.city.text = address.city
-        cell.state.text = address.state
-        cell.zip.text = address.zip
         return cell
     }
     

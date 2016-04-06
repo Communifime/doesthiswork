@@ -8,30 +8,41 @@
 
 import UIKit
 
-class NewAddressVC: UIViewController
+class ManageAddressVC: UIViewController
 {
-    var parentAddressListTVC : AddressListTVC!
+    var parentAddressView : AddressView!
+    var addressName = "Default Name"
     
+    @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var street1TF: UITextField!
     @IBOutlet weak var street2TF: UITextField!
-    
     @IBOutlet weak var cityTF: UITextField!
-    
     @IBOutlet weak var stateTF: UITextField!
-    
     @IBOutlet weak var zipTF: UITextField!
     @IBOutlet weak var errorTV: UITextView!
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.navBar.topItem?.title = addressName
         self.street1TF.maskWithUnderline()
         self.street2TF.maskWithUnderline()
         self.cityTF.maskWithUnderline()
         self.stateTF.maskWithUnderline()
         self.zipTF.maskWithUnderline()
         self.errorTV.hidden = true
+        
+        self.updateAddress()
         self.street1TF.becomeFirstResponder()
+    }
+
+    func updateAddress()
+    {
+        self.street1TF.text = self.parentAddressView.address!.street1
+        self.street2TF.text = self.parentAddressView.address!.street2
+        self.cityTF.text = self.parentAddressView.address!.city
+        self.stateTF.text = self.parentAddressView.address!.state
+        self.zipTF.text = self.parentAddressView.address!.zip
     }
 
     func validateForm() -> Bool
@@ -74,7 +85,8 @@ class NewAddressVC: UIViewController
         {
             //save the address and add it to the parent vc
             let address = Address(street1: self.street1TF.text!, street2: self.street2TF.text!, city: self.cityTF.text!, state: self.stateTF.text!, zip: self.zipTF.text!)
-            self.parentAddressListTVC.addAddress(address)
+            self.parentAddressView.address = address
+            self.parentAddressView.updateAddress()
             self.dismissViewControllerAnimated(true, completion: nil)
         }
     }
