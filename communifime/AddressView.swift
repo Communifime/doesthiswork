@@ -13,7 +13,6 @@ class AddressView: UIViewController
     var addressName = "Default Name"
     var address : Address?
     
-    @IBOutlet weak var addressStack: UIStackView!
     @IBOutlet weak var zipLabel: UILabel!
     @IBOutlet weak var stateLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
@@ -25,7 +24,7 @@ class AddressView: UIViewController
     {
         super.viewDidLoad()
         self.navBar.topItem?.title = addressName
-        self.view.setHeight(self.addressStack.getHeight()+5)
+        //self.view.setHeight(110)
         
         if(address != nil)
         {

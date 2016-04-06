@@ -24,6 +24,7 @@
 		682733B61CB3584B00DBD95B /* NewAddressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682733B51CB3584B00DBD95B /* NewAddressVC.swift */; };
 		682733B81CB3591B00DBD95B /* ManageAddressesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682733B71CB3591B00DBD95B /* ManageAddressesVC.swift */; };
 		682733BA1CB35A8700DBD95B /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682733B91CB35A8700DBD95B /* Address.swift */; };
+		682733BC1CB4815700DBD95B /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682733BB1CB4815700DBD95B /* TextView.swift */; };
 		68FDF1591CA7438B0037B878 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FDF1581CA7438B0037B878 /* AppDelegate.swift */; };
 		68FDF15E1CA7438B0037B878 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68FDF15C1CA7438B0037B878 /* Main.storyboard */; };
 		68FDF1601CA7438B0037B878 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 68FDF15F1CA7438B0037B878 /* Assets.xcassets */; };
@@ -58,6 +59,7 @@
 		682733B51CB3584B00DBD95B /* NewAddressVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewAddressVC.swift; sourceTree = "<group>"; };
 		682733B71CB3591B00DBD95B /* ManageAddressesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageAddressesVC.swift; sourceTree = "<group>"; };
 		682733B91CB35A8700DBD95B /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		682733BB1CB4815700DBD95B /* TextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		68FDF1551CA7438A0037B878 /* communifime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = communifime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68FDF1581CA7438B0037B878 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		68FDF15D1CA7438B0037B878 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				B818DF821CB3F62B00B22D10 /* AddressView.swift */,
+				682733BB1CB4815700DBD95B /* TextView.swift */,
 			);
 			name = "Widget Views";
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 				B818DF761CAEBCCC00B22D10 /* ProfileVC.swift in Sources */,
 				68FDF1741CA749D70037B878 /* UIViewController+Extras.swift in Sources */,
 				682733AF1CB3520900DBD95B /* AddressListTVC.swift in Sources */,
+				682733BC1CB4815700DBD95B /* TextView.swift in Sources */,
 				682733B61CB3584B00DBD95B /* NewAddressVC.swift in Sources */,
 				68FDF1721CA748C70037B878 /* Core.swift in Sources */,
 				682733B21CB3525300DBD95B /* AddressCell.swift in Sources */,

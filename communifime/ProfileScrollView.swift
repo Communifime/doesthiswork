@@ -17,10 +17,11 @@ class ProfileScrollView: UIScrollView
     
     func addTextField(name: String, placeholderText: String, value: String = "", x: CGFloat, width: CGFloat)
     {
-        let frame = CGRectMake(x, self.currY, width, heightOfTextField)
-        let tf = UITextField(frame: frame)
+        //let tf = Core.storyboard.instantiateViewControllerWithIdentifier("TextView") as! TextView
+        let tf = UITextField()
         tf.placeholder = placeholderText
         tf.text = value
+        tf.setRect(x, y: self.currY, width: width, height: 30)
         tf.maskWithUnderline()
         self.addView(tf)
         self.theTFs[name] = tf
@@ -28,16 +29,18 @@ class ProfileScrollView: UIScrollView
     
     func addView(view : UIView)
     {
-        print("adding at: X:\(view.frame.origin.x) Y:\(view.frame.origin.y) with height \(view.getHeight())")
         self.addSubview(view)
         self.currY += view.getHeight() + self.gapBetweenRows
         self.contentSize = CGSizeMake(self.contentSize.width, self.currY + view.getHeight())
     }
     
-    func addAddress()
+    func addAddress(name : String)
     {
         let vc = Core.storyboard.instantiateViewControllerWithIdentifier("AddressView") as! AddressView
-        vc.view.setPosition(10.0, y: self.currY)
+        vc.addressName = name
+        vc.view.setRect(10, y: self.currY, width: vc.view.getWidth(), height: 150)
+        //vc.view.setPosition(10.0, y: self.currY)
+        //vc.view.setHeight(110)
         self.addView(vc.view)
     }
 }
