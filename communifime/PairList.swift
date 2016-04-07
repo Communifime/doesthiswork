@@ -10,18 +10,28 @@ import UIKit
 
 class PairList: UITableViewController
 {
-
+    var pairs : [Pair]!
+    var type = "type"
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
+        self.pairs = [Pair]()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
-
+    
+    func addPair(name: String, value: String)
+    {
+        let p = Pair(name: name, value: value)
+        self.pairs.append(p)
+        self.tableView.reloadData()
+    }
+    
     override func didReceiveMemoryWarning()
     {
         super.didReceiveMemoryWarning()
@@ -39,7 +49,7 @@ class PairList: UITableViewController
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         // #warning Incomplete implementation, return the number of rows
-        return 10
+        return self.pairs.count + 1
     }
 
     
@@ -48,20 +58,30 @@ class PairList: UITableViewController
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
 
         // Configure the cell...
-        if(indexPath.row == 9)
+        if((indexPath.row - self.pairs.count) == 0)
         {
-            cell.textLabel?.text = ""
-            cell.detailTextLabel?.text = "Add New Email"
-            cell.detailTextLabel?.font = UIFont.boldSystemFontOfSize(16)
+            cell.textLabel?.text = "Add New \(self.type)"
+            cell.textLabel?.font = UIFont.boldSystemFontOfSize(16)
+            cell.detailTextLabel?.text = ""
         }
         else
         {
-            cell.textLabel?.text = "Name"
-            cell.detailTextLabel?.text = "value@value.com"
+            let p = self.pairs[indexPath.row]
+            cell.textLabel?.text = p.name
+            cell.detailTextLabel?.text = p.value
         }
         return cell
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        if((indexPath.row - self.pairs.count) == 0)
+        {
+            let vc = self.storyboard?.instantiateViewControllerWithIdentifier("ManagePairVC") as! ManagePairVC
+            vc.parentPairList = self
+            self.presentViewController(vc, animated: true, completion: nil)
+        }
+    }
 
     /*
     // Override to support conditional editing of the table view.

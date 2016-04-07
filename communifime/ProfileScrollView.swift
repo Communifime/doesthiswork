@@ -13,6 +13,7 @@ class ProfileScrollView: UIScrollView
     var currY = CGFloat(20.0)
     var theTFs : [String : UITextField] = [:]
     var theAddresses : [String : AddressView] = [:]
+    var thePairs : [String : PairVC] = [:]
     let gapBetweenRows = CGFloat(10.0)
     let heightOfTextField = CGFloat(30.0)
     
@@ -33,6 +34,15 @@ class ProfileScrollView: UIScrollView
         self.addSubview(view)
         self.currY += view.getHeight() + self.gapBetweenRows
         self.contentSize = CGSizeMake(self.contentSize.width, self.currY + view.getHeight())
+    }
+    
+    func addPairList(name: String)
+    {
+        let vc = Core.storyboard.instantiateViewControllerWithIdentifier("PairVC") as! PairVC
+        vc.category = name
+        vc.view.setRect(10, y: self.currY, width: vc.view.getWidth(), height: 300)
+        self.addView(vc.view)
+        self.thePairs[name] = vc
     }
     
     func addAddress(name : String)

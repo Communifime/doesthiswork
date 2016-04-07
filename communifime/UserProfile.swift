@@ -49,5 +49,6 @@ class UserProfile: NSObject
         }
         sv.addAddress("Home Address")
         sv.addAddress("Work Address")
+        sv.addPairList("email")
     }
 }
