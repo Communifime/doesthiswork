@@ -10,12 +10,14 @@ import UIKit
 
 class FormPair: NSObject
 {
+    var type : String
     var name : String
     var value : NSObject
     
-    init(name : String, value : NSObject)
+    init(name : String, value : NSObject, type: String)
     {
         self.name = name
         self.value = value
+        self.type = type
     }
 }

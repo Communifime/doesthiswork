@@ -10,7 +10,7 @@ import UIKit
 
 class ManageAddressVC: UIViewController
 {
-    var parentAddressView : AddressView!
+    var addressCell : ProfileAddressCell!
     var addressName = "Default Name"
     
     @IBOutlet weak var navBar: UINavigationBar!
@@ -38,11 +38,11 @@ class ManageAddressVC: UIViewController
 
     func updateAddress()
     {
-        self.street1TF.text = self.parentAddressView.address!.street1
-        self.street2TF.text = self.parentAddressView.address!.street2
-        self.cityTF.text = self.parentAddressView.address!.city
-        self.stateTF.text = self.parentAddressView.address!.state
-        self.zipTF.text = self.parentAddressView.address!.zip
+        self.street1TF.text = self.addressCell.address!.street1
+        self.street2TF.text = self.addressCell.address!.street2
+        self.cityTF.text = self.addressCell.address!.city
+        self.stateTF.text = self.addressCell.address!.state
+        self.zipTF.text = self.addressCell.address!.zip
     }
 
     func validateForm() -> Bool
@@ -84,9 +84,12 @@ class ManageAddressVC: UIViewController
         if(validateForm())
         {
             //save the address and add it to the parent vc
-            let address = Address(street1: self.street1TF.text!, street2: self.street2TF.text!, city: self.cityTF.text!, state: self.stateTF.text!, zip: self.zipTF.text!)
-            self.parentAddressView.address = address
-            self.parentAddressView.updateAddress()
+            self.addressCell.address!.street1 = self.street1TF.text!
+            self.addressCell.address!.street2 = self.street2TF.text!
+            self.addressCell.address!.city = self.cityTF.text!
+            self.addressCell.address!.state = self.stateTF.text!
+            self.addressCell.address!.zip = self.zipTF.text!
+            self.addressCell.updateAddress()
             self.dismissViewControllerAnimated(true, completion: nil)
         }
     }

@@ -55,9 +55,9 @@ class AddressView: UIViewController
     {
         if(segue.identifier == "manage address")
         {
-            let vc = segue.destinationViewController as! ManageAddressVC
-            vc.parentAddressView = self
-            vc.addressName = self.addressName
+            //let vc = segue.destinationViewController as! ManageAddressVC
+            //vc.parentAddressView = self
+           // vc.addressName = self.addressName
         }
     }
     

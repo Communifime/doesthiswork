@@ -42,12 +42,12 @@ class ProfileList: UITableViewController
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        let object = self.data[indexPath.row].value
-        if(object is String)
+        let type = self.data[indexPath.row].type
+        if(type == "Text")
         {
             return 44.0
         }
-        else if(object is Address)
+        else if(type == "Address")
         {
             return 110.0
         }
@@ -59,28 +59,41 @@ class ProfileList: UITableViewController
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let object = self.data[indexPath.row].value
-        if(object is String)
+        let type = self.data[indexPath.row].type
+        if(type == "Text")
         {
             let cell = tableView.dequeueReusableCellWithIdentifier("text", forIndexPath: indexPath) as! ProfileTextCell
             cell.tf.placeholder = self.data[indexPath.row].name
-            cell.tf.text = object as? String
+            cell.tf.text = self.data[indexPath.row].value as? String
             return cell
         }
-        else if(object is Address)
+        else if(type == "Address")
         {
             let cell = tableView.dequeueReusableCellWithIdentifier("address", forIndexPath: indexPath) as! ProfileAddressCell
-            cell.address = object as? Address
+            cell.addressNameLabel.text = self.data[indexPath.row].name
+            cell.address = self.data[indexPath.row].value as? Address
             cell.updateAddress()
             return cell
         }
         else
         {
-            let cell = tableView.dequeueReusableCellWithIdentifier("address", forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCellWithIdentifier("pairlist", forIndexPath: indexPath)
+            cell.textLabel?.text = self.data[indexPath.row].name
             return cell
         }
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        let type = self.data[indexPath.row].type
+        if(type == "Address")
+        {
+            let vc = self.storyboard?.instantiateViewControllerWithIdentifier("ManageAddressVC") as! ManageAddressVC
+            vc.addressCell = tableView.cellForRowAtIndexPath(indexPath) as! ProfileAddressCell
+            vc.addressName = self.data[indexPath.row].name
+            self.presentViewController(vc, animated: true, completion: nil)
+        }
+    }
 
     /*
     // Override to support conditional editing of the table view.

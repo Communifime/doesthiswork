@@ -45,15 +45,18 @@ class UserProfile: NSObject
         
         for i in 0..<names.count
         {
-            let fp = FormPair(name: names[i], value: values[i])
+            let fp = FormPair(name: names[i], value: values[i], type: "Text")
             formPairs.append(fp)
         }
         
-        let homeAddress = Address(street1: "Street", street2: "Street", city: "City", state: "State", zip: "Zip")
-        formPairs.append(FormPair(name: "Home Address", value: homeAddress))
+        let homeAddress = Address(street1: "", street2: "", city: "", state: "", zip: "")
+        formPairs.append(FormPair(name: "Home Address", value: homeAddress, type: "Address"))
         
-        let workAddress = Address(street1: "Street", street2: "Street", city: "City", state: "State", zip: "Zip")
-        formPairs.append(FormPair(name: "Work Address", value: workAddress))
+        let workAddress = Address(street1: "", street2: "", city: "", state: "", zip: "")
+        formPairs.append(FormPair(name: "Work Address", value: workAddress, type: "Address"))
+        
+        let emails = [Pair]()
+        formPairs.append(FormPair(name: "emails", value: emails, type: "PairList"))
         return formPairs
     }
     

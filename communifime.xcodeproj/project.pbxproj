@@ -114,6 +114,8 @@
 		682733A51CB06FAD00DBD95B /* Custom Objects */ = {
 			isa = PBXGroup;
 			children = (
+				682733C51CB5EDE400DBD95B /* Pair.swift */,
+				682733B91CB35A8700DBD95B /* Address.swift */,
 				682733D11CB9990400DBD95B /* FormPair.swift */,
 				682733A61CB06FEC00DBD95B /* UserProfile.swift */,
 				682733A81CB072B400DBD95B /* UserFamilyMember.swift */,
@@ -132,8 +134,6 @@
 		682733BD1CB5579000DBD95B /* Addresses */ = {
 			isa = PBXGroup;
 			children = (
-				B818DF821CB3F62B00B22D10 /* AddressView.swift */,
-				682733B91CB35A8700DBD95B /* Address.swift */,
 				682733B51CB3584B00DBD95B /* ManageAddressVC.swift */,
 			);
 			name = Addresses;
@@ -145,7 +145,6 @@
 				682733C11CB5D5F800DBD95B /* PairVC.swift */,
 				682733C31CB5D8FE00DBD95B /* ManagePairVC.swift */,
 				682733BF1CB55A4A00DBD95B /* PairList.swift */,
-				682733C51CB5EDE400DBD95B /* Pair.swift */,
 			);
 			name = "Name/Value Pairs";
 			sourceTree = "<group>";
@@ -162,6 +161,7 @@
 		682733D41CB99BD800DBD95B /* toDelete */ = {
 			isa = PBXGroup;
 			children = (
+				B818DF821CB3F62B00B22D10 /* AddressView.swift */,
 				682733AC1CB077F000DBD95B /* ProfileScrollView.swift */,
 			);
 			name = toDelete;
