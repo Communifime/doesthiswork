@@ -36,6 +36,27 @@ class UserProfile: NSObject
     var highSchool : String = ""
     var familyMembers : [String : UserFamilyMember] = [:]
     
+    func getFormObjects() -> [FormPair]
+    {
+        var formPairs = [FormPair]()
+        
+        let names = ["First Name", "Last Name", "Hometown", "Facebook", "Twitter", "LinkedIn", "Gender", "Hair Color", "Hair Length", "Eye Color", "Company", "Position", "High School"]
+        let values = [firstName, lastName, hometown, facebook, twitter, linkedIn, gender, hairColor, hairLength, eyeColor, company, position, highSchool]
+        
+        for i in 0..<names.count
+        {
+            let fp = FormPair(name: names[i], value: values[i])
+            formPairs.append(fp)
+        }
+        
+        let homeAddress = Address(street1: "Street", street2: "Street", city: "City", state: "State", zip: "Zip")
+        formPairs.append(FormPair(name: "Home Address", value: homeAddress))
+        
+        let workAddress = Address(street1: "Street", street2: "Street", city: "City", state: "State", zip: "Zip")
+        formPairs.append(FormPair(name: "Work Address", value: workAddress))
+        return formPairs
+    }
+    
     func fillScrollView(sv : ProfileScrollView)
     {
         let screenRect = UIScreen.mainScreen().bounds
