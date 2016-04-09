@@ -12,6 +12,7 @@ class PairVC: UIViewController
 {
     @IBOutlet weak var navBar: UINavigationBar!
     var category = "Default Category"
+    var profileSV : ProfileScrollView!
     
     override func viewDidLoad()
     {
@@ -28,14 +29,15 @@ class PairVC: UIViewController
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        let pl = segue.destinationViewController as! PairList
+        pl.profileSV = self.profileSV
     }
-    */
+    
 
 }

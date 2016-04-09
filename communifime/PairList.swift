@@ -12,7 +12,8 @@ class PairList: UITableViewController
 {
     var pairs : [Pair]!
     var type = "type"
-    
+    var profileSV : ProfileScrollView!
+
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -30,6 +31,10 @@ class PairList: UITableViewController
         let p = Pair(name: name, value: value)
         self.pairs.append(p)
         self.tableView.reloadData()
+        
+        //refresh the profile scrollview to take 
+        //this new change into account
+        //self.profileSV.refresh()
     }
     
     override func didReceiveMemoryWarning()

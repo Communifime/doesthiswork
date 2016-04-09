@@ -16,6 +16,14 @@ class ProfileVC: UIViewController {
     {
         super.viewDidLoad()
         self.profileImageButton.maskAsCircle()
+        let f = CGRectMake(0, 0, self.view.getWidth(), self.profileSV.getHeight())
+        self.profileSV.stackView = UIStackView(frame: f)
+        self.profileSV.stackView.spacing = 5.0
+        self.profileSV.stackView.distribution = .FillProportionally
+        self.profileSV.stackView.axis = .Vertical
+        self.profileSV.stackView.alignment = .Fill
+        
+        self.profileSV.addSubview(self.profileSV.stackView)
         Core.currentUserProfile.fillScrollView(profileSV)
         
         // Do any additional setup after loading the view.
@@ -25,6 +33,7 @@ class ProfileVC: UIViewController {
     {
         self.profileSV.setNeedsDisplay()
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
