@@ -23,6 +23,11 @@ class ProfileList: UITableViewController
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
+    override func viewWillAppear(animated: Bool)
+    {
+        self.tableView.reloadData()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -73,12 +78,16 @@ class ProfileList: UITableViewController
             cell.addressNameLabel.text = self.data[indexPath.row].name
             cell.address = self.data[indexPath.row].value as? Address
             cell.updateAddress()
+            cell.accessoryType = .DisclosureIndicator
             return cell
         }
         else
         {
-            let cell = tableView.dequeueReusableCellWithIdentifier("pairlist", forIndexPath: indexPath)
-            cell.textLabel?.text = self.data[indexPath.row].name
+            let cell = tableView.dequeueReusableCellWithIdentifier("pairlist", forIndexPath: indexPath) as! ProfilePairListCell
+            let data = self.data[indexPath.row].value as? [Pair]
+            cell.textLabel?.text = "\(self.data[indexPath.row].name) - List (\(data!.count))"
+            cell.data = data
+            cell.accessoryType = .DisclosureIndicator
             return cell
         }
     }
@@ -91,6 +100,16 @@ class ProfileList: UITableViewController
             let vc = self.storyboard?.instantiateViewControllerWithIdentifier("ManageAddressVC") as! ManageAddressVC
             vc.addressCell = tableView.cellForRowAtIndexPath(indexPath) as! ProfileAddressCell
             vc.addressName = self.data[indexPath.row].name
+            self.presentViewController(vc, animated: true, completion: nil)
+        }
+        else if(type == "PairList")
+        {
+            let vc = self.storyboard?.instantiateViewControllerWithIdentifier("PairList") as! PairList
+            vc.parentCell = tableView.cellForRowAtIndexPath(indexPath) as! ProfilePairListCell
+            vc.parentVC = self
+            vc.data = vc.parentCell.data
+            vc.formPair = self.data[indexPath.row]
+            vc.varName = self.data[indexPath.row].name
             self.presentViewController(vc, animated: true, completion: nil)
         }
     }

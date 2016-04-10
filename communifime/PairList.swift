@@ -8,33 +8,39 @@
 
 import UIKit
 
-class PairList: UITableViewController
+class PairList: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
-    var pairs : [Pair]!
-    var type = "type"
-    var profileSV : ProfileScrollView!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var navBar: UINavigationBar!
 
+    var type = "type"
+    var parentCell : ProfilePairListCell!
+    var parentVC : ProfileList!
+    var data : [Pair]!
+    var varName : String!
+    var formPair : FormPair!
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        self.pairs = [Pair]()
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        navBar.topItem?.title = self.varName
+    }
+    
+    @IBAction func addButtonPressed(sender: AnyObject)
+    {
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("ManagePairVC") as! ManagePairVC
+        vc.parentPairList = self
+        vc.varName = self.varName
+        self.presentViewController(vc, animated: true, completion: nil)
     }
     
     func addPair(name: String, value: String)
     {
         let p = Pair(name: name, value: value)
-        self.pairs.append(p)
+        self.data.append(p)
+        self.formPair.value = self.data
         self.tableView.reloadData()
-        
-        //refresh the profile scrollview to take 
-        //this new change into account
-        //self.profileSV.refresh()
+        self.parentVC.tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning()
@@ -45,47 +51,40 @@ class PairList: UITableViewController
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int
     {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         // #warning Incomplete implementation, return the number of rows
-        return self.pairs.count + 1
+        return self.data.count
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
 
         // Configure the cell...
-        if((indexPath.row - self.pairs.count) == 0)
-        {
-            cell.textLabel?.text = "Add New \(self.type)"
-            cell.textLabel?.font = UIFont.boldSystemFontOfSize(16)
-            cell.detailTextLabel?.text = ""
-        }
-        else
-        {
-            let p = self.pairs[indexPath.row]
-            cell.textLabel?.text = p.name
-            cell.detailTextLabel?.text = p.value
-        }
+        let p = self.data[indexPath.row]
+        cell.textLabel?.text = p.name
+        cell.detailTextLabel?.text = p.value
+        cell.accessoryType = .DisclosureIndicator
+        cell.editing = true
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        if((indexPath.row - self.pairs.count) == 0)
-        {
-            let vc = self.storyboard?.instantiateViewControllerWithIdentifier("ManagePairVC") as! ManagePairVC
-            vc.parentPairList = self
-            self.presentViewController(vc, animated: true, completion: nil)
-        }
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("ManagePairVC") as! ManagePairVC
+        vc.parentPairList = self
+        vc.varName = self.varName
+        vc.editMode = true
+        vc.editPair = self.data[indexPath.row]
+        self.presentViewController(vc, animated: true, completion: nil)
     }
 
     /*

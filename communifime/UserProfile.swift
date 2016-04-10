@@ -57,22 +57,12 @@ class UserProfile: NSObject
         
         let emails = [Pair]()
         formPairs.append(FormPair(name: "emails", value: emails, type: "PairList"))
-        return formPairs
-    }
-    
-    func fillScrollView(sv : ProfileScrollView)
-    {
-        let screenRect = UIScreen.mainScreen().bounds
         
-        let names = ["First Name", "Last Name", "Hometown", "Facebook", "Twitter", "LinkedIn", "Gender", "Hair Color", "Hair Length", "Eye Color", "Company", "Position", "High School"]
-        let values = [firstName, lastName, hometown, facebook, twitter, linkedIn, gender, hairColor, hairLength, eyeColor, company, position, highSchool]
-        //sv.addAddress()
-        for i in 0..<names.count
-        {
-            sv.addTextField(names[i], placeholderText: names[i], value: values[i], x: 10, width: screenRect.width-20)
-        }
-        sv.addAddress("Home Address")
-        sv.addAddress("Work Address")
-        sv.addPairList("email")
+        let phoneNumbers = [Pair]()
+        formPairs.append(FormPair(name: "phone numbers", value: phoneNumbers, type: "PairList"))
+        
+        let colleges = [Pair]()
+        formPairs.append(FormPair(name: "colleges", value: colleges, type: "PairList"))
+        return formPairs
     }
 }
