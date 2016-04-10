@@ -10,7 +10,7 @@ import UIKit
 
 class ProfileList: UITableViewController
 {
-    var data : [FormPair]!
+    var data : [[FormPair]]!
 
     override func viewDidLoad()
     {
@@ -37,17 +37,39 @@ class ProfileList: UITableViewController
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return self.data.count
     }
 
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if(section == 0)
+        {
+            return "Personal Data"
+        }
+        else if(section == 1)
+        {
+            return "Work Data"
+        }
+        else if(section == 2)
+        {
+            return "Education Data"
+        }
+        else if(section == 3)
+        {
+            return "Family Data"
+        }
+        else
+        {
+            return "UNKNOWN"
+        }
+    }
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return data.count
+        return self.data[section].count
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        let type = self.data[indexPath.row].type
+        let type = self.data[indexPath.section][indexPath.row].type
         if(type == "Text")
         {
             return 44.0
@@ -64,19 +86,19 @@ class ProfileList: UITableViewController
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let type = self.data[indexPath.row].type
+        let type = self.data[indexPath.section][indexPath.row].type
         if(type == "Text")
         {
             let cell = tableView.dequeueReusableCellWithIdentifier("text", forIndexPath: indexPath) as! ProfileTextCell
-            cell.tf.placeholder = self.data[indexPath.row].name
-            cell.tf.text = self.data[indexPath.row].value as? String
+            cell.tf.placeholder = self.data[indexPath.section][indexPath.row].name
+            cell.tf.text = self.data[indexPath.section][indexPath.row].value as? String
             return cell
         }
         else if(type == "Address")
         {
             let cell = tableView.dequeueReusableCellWithIdentifier("address", forIndexPath: indexPath) as! ProfileAddressCell
-            cell.addressNameLabel.text = self.data[indexPath.row].name
-            cell.address = self.data[indexPath.row].value as? Address
+            cell.addressNameLabel.text = self.data[indexPath.section][indexPath.row].name
+            cell.address = self.data[indexPath.section][indexPath.row].value as? Address
             cell.updateAddress()
             cell.accessoryType = .DisclosureIndicator
             return cell
@@ -84,8 +106,8 @@ class ProfileList: UITableViewController
         else
         {
             let cell = tableView.dequeueReusableCellWithIdentifier("pairlist", forIndexPath: indexPath) as! ProfilePairListCell
-            let data = self.data[indexPath.row].value as? [Pair]
-            cell.textLabel?.text = "\(self.data[indexPath.row].name) - List (\(data!.count))"
+            let data = self.data[indexPath.section][indexPath.row].value as? [Pair]
+            cell.textLabel?.text = "\(self.data[indexPath.section][indexPath.row].name) - List (\(data!.count))"
             cell.data = data
             cell.accessoryType = .DisclosureIndicator
             return cell
@@ -94,12 +116,12 @@ class ProfileList: UITableViewController
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        let type = self.data[indexPath.row].type
+        let type = self.data[indexPath.section][indexPath.row].type
         if(type == "Address")
         {
             let vc = self.storyboard?.instantiateViewControllerWithIdentifier("ManageAddressVC") as! ManageAddressVC
             vc.addressCell = tableView.cellForRowAtIndexPath(indexPath) as! ProfileAddressCell
-            vc.addressName = self.data[indexPath.row].name
+            vc.addressName = self.data[indexPath.section][indexPath.row].name
             self.presentViewController(vc, animated: true, completion: nil)
         }
         else if(type == "PairList")
@@ -108,8 +130,13 @@ class ProfileList: UITableViewController
             vc.parentCell = tableView.cellForRowAtIndexPath(indexPath) as! ProfilePairListCell
             vc.parentVC = self
             vc.data = vc.parentCell.data
-            vc.formPair = self.data[indexPath.row]
-            vc.varName = self.data[indexPath.row].name
+            vc.formPair = self.data[indexPath.section][indexPath.row]
+            vc.varName = self.data[indexPath.section][indexPath.row].name
+            self.presentViewController(vc, animated: true, completion: nil)
+        }
+        else if(type == "FamilyList")
+        {
+            let vc = self.storyboard?.instantiateViewControllerWithIdentifier("FamilyList") as! FamilyList
             self.presentViewController(vc, animated: true, completion: nil)
         }
     }
