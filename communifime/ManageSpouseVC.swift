@@ -11,6 +11,7 @@ import UIKit
 class ManageSpouseVC: UIViewController
 {
 
+    @IBOutlet weak var sv: UIScrollView!
     @IBOutlet weak var imageButton: UIButton!
     @IBOutlet weak var firstNameTF: UITextField!
     @IBOutlet weak var lastNameTF: UITextField!
@@ -19,6 +20,7 @@ class ManageSpouseVC: UIViewController
     
     @IBOutlet weak var phoneNumbersButton: UIButton!
     @IBOutlet weak var emailsButton: UIButton!
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -31,6 +33,12 @@ class ManageSpouseVC: UIViewController
         // Do any additional setup after loading the view.
     }
 
+    override func viewDidLayoutSubviews()
+    {
+        sv.setWidth(self.view.getWidth())
+        sv.contentSize = CGSizeMake(sv.getWidth(), 1080)
+    }
+    
     @IBAction func phoneNumbersButtonPressed(sender: AnyObject)
     {
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("PairList") as! PairList
