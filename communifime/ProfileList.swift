@@ -78,6 +78,10 @@ class ProfileList: UITableViewController
         {
             return 110.0
         }
+        else if(type == "Date")
+        {
+            return 240.0
+        }
         else
         {
             return 44.0
@@ -101,6 +105,12 @@ class ProfileList: UITableViewController
             cell.address = self.data[indexPath.section][indexPath.row].value as? Address
             cell.updateAddress()
             cell.accessoryType = .DisclosureIndicator
+            return cell
+        }
+        else if(type == "Date")
+        {
+            let cell = tableView.dequeueReusableCellWithIdentifier("date", forIndexPath: indexPath) as! ProfileDateCell
+            cell.varName.text = self.data[indexPath.section][indexPath.row].name
             return cell
         }
         else

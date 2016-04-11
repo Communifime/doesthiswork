@@ -19,7 +19,7 @@ class UserProfile: NSObject
     var twitter : String = ""
     var linkedIn : String = ""
     var gender : String = ""
-    var birthDate : NSDate?
+    var birthDate : NSDate = NSDate()
     var hairColor : String = ""
     var hairLength : String = ""
     var eyeColor : String = ""
@@ -61,6 +61,8 @@ class UserProfile: NSObject
         personalPairs.append(FormPair(name: "Home Address", value: homeAddress, type: "Address"))
         
         personalPairs.append(FormPair(name: "Home Town", value: self.hometown, type: "Text"))
+        
+        personalPairs.append(FormPair(name: "Birth Date", value: self.birthDate, type: "Date"))
         
         personalPairs.append(FormPair(name: "emails", value: emails, type: "PairList"))
         

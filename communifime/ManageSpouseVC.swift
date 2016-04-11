@@ -17,27 +17,105 @@ class ManageSpouseVC: UIViewController
     @IBOutlet weak var lastNameTF: UITextField!
     @IBOutlet weak var companyTF: UITextField!
     @IBOutlet weak var positionTF: UITextField!
-    
+    @IBOutlet weak var errorTV: UITextView!
     @IBOutlet weak var phoneNumbersButton: UIButton!
     @IBOutlet weak var emailsButton: UIButton!
-    
+    @IBOutlet weak var datePicker: UIDatePicker!
+    var errorHeight = CGFloat(0.0)
+
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.errorTV.hidden = true
         self.imageButton.maskAsCircle()
         self.firstNameTF.maskWithUnderline()
         self.lastNameTF.maskWithUnderline()
         self.companyTF.maskWithUnderline()
         self.positionTF.maskWithUnderline()
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ManageSpouseVC.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ManageSpouseVC.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
+        
         // Do any additional setup after loading the view.
     }
 
+    override func viewWillDisappear(animated: Bool)
+    {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
     override func viewDidLayoutSubviews()
     {
-        sv.setWidth(self.view.getWidth())
-        sv.contentSize = CGSizeMake(sv.getWidth(), 1080)
+        let newSize = CGSizeMake(self.sv.getWidth(), self.sv.contentSize.height)
+        sv.contentSize = newSize
     }
+    
+    //Keyboard Events
+    func keyboardWillShow(notification: NSNotification)
+    {
+        let userInfo = notification.userInfo
+        let keyboardSize = (userInfo![UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue()
+        let keyboardHeight = keyboardSize!.size.height
+        let newSize = CGSizeMake(self.sv.getWidth(), self.sv.getHeight()+keyboardHeight)
+        sv.contentSize = newSize
+    }
+    
+    func keyboardWillHide(notification: NSNotification)
+    {
+        let newSize = CGSizeMake(self.sv.getWidth(), self.sv.getHeight())
+        sv.contentSize = newSize
+    }
+    
+    @IBAction func addButtonPressed(sender: AnyObject)
+    {
+        if(self.validateForm())
+        {
+            //add the child to the family list
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+    }
+    
+    func validateForm() -> Bool
+    {
+        var errorMsg = ""
+        if(firstNameTF.text == "")
+        {
+            errorMsg = "You must enter a first name"
+        }
+        else if(lastNameTF.text == "")
+        {
+            errorMsg = "You must enter a last name"
+        }
+        else if(companyTF.text == "")
+        {
+            errorMsg = "You must enter a company"
+        }
+        else if(positionTF.text == "")
+        {
+            errorMsg = "You must enter a position"
+        }
+        
+        if(errorMsg == "")
+        {
+            self.errorHeight = CGFloat(0.0)
+            let newSize = CGSizeMake(self.sv.getWidth(), self.sv.getHeight()-self.errorHeight)
+            sv.contentSize = newSize
+            
+            self.errorTV.hidden = true
+            return true
+        }
+        else
+        {
+            self.errorHeight = self.errorTV.getHeight()
+            let newSize = CGSizeMake(self.sv.getWidth(), self.sv.getHeight()-self.errorHeight)
+            sv.contentSize = newSize
+            self.errorTV.text = errorMsg
+            self.errorTV.textColor = UIColor.redColor()
+            self.errorTV.hidden = false
+            return false
+        }
+    }
+
     
     @IBAction func phoneNumbersButtonPressed(sender: AnyObject)
     {

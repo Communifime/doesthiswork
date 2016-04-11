@@ -10,5 +10,8 @@ import UIKit
 
 class SpouseFamilyMember: FamilyMember
 {
-
+    var emails : [Pair] = [Pair]()
+    var phoneNumbers : [Pair] = [Pair]()
+    var company : String = ""
+    var position : String = ""
 }
