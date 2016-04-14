@@ -19,6 +19,7 @@ class PairList: UIViewController, UITableViewDataSource, UITableViewDelegate
     var data : [Pair]!
     var varName : String!
     var formPair : FormPair!
+    var familyMember : SpouseFamilyMember?
     
     override func viewDidLoad()
     {
@@ -38,9 +39,23 @@ class PairList: UIViewController, UITableViewDataSource, UITableViewDelegate
     {
         let p = Pair(name: name, value: value)
         self.data.append(p)
-        self.formPair.value = self.data
+        if(self.familyMember == nil)
+        {
+            self.formPair.value = self.data
+            self.parentVC.tableView.reloadData()
+        }
+        else
+        {
+            if(self.varName == "Email Addresses")
+            {
+                self.familyMember?.emails = self.data
+            }
+            else
+            {
+                self.familyMember?.phoneNumbers = self.data
+            }
+        }
         self.tableView.reloadData()
-        self.parentVC.tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning()

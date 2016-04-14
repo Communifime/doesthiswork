@@ -16,12 +16,19 @@ class ManageChildVC: UIViewController
     @IBOutlet weak var lastNameTF: UITextField!
     @IBOutlet weak var gradeTF: UITextField!
     @IBOutlet weak var errorTV: UITextView!
+    @IBOutlet weak var addButton: UIButton!
+
     @IBOutlet weak var datePicker: UIDatePicker!
     var errorHeight = CGFloat(0.0)
+    var parentFamilyList : FamilyList!
+    var child = ChildFamilyMember()
+    var editMode = false
+    var initialDataLoaded = false
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.child.relationship = "child"
         self.errorTV.hidden = true
         self.imageButton.maskAsCircle()
         self.firstNameTF.maskWithUnderline()
@@ -32,6 +39,36 @@ class ManageChildVC: UIViewController
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ManageSpouseVC.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
 
         // Do any additional setup after loading the view.
+    }
+    
+    func setButtonTitles(button : UIButton, theTitle : String)
+    {
+        button.setTitle(theTitle, forState: .Normal)
+        button.setTitle(theTitle, forState: .Selected)
+        button.setTitle(theTitle, forState: .Highlighted)
+    }
+    
+    override func viewWillAppear(animated: Bool)
+    {
+        //load the form
+        if(!self.initialDataLoaded)
+        {
+            if(self.editMode)
+            {
+                self.setButtonTitles(self.addButton, theTitle: "save")
+            }
+            self.firstNameTF.text = self.child.firstName
+            self.lastNameTF.text = self.child.lastName
+            self.gradeTF.text = self.child.grade
+            self.datePicker.date = self.child.birthDate
+            if(self.child.image != nil)
+            {
+                self.imageButton.setBackgroundImage(self.child.image!, forState: .Normal)
+                self.imageButton.setBackgroundImage(self.child.image!, forState: .Highlighted)
+                self.imageButton.setBackgroundImage(self.child.image!, forState: .Selected)
+            }
+            self.initialDataLoaded = true
+        }
     }
     
     override func viewWillDisappear(animated: Bool)
@@ -66,6 +103,15 @@ class ManageChildVC: UIViewController
         if(self.validateForm())
         {
             //add the child to the family list
+            self.child.firstName = self.firstNameTF.text!
+            self.child.lastName = self.lastNameTF.text!
+            self.child.grade = self.gradeTF.text!
+            self.child.birthDate = self.datePicker.date
+            self.child.image = self.imageButton.backgroundImageForState(.Normal)
+            if(!self.editMode)
+            {
+                self.parentFamilyList.addFamilyMember(self.child)
+            }
             self.dismissViewControllerAnimated(true, completion: nil)
         }
     }

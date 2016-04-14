@@ -20,12 +20,18 @@ class ManageSpouseVC: UIViewController
     @IBOutlet weak var errorTV: UITextView!
     @IBOutlet weak var phoneNumbersButton: UIButton!
     @IBOutlet weak var emailsButton: UIButton!
+    @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var datePicker: UIDatePicker!
     var errorHeight = CGFloat(0.0)
-
+    var parentFamilyList : FamilyList!
+    var spouse = SpouseFamilyMember()
+    var editMode = false
+    var initialDataLoaded = false
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        spouse.relationship = "spouse"
         self.errorTV.hidden = true
         self.imageButton.maskAsCircle()
         self.firstNameTF.maskWithUnderline()
@@ -39,6 +45,38 @@ class ManageSpouseVC: UIViewController
         // Do any additional setup after loading the view.
     }
 
+    func setButtonTitles(button : UIButton, theTitle : String)
+    {
+        button.setTitle(theTitle, forState: .Normal)
+        button.setTitle(theTitle, forState: .Selected)
+        button.setTitle(theTitle, forState: .Highlighted)
+    }
+    
+    override func viewWillAppear(animated: Bool)
+    {
+        if(!self.initialDataLoaded)
+        {
+            if(self.editMode)
+            {
+                self.setButtonTitles(self.addButton, theTitle: "save")
+            }
+            self.firstNameTF.text = self.spouse.firstName
+            self.lastNameTF.text = self.spouse.lastName
+            self.companyTF.text = self.spouse.company
+            self.positionTF.text = self.spouse.position
+            self.datePicker.date = self.spouse.birthDate
+            if(self.spouse.image != nil)
+            {
+                self.imageButton.setBackgroundImage(self.spouse.image!, forState: .Normal)
+                self.imageButton.setBackgroundImage(self.spouse.image!, forState: .Highlighted)
+                self.imageButton.setBackgroundImage(self.spouse.image!, forState: .Selected)
+            }
+            self.initialDataLoaded = true
+        }
+        self.setButtonTitles(self.emailsButton, theTitle: "emails (\(self.spouse.emails.count))")
+        self.setButtonTitles(self.phoneNumbersButton, theTitle: "phone numbers (\(self.spouse.phoneNumbers.count))")
+    }
+    
     override func viewWillDisappear(animated: Bool)
     {
         NSNotificationCenter.defaultCenter().removeObserver(self)
@@ -71,6 +109,16 @@ class ManageSpouseVC: UIViewController
         if(self.validateForm())
         {
             //add the child to the family list
+            self.spouse.firstName = self.firstNameTF.text!
+            self.spouse.lastName = self.lastNameTF.text!
+            self.spouse.company = self.companyTF.text!
+            self.spouse.position = self.positionTF.text!
+            self.spouse.birthDate = self.datePicker.date
+            self.spouse.image = self.imageButton.backgroundImageForState(.Normal)
+            if(!self.editMode)
+            {
+                self.parentFamilyList.addFamilyMember(self.spouse)
+            }
             self.dismissViewControllerAnimated(true, completion: nil)
         }
     }
@@ -121,7 +169,8 @@ class ManageSpouseVC: UIViewController
     {
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("PairList") as! PairList
         vc.varName = "Phone Numbers"
-        vc.data = [Pair]()
+        vc.data = self.spouse.phoneNumbers
+        vc.familyMember = self.spouse
         self.presentViewController(vc, animated: true, completion: nil)
 
     }
@@ -130,7 +179,8 @@ class ManageSpouseVC: UIViewController
     {
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("PairList") as! PairList
         vc.varName = "Email Addresses"
-        vc.data = [Pair]()
+        vc.data = self.spouse.emails
+        vc.familyMember = self.spouse
         self.presentViewController(vc, animated: true, completion: nil)
     }
     

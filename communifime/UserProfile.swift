@@ -89,7 +89,7 @@ class UserProfile: NSObject
         educationPairs.append(FormPair(name: "colleges", value: colleges, type: "PairList"))
         
         //Family
-        familyPairs.append(FormPair(name: "Family Members", value: colleges, type: "FamilyList"))
+        familyPairs.append(FormPair(name: "Family Members", value: familyMembers, type: "FamilyList"))
         
         
         return [personalPairs, workPairs, educationPairs, familyPairs]

@@ -11,10 +11,17 @@ import UIKit
 class FamilyList: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
     @IBOutlet weak var tableView: UITableView!
+    var data : [FamilyMember] = [FamilyMember]()
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+    }
+    
+    func addFamilyMember(member: FamilyMember)
+    {
+        self.data.append(member)
+        self.tableView.reloadData()
     }
     
     @IBAction func addButtonPressed(sender: AnyObject)
@@ -23,12 +30,14 @@ class FamilyList: UIViewController, UITableViewDelegate, UITableViewDataSource
         let spouseAction = UIAlertAction(title: "Spouse", style: .Default) { (action) in
             //show the create spouse VC
             let vc = self.storyboard?.instantiateViewControllerWithIdentifier("ManageSpouseVC") as! ManageSpouseVC
+            vc.parentFamilyList = self
             self.presentViewController(vc, animated: true, completion: nil)
         }
         
         let childAction = UIAlertAction(title: "Child", style: .Default) { (action) in
             //show the create child VC
             let vc = self.storyboard?.instantiateViewControllerWithIdentifier("ManageChildVC") as! ManageChildVC
+            vc.parentFamilyList = self
             self.presentViewController(vc, animated: true, completion: nil)
 
         }
@@ -56,7 +65,7 @@ class FamilyList: UIViewController, UITableViewDelegate, UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         // #warning Incomplete implementation, return the number of rows
-        return 10
+        return self.data.count
     }
     
     
@@ -65,12 +74,32 @@ class FamilyList: UIViewController, UITableViewDelegate, UITableViewDataSource
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
         
         // Configure the cell...
-        cell.textLabel?.text = "Test Row"
+        let member = self.data[indexPath.row]
+        
+        cell.textLabel?.text = "\(member.firstName) \(member.lastName)"
+        cell.detailTextLabel?.text = member.relationship
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
+        let member = self.data[indexPath.row]
+        if(member is SpouseFamilyMember)
+        {
+            let vc = self.storyboard?.instantiateViewControllerWithIdentifier("ManageSpouseVC") as! ManageSpouseVC
+            vc.parentFamilyList = self
+            vc.spouse = member as! SpouseFamilyMember
+            vc.editMode = true
+            self.presentViewController(vc, animated: true, completion: nil)
+        }
+        else
+        {
+            let vc = self.storyboard?.instantiateViewControllerWithIdentifier("ManageChildVC") as! ManageChildVC
+            vc.parentFamilyList = self
+            vc.child = member as! ChildFamilyMember
+            vc.editMode = true
+            self.presentViewController(vc, animated: true, completion: nil)
+        }
     }
     
     /*

@@ -10,5 +10,5 @@ import UIKit
 
 class ChildFamilyMember: FamilyMember
 {
-    var grade : String!
+    var grade : String = ""
 }
