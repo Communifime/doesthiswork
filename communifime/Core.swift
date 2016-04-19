@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import AWSS3
+import AWSCore
 
 class Core: NSObject
 {
@@ -16,6 +18,35 @@ class Core: NSObject
     static var fireBaseRef = Firebase(url: "https://amber-fire-7588.firebaseio.com/")
     
     static var currentUserProfile = UserProfile()
+    
+    static func setButtonImage(buttonForImage: UIButton, image: UIImage)
+    {
+        buttonForImage.setBackgroundImage(image, forState: .Normal)
+        buttonForImage.setBackgroundImage(image, forState: .Highlighted)
+        buttonForImage.setBackgroundImage(image, forState: .Selected)
+    }
+    
+    static func getImage(button: UIButton)
+    {
+        // Construct the NSURL for the download location.
+        let downloadingFilePath = NSTemporaryDirectory().stringByAppendingString("downloaded-testImage.jpg")
+        
+        let downloadingFileURL = NSURL.fileURLWithPath(downloadingFilePath)
+        
+        // Construct the download request.
+        let downloadRequest = AWSS3TransferManagerDownloadRequest.init()
+        
+        downloadRequest.bucket = "communifi";
+        downloadRequest.key = "testImage.jpg";
+        downloadRequest.downloadingFileURL = downloadingFileURL;
+        
+        let transferManager = AWSS3TransferManager.defaultS3TransferManager()
+        transferManager.download(downloadRequest).continueWithSuccessBlock { (task) -> AnyObject? in
+            let image = UIImage(contentsOfFile: downloadingFilePath)
+            Core.setButtonImage(button, image: image!)
+            return image
+        }
+    }
     
     static func isValidEmail(testStr:String) -> Bool
     {

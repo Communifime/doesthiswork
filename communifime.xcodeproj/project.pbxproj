@@ -32,6 +32,7 @@
 		682733D01CB9945000DBD95B /* ProfileAddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682733CF1CB9945000DBD95B /* ProfileAddressCell.swift */; };
 		682733D21CB9990400DBD95B /* FormPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682733D11CB9990400DBD95B /* FormPair.swift */; };
 		682733D61CBA99B900DBD95B /* ProfilePairListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682733D51CBA99B900DBD95B /* ProfilePairListCell.swift */; };
+		6859CF431CC6CF8700208C90 /* Accounts in Resources */ = {isa = PBXBuildFile; fileRef = 6859CF421CC6CF8700208C90 /* Accounts */; };
 		68F3830D1CBBDC56001E0587 /* ProfileDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F3830C1CBBDC56001E0587 /* ProfileDateCell.swift */; };
 		68F3830F1CBBE5C9001E0587 /* ChildFamilyMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F3830E1CBBE5C9001E0587 /* ChildFamilyMember.swift */; };
 		68FDF1591CA7438B0037B878 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FDF1581CA7438B0037B878 /* AppDelegate.swift */; };
@@ -76,6 +77,7 @@
 		682733CF1CB9945000DBD95B /* ProfileAddressCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileAddressCell.swift; sourceTree = "<group>"; };
 		682733D11CB9990400DBD95B /* FormPair.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormPair.swift; sourceTree = "<group>"; };
 		682733D51CBA99B900DBD95B /* ProfilePairListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePairListCell.swift; sourceTree = "<group>"; };
+		6859CF421CC6CF8700208C90 /* Accounts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Accounts; sourceTree = "<group>"; };
 		68F3830C1CBBDC56001E0587 /* ProfileDateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileDateCell.swift; sourceTree = "<group>"; };
 		68F3830E1CBBE5C9001E0587 /* ChildFamilyMember.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChildFamilyMember.swift; sourceTree = "<group>"; };
 		68FDF1551CA7438A0037B878 /* communifime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = communifime.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -193,6 +195,7 @@
 		68FDF14C1CA7438A0037B878 = {
 			isa = PBXGroup;
 			children = (
+				6859CF421CC6CF8700208C90 /* Accounts */,
 				68FDF16A1CA743EB0037B878 /* TODO */,
 				68FDF1571CA7438B0037B878 /* communifime */,
 				68FDF1561CA7438A0037B878 /* Products */,
@@ -343,6 +346,7 @@
 				6824FED81CBB35A600C33B9D /* chevronBackground.png in Resources */,
 				68FDF1601CA7438B0037B878 /* Assets.xcassets in Resources */,
 				682733B41CB355FD00DBD95B /* leftArrow.png in Resources */,
+				6859CF431CC6CF8700208C90 /* Accounts in Resources */,
 				68FDF16B1CA743EB0037B878 /* TODO in Resources */,
 				682733A41CAE09AD00DBD95B /* addProfileImage.png in Resources */,
 				68148BE21CA89A330096E699 /* settings_icon.png in Resources */,

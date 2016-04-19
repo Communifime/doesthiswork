@@ -17,6 +17,7 @@ class ProfileVC: UIViewController
     {
         super.viewDidLoad()
         self.profileImageButton.maskAsCircle()
+        Core.getImage(self.profileImageButton)
     }
     
     override func didReceiveMemoryWarning()
