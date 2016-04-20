@@ -24,4 +24,24 @@ class Address: NSObject
         self.state = state
         self.zip = zip
     }
+    
+    init(data : [String : String])
+    {
+        self.street1 = data["street1"]!
+        self.street2 = data["street2"]!
+        self.city = data["city"]!
+        self.state = data["state"]!
+        self.zip = data["zip"]!
+    }
+    
+    func getDictionary() -> NSDictionary
+    {
+        var dictionary = [String : String]()
+        dictionary["street1"] = self.street1
+        dictionary["street2"] = self.street2
+        dictionary["city"] = self.city
+        dictionary["state"] = self.state
+        dictionary["zip"] = self.zip
+        return dictionary
+    }
 }

@@ -11,6 +11,8 @@ import UIKit
 class ProfileTextCell: UITableViewCell
 {
     @IBOutlet weak var tf: UITextField!
+    var data : FormPair!
+    var profile : UserProfile!
     
     override func awakeFromNib()
     {
@@ -20,6 +22,12 @@ class ProfileTextCell: UITableViewCell
         tf.maskWithUnderline()
     }
 
+    @IBAction func textDidChange(sender : UITextField)
+    {
+        data.value = sender.text!
+        self.profile.setValue(data.name, value: data.value)
+    }
+    
     override func setSelected(selected: Bool, animated: Bool)
     {
         super.setSelected(selected, animated: animated)

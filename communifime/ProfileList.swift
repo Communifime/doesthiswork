@@ -11,7 +11,8 @@ import UIKit
 class ProfileList: UITableViewController
 {
     var data : [[FormPair]]!
-
+    var profile : UserProfile!
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -94,6 +95,8 @@ class ProfileList: UITableViewController
         if(type == "Text")
         {
             let cell = tableView.dequeueReusableCellWithIdentifier("text", forIndexPath: indexPath) as! ProfileTextCell
+            cell.data = self.data[indexPath.section][indexPath.row]
+            cell.profile = self.profile
             cell.tf.placeholder = self.data[indexPath.section][indexPath.row].name
             cell.tf.text = self.data[indexPath.section][indexPath.row].value as? String
             return cell

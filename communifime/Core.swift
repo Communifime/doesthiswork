@@ -17,7 +17,7 @@ class Core: NSObject
     
     static var fireBaseRef = Firebase(url: "https://amber-fire-7588.firebaseio.com/")
     
-    static var currentUserProfile = UserProfile()
+    static var currentUserProfile : UserProfile!
     
     static func setButtonImage(buttonForImage: UIButton, image: UIImage)
     {
@@ -42,9 +42,11 @@ class Core: NSObject
         
         let transferManager = AWSS3TransferManager.defaultS3TransferManager()
         transferManager.download(downloadRequest).continueWithSuccessBlock { (task) -> AnyObject? in
-            let image = UIImage(contentsOfFile: downloadingFilePath)
-            Core.setButtonImage(button, image: image!)
-            return image
+            dispatch_async(dispatch_get_main_queue(), { 
+                let image = UIImage(contentsOfFile: downloadingFilePath)
+                Core.setButtonImage(button, image: image!)
+            })
+            return nil
         }
     }
     

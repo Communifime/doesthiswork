@@ -12,12 +12,18 @@ class ProfileVC: UIViewController
 {
     @IBOutlet weak var profileImageButton: UIButton!
     var profileList : ProfileList!
+    var profile = Core.currentUserProfile
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         self.profileImageButton.maskAsCircle()
         Core.getImage(self.profileImageButton)
+    }
+    
+    @IBAction func saveButtonPressed(sender: AnyObject)
+    {
+        self.profile.save()
     }
     
     override func didReceiveMemoryWarning()
@@ -41,6 +47,7 @@ class ProfileVC: UIViewController
         {
             self.profileList = segue.destinationViewController as! ProfileList
             self.profileList.data = Core.currentUserProfile.getFormObjects()
+            self.profileList.profile = self.profile
         }
     }
     
