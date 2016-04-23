@@ -134,15 +134,7 @@ class ManageSpouseVC: UIViewController
         {
             errorMsg = "You must enter a last name"
         }
-        else if(companyTF.text == "")
-        {
-            errorMsg = "You must enter a company"
-        }
-        else if(positionTF.text == "")
-        {
-            errorMsg = "You must enter a position"
-        }
-        
+                
         if(errorMsg == "")
         {
             self.errorHeight = CGFloat(0.0)

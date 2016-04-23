@@ -10,7 +10,7 @@ import UIKit
 
 class ProfilePairListCell: UITableViewCell
 {
-    var data : [Pair]!
+    var data : [AnyObject]!
     
     override func awakeFromNib()
     {

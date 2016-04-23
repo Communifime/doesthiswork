@@ -14,4 +14,15 @@ class SpouseFamilyMember: FamilyMember
     var phoneNumbers : [Pair] = [Pair]()
     var company : String = ""
     var position : String = ""
+    
+    override func toDictionary() -> [String : AnyObject]
+    {
+        var data = super.toDictionary()
+        data["Company"] = self.company
+        data["Position"] = self.position
+        data["Emails"] = Core.pairArrayToDictionary(self.emails)
+        data["Phone Numbers"] = Core.pairArrayToDictionary(self.phoneNumbers)
+        data["Relationship"] = "spouse"
+        return data
+    }
 }

@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import AWSCore
 
 class UserProfile: NSObject
 {
@@ -63,12 +64,28 @@ class UserProfile: NSObject
             self.linkedIn = data["LinkedIn"] as! String
             self.position = data["Position"] as! String
             self.twitter = data["Twitter"] as! String
+            self.birthDate = NSDate.aws_dateFromString(data["Birth Date"] as! String)
+            let homeAddress = data["Home Address"] as! NSDictionary
+            self.homeAddress.street1 = homeAddress["street1"] as! String
+            self.homeAddress.street2 = homeAddress["street2"] as! String
+            self.homeAddress.city = homeAddress["city"] as! String
+            self.homeAddress.state = homeAddress["state"] as! String
+            self.homeAddress.zip = homeAddress["zip"] as! String
+            
+            let workAddress = data["Work Address"] as! NSDictionary
+            self.workAddress.street1 = workAddress["street1"] as! String
+            self.workAddress.street2 = workAddress["street2"] as! String
+            self.workAddress.city = workAddress["city"] as! String
+            self.workAddress.state = workAddress["state"] as! String
+            self.workAddress.zip = workAddress["zip"] as! String
+            self.emails = Core.dictionaryToPairArray(data["Emails"] as? [String : String])
+            self.phoneNumbers = Core.dictionaryToPairArray(data["Phone Numbers"] as? [String : String])
+            self.colleges = Core.dictionaryToPairArray(data["Colleges"] as? [String : String])
         }
     }
     
     func setValue(key : String, value : AnyObject)
     {
-        print("Setting \(key) to value \(value)")
         if(key == "First Name")
         {
             self.firstName = value as! String
@@ -130,10 +147,13 @@ class UserProfile: NSObject
         {
             self.workAddress = Address(data: value as! [String : String])
         }
-
+        else if(key == "Birth Date")
+        {
+            self.birthDate = value as! NSDate
+        }
     }
     
-    func save()
+    func save(saveSuccessButton: UIButton)
     {
         var profile = [String : AnyObject]()
         profile["First Name"] = self.firstName
@@ -151,7 +171,33 @@ class UserProfile: NSObject
         profile["High School"] = self.highSchool
         profile["Home Address"] = self.homeAddress.getDictionary()
         profile["Work Address"] = self.workAddress.getDictionary()
-        self.ref.setValue(profile)
+        profile["Birth Date"] = self.birthDate.aws_stringValue(AWSDateISO8601DateFormat1)
+        profile["Emails"] = Core.pairArrayToDictionary(self.emails)
+        profile["Phone Numbers"] = Core.pairArrayToDictionary(self.phoneNumbers)
+        profile["Colleges"] = Core.pairArrayToDictionary(self.colleges)
+        profile["Family Members"] = self.getFamilyMembersDictionary()
+        self.ref.setValue(profile) { (error, firebase) in
+            UIView.animateWithDuration(0.5, animations: {
+                saveSuccessButton.alpha = 1.0
+                }, completion: { (done) in
+                    UIView.animateWithDuration(0.5, animations: { 
+                        saveSuccessButton.alpha = 0.0
+                    })
+            })
+        }
+    }
+    
+    
+    func getFamilyMembersDictionary() -> [String : [String : AnyObject]]
+    {
+        var fmDictionary = [String : [String : AnyObject]]()
+        var index = 0
+        for fm in self.familyMembers
+        {
+            fmDictionary["\(index)"] = fm.toDictionary()
+            index += 1
+        }
+        return fmDictionary
     }
     
     func getFormObjects() -> [[FormPair]]

@@ -19,6 +19,30 @@ class Core: NSObject
     
     static var currentUserProfile : UserProfile!
     
+    static func dictionaryToPairArray(pairDictionary : [String : String]?) -> [Pair]
+    {
+        var pairs = [Pair]()
+        if(pairDictionary == nil)
+        {
+            return pairs
+        }
+        for datum in pairDictionary!
+        {
+            pairs.append(Pair(name: datum.0, value: datum.1))
+        }
+        return pairs
+    }
+    
+    static func pairArrayToDictionary(pairs : [Pair]) -> [String : String]
+    {
+        var pairDictionary = [String : String]()
+        for pair in pairs
+        {
+            pairDictionary[pair.name] = pair.value
+        }
+        return pairDictionary
+    }
+
     static func setButtonImage(buttonForImage: UIButton, image: UIImage)
     {
         buttonForImage.setBackgroundImage(image, forState: .Normal)

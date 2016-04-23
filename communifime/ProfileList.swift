@@ -114,6 +114,18 @@ class ProfileList: UITableViewController
         {
             let cell = tableView.dequeueReusableCellWithIdentifier("date", forIndexPath: indexPath) as! ProfileDateCell
             cell.varName.text = self.data[indexPath.section][indexPath.row].name
+            cell.data = self.data[indexPath.section][indexPath.row]
+            cell.profile = self.profile
+            cell.date.date = cell.data.value as! NSDate
+            return cell
+        }
+        else if(type == "FamilyList")
+        {
+            let cell = tableView.dequeueReusableCellWithIdentifier("pairlist", forIndexPath: indexPath) as! ProfilePairListCell
+            let data = self.data[indexPath.section][indexPath.row].value as? [FamilyMember]
+            cell.textLabel?.text = "\(self.data[indexPath.section][indexPath.row].name) - (\(data!.count))"
+            cell.data = data
+            cell.accessoryType = .DisclosureIndicator
             return cell
         }
         else
@@ -142,7 +154,7 @@ class ProfileList: UITableViewController
             let vc = self.storyboard?.instantiateViewControllerWithIdentifier("PairList") as! PairList
             vc.parentCell = tableView.cellForRowAtIndexPath(indexPath) as! ProfilePairListCell
             vc.parentVC = self
-            vc.data = vc.parentCell.data
+            vc.data = vc.parentCell.data as! [Pair]
             vc.formPair = self.data[indexPath.section][indexPath.row]
             vc.varName = self.data[indexPath.section][indexPath.row].name
             self.presentViewController(vc, animated: true, completion: nil)
@@ -150,6 +162,10 @@ class ProfileList: UITableViewController
         else if(type == "FamilyList")
         {
             let vc = self.storyboard?.instantiateViewControllerWithIdentifier("FamilyList") as! FamilyList
+            vc.parentCell = tableView.cellForRowAtIndexPath(indexPath) as! ProfilePairListCell
+            vc.parentVC = self
+            vc.data = vc.parentCell.data as! [FamilyMember]
+            vc.formPair = self.data[indexPath.section][indexPath.row]
             self.presentViewController(vc, animated: true, completion: nil)
         }
     }

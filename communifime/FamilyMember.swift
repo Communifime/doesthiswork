@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AWSCore
 
 class FamilyMember: NSObject
 {
@@ -15,4 +16,13 @@ class FamilyMember: NSObject
     var image : UIImage?
     var birthDate : NSDate = NSDate()
     var relationship : String = ""
+    
+    func toDictionary() -> [String : AnyObject]
+    {
+        var data = [String : String]()
+        data["First Name"] = self.firstName
+        data["Last Name"] = self.lastName
+        data["Birth Date"] = self.birthDate.aws_stringValue(AWSDateISO8601DateFormat1)
+        return data
+    }
 }

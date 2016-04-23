@@ -10,6 +10,8 @@ import UIKit
 
 class ProfileVC: UIViewController
 {
+    
+    @IBOutlet weak var profileSavedButton: UIButton!
     @IBOutlet weak var profileImageButton: UIButton!
     var profileList : ProfileList!
     var profile = Core.currentUserProfile
@@ -17,13 +19,14 @@ class ProfileVC: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.profileSavedButton.alpha = 0.0
         self.profileImageButton.maskAsCircle()
         Core.getImage(self.profileImageButton)
     }
     
     @IBAction func saveButtonPressed(sender: AnyObject)
     {
-        self.profile.save()
+        self.profile.save(self.profileSavedButton)
     }
     
     override func didReceiveMemoryWarning()

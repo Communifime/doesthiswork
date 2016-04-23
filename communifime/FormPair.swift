@@ -12,9 +12,9 @@ class FormPair: NSObject
 {
     var type : String
     var name : String
-    var value : NSObject
+    var value : AnyObject
     
-    init(name : String, value : NSObject, type: String)
+    init(name : String, value : AnyObject, type: String)
     {
         self.name = name
         self.value = value

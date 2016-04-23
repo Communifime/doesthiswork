@@ -12,12 +12,20 @@ class ProfileDateCell: UITableViewCell
 {
     @IBOutlet weak var varName: UILabel!
     @IBOutlet weak var date: UIDatePicker!
-    
+    var data : FormPair!
+    var profile : UserProfile!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
+    @IBAction func dateDidChange(sender : AnyObject)
+    {
+        data.value = date.date
+        self.profile.setValue(data.name, value: data.value)
+    }
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

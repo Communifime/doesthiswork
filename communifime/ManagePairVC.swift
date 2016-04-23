@@ -10,6 +10,8 @@ import UIKit
 
 class ManagePairVC: UIViewController
 {
+    
+    @IBOutlet weak var errorTV: UITextView!
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var name: UITextField!
     @IBOutlet weak var value: UITextField!
@@ -22,6 +24,7 @@ class ManagePairVC: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.errorTV.alpha = 0.0
         if(editMode)
         {
             self.navBar.topItem?.title = "Edit \(self.varName)"
@@ -45,18 +48,7 @@ class ManagePairVC: UIViewController
         let vc = UIAlertController(title: "Delete Confirm", message: "Are you sure you want to delete this entry?", preferredStyle: .Alert)
         let confirm = UIAlertAction(title: "Confirm", style: .Default) { (action) in
             //do delete code
-            
-            let data = self.parentPairList.data
-            var newData = [Pair]()
-            for datum in data
-            {
-                if(datum != self.editPair)
-                {
-                    newData.append(datum)
-                }
-            }
-            self.parentPairList.data = newData
-            self.parentPairList.tableView.reloadData()
+            self.parentPairList.removePair(self.editPair)
             self.dismissViewControllerAnimated(true, completion: nil)
         }
         
@@ -68,7 +60,51 @@ class ManagePairVC: UIViewController
     
     func validateForm() -> Bool
     {
-        return true
+        var errorMessage = ""
+        if(editMode)
+        {
+            if(self.name.text?.characters.count == 0)
+            {
+                errorMessage = "You must enter a label name"
+            }
+            else if(self.value.text?.characters.count == 0)
+            {
+                errorMessage = "You must enter an value"
+            }
+            else if(self.name.text! != self.editPair.name && self.parentPairList.hasLabel(self.name.text!))
+            {
+                errorMessage = "A value with that label already exists."
+            }
+        }
+        else
+        {
+            if(self.name.text?.characters.count == 0)
+            {
+                errorMessage = "You must enter a label name"
+            }
+            else if(self.value.text?.characters.count == 0)
+            {
+                errorMessage = "You must enter a value"
+            }
+            else if(self.parentPairList.hasLabel(self.name.text!))
+            {
+                errorMessage = "A value with that label already exists."
+            }
+        }
+        
+        if(errorMessage != "")
+        {
+            self.errorTV.text = errorMessage
+            self.errorTV.textColor = UIColor.redColor()
+            self.errorTV.alpha = 1.0
+            return false
+        }
+        else
+        {
+            self.errorTV.text = ""
+            self.errorTV.alpha = 0.0
+            return true
+        }
     }
     
     @IBAction func saveButtonPressed(sender: AnyObject)

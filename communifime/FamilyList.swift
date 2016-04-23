@@ -11,8 +11,11 @@ import UIKit
 class FamilyList: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
     @IBOutlet weak var tableView: UITableView!
-    var data : [FamilyMember] = [FamilyMember]()
-    
+    var data : [FamilyMember]!
+    var parentCell : ProfilePairListCell!
+    var parentVC : ProfileList!
+    var formPair : FormPair!
+
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -22,6 +25,14 @@ class FamilyList: UIViewController, UITableViewDelegate, UITableViewDataSource
     {
         self.data.append(member)
         self.tableView.reloadData()
+        self.parentVC.tableView.reloadData()
+    }
+    
+    @IBAction func doneButtonPressed(sender: AnyObject)
+    {
+        self.formPair.value = self.data
+        self.parentVC.profile.familyMembers = self.data
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func addButtonPressed(sender: AnyObject)
@@ -41,7 +52,6 @@ class FamilyList: UIViewController, UITableViewDelegate, UITableViewDataSource
             self.presentViewController(vc, animated: true, completion: nil)
 
         }
-        
         vc.addAction(spouseAction)
         vc.addAction(childAction)
         self.presentViewController(vc, animated: true, completion: nil)

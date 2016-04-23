@@ -19,6 +19,8 @@ class PairList: UIViewController, UITableViewDataSource, UITableViewDelegate
     var data : [Pair]!
     var varName : String!
     var formPair : FormPair!
+    
+    //used for phone and email lists for family members
     var familyMember : SpouseFamilyMember?
     
     override func viewDidLoad()
@@ -35,6 +37,57 @@ class PairList: UIViewController, UITableViewDataSource, UITableViewDelegate
         self.presentViewController(vc, animated: true, completion: nil)
     }
     
+    @IBAction func doneButtonPressed(sender : AnyObject)
+    {
+        if(self.familyMember == nil)
+        {
+            self.formPair.value = self.data
+            self.parentVC.profile.setValue(self.formPair.name, value: self.data)
+        }
+        else
+        {
+            //do the stuff for the Family list page
+        }
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func hasLabel(name: String) -> Bool
+    {
+        for pair in self.data
+        {
+            if(pair.name == name)
+            {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func removePair(pair : Pair)
+    {
+        let pos = self.data.indexOf(pair)
+        self.data.removeAtIndex(pos!)
+        self.syncProfile()
+        self.tableView.reloadData()
+    }
+    
+    func syncProfile()
+    {
+        let varName = self.formPair.name
+        if(varName == "emails")
+        {
+            self.parentVC.profile.emails = self.data
+        }
+        else if(varName == "phone numbers")
+        {
+            self.parentVC.profile.phoneNumbers = self.data
+        }
+        else if(varName == "colleges")
+        {
+            self.parentVC.profile.colleges = self.data
+        }
+
+    }
     func addPair(name: String, value: String)
     {
         let p = Pair(name: name, value: value)
@@ -42,6 +95,7 @@ class PairList: UIViewController, UITableViewDataSource, UITableViewDelegate
         if(self.familyMember == nil)
         {
             self.formPair.value = self.data
+            self.syncProfile()
             self.parentVC.tableView.reloadData()
         }
         else
