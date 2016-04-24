@@ -12,6 +12,12 @@ class ChildFamilyMember: FamilyMember
 {
     var grade : String = ""
     
+    override init()
+    {
+        super.init()
+        self.relationship = "child"
+    }
+    
     override func toDictionary() -> [String : AnyObject]
     {
         var data = super.toDictionary()

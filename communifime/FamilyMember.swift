@@ -14,6 +14,7 @@ class FamilyMember: NSObject
     var firstName : String = ""
     var lastName : String = ""
     var image : UIImage?
+    var imageName : String = ""
     var birthDate : NSDate = NSDate()
     var relationship : String = ""
     

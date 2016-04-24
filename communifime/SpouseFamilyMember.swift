@@ -15,6 +15,12 @@ class SpouseFamilyMember: FamilyMember
     var company : String = ""
     var position : String = ""
     
+    override init()
+    {
+        super.init()
+        self.relationship = "spouse"
+    }
+
     override func toDictionary() -> [String : AnyObject]
     {
         var data = super.toDictionary()

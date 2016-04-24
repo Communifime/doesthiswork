@@ -81,6 +81,7 @@ class UserProfile: NSObject
             self.emails = Core.dictionaryToPairArray(data["Emails"] as? [String : String])
             self.phoneNumbers = Core.dictionaryToPairArray(data["Phone Numbers"] as? [String : String])
             self.colleges = Core.dictionaryToPairArray(data["Colleges"] as? [String : String])
+            self.familyMembers = self.getFamilyMemberArray(data["Family Members"] as! [[String : AnyObject]])
         }
     }
     
@@ -187,6 +188,36 @@ class UserProfile: NSObject
         }
     }
     
+    func getFamilyMemberArray(dictionaries : [[String : AnyObject]]) -> [FamilyMember]
+    {
+        var data = [FamilyMember]()
+        for obj in dictionaries
+        {
+            let relationship = obj["Relationship"]! as! String
+            if(relationship == "child")
+            {
+                let child = ChildFamilyMember()
+                child.firstName = obj["First Name"] as! String
+                child.lastName = obj["Last Name"] as! String
+                child.grade = obj["Grade"] as! String
+                child.birthDate = NSDate.aws_dateFromString(obj["Birth Date"] as! String)
+                data.append(child)
+            }
+            else if(relationship == "spouse")
+            {
+                let spouse = SpouseFamilyMember()
+                spouse.firstName = obj["First Name"] as! String
+                spouse.lastName = obj["Last Name"] as! String
+                spouse.company = obj["Company"] as! String
+                spouse.position = obj["Position"] as! String
+                spouse.birthDate = NSDate.aws_dateFromString(obj["Birth Date"] as! String)
+                spouse.emails = Core.dictionaryToPairArray(obj["Emails"] as? [String : String])
+                spouse.phoneNumbers = Core.dictionaryToPairArray(obj["Phone Numbers"] as? [String : String])
+                data.append(spouse)
+            }
+        }
+        return data
+    }
     
     func getFamilyMembersDictionary() -> [String : [String : AnyObject]]
     {

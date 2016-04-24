@@ -50,6 +50,39 @@ class Core: NSObject
         buttonForImage.setBackgroundImage(image, forState: .Selected)
     }
     
+    static func storeImage(image: UIImage, fileName: String?)
+    {
+        // Construct the upload request.
+        var hashString = fileName
+        if(hashString == nil)
+        {
+            let date = NSDate()
+            let hashableString = NSString(format: "%f", date.timeIntervalSinceReferenceDate)
+            hashString = hashableString.aws_md5String() + ".png"
+        }
+        
+        let path:NSString = NSTemporaryDirectory().stringByAppendingString(hashString!)
+        let imageData = UIImagePNGRepresentation(image)
+        imageData!.writeToFile(path as String, atomically: true)
+        let url: NSURL = NSURL(fileURLWithPath: path as String)
+        let uploadRequest: AWSS3TransferManagerUploadRequest = AWSS3TransferManagerUploadRequest()
+        // set the bucket
+        uploadRequest.bucket = "communifi"
+        uploadRequest.key = "profile_pics/" +
+            hashString!
+        uploadRequest.contentType =
+        "png"
+        uploadRequest.body = url
+        uploadRequest.uploadProgress = { (currSent, totalSent, totalExpected) in
+            dispatch_sync(dispatch_get_main_queue(), { () -> Void in
+                print("\(totalSent) of \(totalExpected) bytes sent")
+            })
+        }
+        let transferManager:AWSS3TransferManager =
+            AWSS3TransferManager.defaultS3TransferManager()
+        transferManager.upload(uploadRequest)
+    }
+    
     static func getImage(button: UIButton)
     {
         // Construct the NSURL for the download location.
