@@ -28,6 +28,12 @@ class ManageChildVC: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        if(self.child.imageName != "")
+        {
+            Core.getImage(self.imageButton, imageContainer: self.child)
+        }
+
         self.child.relationship = "child"
         self.errorTV.hidden = true
         self.imageButton.maskAsCircle()
@@ -107,7 +113,11 @@ class ManageChildVC: UIViewController
             self.child.lastName = self.lastNameTF.text!
             self.child.grade = self.gradeTF.text!
             self.child.birthDate = self.datePicker.date
-            self.child.image = self.imageButton.backgroundImageForState(.Normal)
+            if(self.child.image == nil || self.child.image != self.imageButton.currentBackgroundImage)
+            {
+                self.child.imageChanged = true
+            }
+            self.child.image = self.imageButton.currentBackgroundImage
             if(!self.editMode)
             {
                 self.parentFamilyList.addFamilyMember(self.child)

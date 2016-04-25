@@ -31,6 +31,11 @@ class ManageSpouseVC: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        if(self.spouse.imageName != "")
+        {
+            Core.getImage(self.imageButton, imageContainer: self.spouse)
+        }
         spouse.relationship = "spouse"
         self.errorTV.hidden = true
         self.imageButton.maskAsCircle()
@@ -114,7 +119,11 @@ class ManageSpouseVC: UIViewController
             self.spouse.company = self.companyTF.text!
             self.spouse.position = self.positionTF.text!
             self.spouse.birthDate = self.datePicker.date
-            self.spouse.image = self.imageButton.backgroundImageForState(.Normal)
+            if(self.spouse.image == nil || self.spouse.image != self.imageButton.currentBackgroundImage)
+            {
+                self.spouse.imageChanged = true
+            }
+            self.spouse.image = self.imageButton.currentBackgroundImage
             if(!self.editMode)
             {
                 self.parentFamilyList.addFamilyMember(self.spouse)

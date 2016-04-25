@@ -10,11 +10,12 @@ import UIKit
 import Firebase
 import AWSCore
 
-class UserProfile: NSObject
+class UserProfile: NSObject, ImageContainer
 {
     var firstName : String = ""
     var lastName : String = ""
     var image : UIImage?
+    var imageName : String = ""
     var homeAddress : Address =  Address(street1: "", street2: "", city: "", state: "", zip: "")
     var hometown : String = ""
     var facebook : String = ""
@@ -64,6 +65,7 @@ class UserProfile: NSObject
             self.linkedIn = data["LinkedIn"] as! String
             self.position = data["Position"] as! String
             self.twitter = data["Twitter"] as! String
+            self.imageName = data["Image Name"] as! String
             self.birthDate = NSDate.aws_dateFromString(data["Birth Date"] as! String)
             let homeAddress = data["Home Address"] as! NSDictionary
             self.homeAddress.street1 = homeAddress["street1"] as! String
@@ -81,7 +83,11 @@ class UserProfile: NSObject
             self.emails = Core.dictionaryToPairArray(data["Emails"] as? [String : String])
             self.phoneNumbers = Core.dictionaryToPairArray(data["Phone Numbers"] as? [String : String])
             self.colleges = Core.dictionaryToPairArray(data["Colleges"] as? [String : String])
-            self.familyMembers = self.getFamilyMemberArray(data["Family Members"] as! [[String : AnyObject]])
+            if(data["Family Members"] != nil)
+            {
+                self.familyMembers = self.getFamilyMemberArray(data["Family Members"] as! [[String : AnyObject]])
+            }
+            
         }
     }
     
@@ -154,7 +160,7 @@ class UserProfile: NSObject
         }
     }
     
-    func save(saveSuccessButton: UIButton)
+    func save(saveSuccessButton: UIButton, currProfileImage: UIImage)
     {
         var profile = [String : AnyObject]()
         profile["First Name"] = self.firstName
@@ -177,6 +183,21 @@ class UserProfile: NSObject
         profile["Phone Numbers"] = Core.pairArrayToDictionary(self.phoneNumbers)
         profile["Colleges"] = Core.pairArrayToDictionary(self.colleges)
         profile["Family Members"] = self.getFamilyMembersDictionary()
+        
+        if(self.imageName == "")
+        {
+            //generate a hash name for the image
+            let date = NSDate()
+            let hashableString = NSString(format: "%f", date.timeIntervalSinceReferenceDate)
+            let hashString = hashableString.aws_md5String() + ".png"
+            self.imageName = hashString
+        }
+        profile["Image Name"] = self.imageName
+        if(self.image != currProfileImage)
+        {
+            Core.storeImage(currProfileImage, fileName: self.imageName)
+        }
+        
         self.ref.setValue(profile) { (error, firebase) in
             UIView.animateWithDuration(0.5, animations: {
                 saveSuccessButton.alpha = 1.0
@@ -199,6 +220,7 @@ class UserProfile: NSObject
                 let child = ChildFamilyMember()
                 child.firstName = obj["First Name"] as! String
                 child.lastName = obj["Last Name"] as! String
+                child.imageName = obj["Image Name"] as! String
                 child.grade = obj["Grade"] as! String
                 child.birthDate = NSDate.aws_dateFromString(obj["Birth Date"] as! String)
                 data.append(child)
@@ -208,6 +230,7 @@ class UserProfile: NSObject
                 let spouse = SpouseFamilyMember()
                 spouse.firstName = obj["First Name"] as! String
                 spouse.lastName = obj["Last Name"] as! String
+                spouse.imageName = obj["Image Name"] as! String
                 spouse.company = obj["Company"] as! String
                 spouse.position = obj["Position"] as! String
                 spouse.birthDate = NSDate.aws_dateFromString(obj["Birth Date"] as! String)

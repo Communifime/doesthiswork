@@ -33,6 +33,8 @@
 		682733D21CB9990400DBD95B /* FormPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682733D11CB9990400DBD95B /* FormPair.swift */; };
 		682733D61CBA99B900DBD95B /* ProfilePairListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682733D51CBA99B900DBD95B /* ProfilePairListCell.swift */; };
 		6859CF431CC6CF8700208C90 /* Accounts in Resources */ = {isa = PBXBuildFile; fileRef = 6859CF421CC6CF8700208C90 /* Accounts */; };
+		6859CF451CCDA89F00208C90 /* ImageContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6859CF441CCDA89F00208C90 /* ImageContainer.swift */; };
+		6859CF471CCDB7C000208C90 /* loadingImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 6859CF461CCDB7C000208C90 /* loadingImage.png */; };
 		68F3830D1CBBDC56001E0587 /* ProfileDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F3830C1CBBDC56001E0587 /* ProfileDateCell.swift */; };
 		68F3830F1CBBE5C9001E0587 /* ChildFamilyMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F3830E1CBBE5C9001E0587 /* ChildFamilyMember.swift */; };
 		68FDF1591CA7438B0037B878 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FDF1581CA7438B0037B878 /* AppDelegate.swift */; };
@@ -78,6 +80,8 @@
 		682733D11CB9990400DBD95B /* FormPair.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormPair.swift; sourceTree = "<group>"; };
 		682733D51CBA99B900DBD95B /* ProfilePairListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePairListCell.swift; sourceTree = "<group>"; };
 		6859CF421CC6CF8700208C90 /* Accounts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Accounts; sourceTree = "<group>"; };
+		6859CF441CCDA89F00208C90 /* ImageContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageContainer.swift; sourceTree = "<group>"; };
+		6859CF461CCDB7C000208C90 /* loadingImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loadingImage.png; sourceTree = "<group>"; };
 		68F3830C1CBBDC56001E0587 /* ProfileDateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileDateCell.swift; sourceTree = "<group>"; };
 		68F3830E1CBBE5C9001E0587 /* ChildFamilyMember.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChildFamilyMember.swift; sourceTree = "<group>"; };
 		68FDF1551CA7438A0037B878 /* communifime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = communifime.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +117,7 @@
 		68148BDC1CA895F80096E699 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				6859CF461CCDB7C000208C90 /* loadingImage.png */,
 				6824FED71CBB35A600C33B9D /* chevronBackground.png */,
 				682733B31CB355FD00DBD95B /* leftArrow.png */,
 				682733A31CAE09AD00DBD95B /* addProfileImage.png */,
@@ -152,6 +157,7 @@
 				682733B91CB35A8700DBD95B /* Address.swift */,
 				682733D11CB9990400DBD95B /* FormPair.swift */,
 				682733A61CB06FEC00DBD95B /* UserProfile.swift */,
+				6859CF441CCDA89F00208C90 /* ImageContainer.swift */,
 			);
 			name = "Custom Objects";
 			sourceTree = "<group>";
@@ -351,6 +357,7 @@
 				682733A41CAE09AD00DBD95B /* addProfileImage.png in Resources */,
 				68148BE21CA89A330096E699 /* settings_icon.png in Resources */,
 				68148BE41CA89AB50096E699 /* communities_icon.png in Resources */,
+				6859CF471CCDB7C000208C90 /* loadingImage.png in Resources */,
 				68148BE01CA899B40096E699 /* profile_icon.png in Resources */,
 				68148BE81CA98FE10096E699 /* add-icon.png in Resources */,
 				68FDF15E1CA7438B0037B878 /* Main.storyboard in Resources */,
@@ -434,6 +441,7 @@
 				68148BE61CA89DBB0096E699 /* SettingsVC.swift in Sources */,
 				68F3830F1CBBE5C9001E0587 /* ChildFamilyMember.swift in Sources */,
 				B818DF781CAEBE0C00B22D10 /* GetImageVC.swift in Sources */,
+				6859CF451CCDA89F00208C90 /* ImageContainer.swift in Sources */,
 				682733C41CB5D8FE00DBD95B /* ManagePairVC.swift in Sources */,
 				B818DF861CB3F99600B22D10 /* UIView+Extras.swift in Sources */,
 				682733D61CBA99B900DBD95B /* ProfilePairListCell.swift in Sources */,

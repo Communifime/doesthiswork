@@ -21,12 +21,12 @@ class ProfileVC: UIViewController
         super.viewDidLoad()
         self.profileSavedButton.alpha = 0.0
         self.profileImageButton.maskAsCircle()
-        Core.getImage(self.profileImageButton)
+        Core.getImage(self.profileImageButton, imageContainer: self.profile)
     }
     
     @IBAction func saveButtonPressed(sender: AnyObject)
     {
-        self.profile.save(self.profileSavedButton)
+        self.profile.save(self.profileSavedButton, currProfileImage: self.profileImageButton.currentBackgroundImage!)
     }
     
     override func didReceiveMemoryWarning()

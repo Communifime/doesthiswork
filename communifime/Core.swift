@@ -50,7 +50,7 @@ class Core: NSObject
         buttonForImage.setBackgroundImage(image, forState: .Selected)
     }
     
-    static func storeImage(image: UIImage, fileName: String?)
+    static func storeImage(image: UIImage, fileName: String?) -> String
     {
         // Construct the upload request.
         var hashString = fileName
@@ -81,12 +81,19 @@ class Core: NSObject
         let transferManager:AWSS3TransferManager =
             AWSS3TransferManager.defaultS3TransferManager()
         transferManager.upload(uploadRequest)
+        return hashString!
     }
     
-    static func getImage(button: UIButton)
+    static func getImage(button: UIButton, imageContainer: ImageContainer)
     {
+        let imagePath = NSBundle.mainBundle().pathForResource("loadingImage", ofType: "png")
+        let loadingImage = UIImage(contentsOfFile: imagePath!)
+        button.setBackgroundImage(loadingImage, forState: .Normal)
+        button.setBackgroundImage(loadingImage, forState: .Highlighted)
+        button.setBackgroundImage(loadingImage, forState: .Selected)
+        
         // Construct the NSURL for the download location.
-        let downloadingFilePath = NSTemporaryDirectory().stringByAppendingString("downloaded-testImage.jpg")
+        let downloadingFilePath = NSTemporaryDirectory().stringByAppendingString(imageContainer.imageName)
         
         let downloadingFileURL = NSURL.fileURLWithPath(downloadingFilePath)
         
@@ -94,7 +101,7 @@ class Core: NSObject
         let downloadRequest = AWSS3TransferManagerDownloadRequest.init()
         
         downloadRequest.bucket = "communifi";
-        downloadRequest.key = "testImage.jpg";
+        downloadRequest.key = "profile_pics/\(imageContainer.imageName)";
         downloadRequest.downloadingFileURL = downloadingFileURL;
         
         let transferManager = AWSS3TransferManager.defaultS3TransferManager()
@@ -102,6 +109,14 @@ class Core: NSObject
             dispatch_async(dispatch_get_main_queue(), { 
                 let image = UIImage(contentsOfFile: downloadingFilePath)
                 Core.setButtonImage(button, image: image!)
+                if(imageContainer is UserProfile)
+                {
+                    (imageContainer as! UserProfile).image = image!
+                }
+                else if(imageContainer is FamilyMember)
+                {
+                    (imageContainer as! FamilyMember).image = image!
+                }
             })
             return nil
         }
