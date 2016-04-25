@@ -195,8 +195,10 @@ class UserProfile: NSObject, ImageContainer
         profile["Image Name"] = self.imageName
         if(self.image != currProfileImage)
         {
-            Core.storeImage(currProfileImage, fileName: self.imageName)
+            Core.storeImage(currProfileImage, fileName: self.imageName, progressView: Core.profileProgress)
         }
+        //delete the images staged for deletion
+        Core.deleteImageList()
         
         self.ref.setValue(profile) { (error, firebase) in
             UIView.animateWithDuration(0.5, animations: {

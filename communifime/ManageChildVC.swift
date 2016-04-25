@@ -10,6 +10,8 @@ import UIKit
 
 class ManageChildVC: UIViewController
 {
+    
+    @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var sv: UIScrollView!
     @IBOutlet weak var imageButton: UIButton!
     @IBOutlet weak var firstNameTF: UITextField!
@@ -28,6 +30,14 @@ class ManageChildVC: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        if(editMode)
+        {
+            self.deleteButton.hidden = false
+        }
+        else
+        {
+            self.deleteButton.hidden = true
+        }
         
         if(self.child.imageName != "")
         {
@@ -47,6 +57,23 @@ class ManageChildVC: UIViewController
         // Do any additional setup after loading the view.
     }
     
+    @IBAction func deleteButtonPressed(sender : AnyObject)
+    {
+        let vc = UIAlertController(title: "Delete Confirmation", message: "Are you sure you wish to delete this family member?", preferredStyle: .Alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        let confirmAction = UIAlertAction(title: "Confirm", style: .Default) { (action) in
+            //do delete stuff
+            Core.imagesToDelete.append(self.child.imageName)
+            let pos = self.parentFamilyList.data.indexOf(self.child)
+            self.parentFamilyList.data.removeAtIndex(pos!)
+            self.parentFamilyList.tableView.reloadData()
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        vc.addAction(cancelAction)
+        vc.addAction(confirmAction)
+        self.presentViewController(vc, animated: true, completion: nil)
+    }
+
     func setButtonTitles(button : UIButton, theTitle : String)
     {
         button.setTitle(theTitle, forState: .Normal)

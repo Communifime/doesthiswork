@@ -18,6 +18,9 @@ class Core: NSObject
     static var fireBaseRef = Firebase(url: "https://amber-fire-7588.firebaseio.com/")
     
     static var currentUserProfile : UserProfile!
+    static var imagesToDelete = [String]()
+    static var profileProgress : UIProgressView!
+    static var familyProfileProgress : UIProgressView!
     
     static func dictionaryToPairArray(pairDictionary : [String : String]?) -> [Pair]
     {
@@ -50,7 +53,7 @@ class Core: NSObject
         buttonForImage.setBackgroundImage(image, forState: .Selected)
     }
     
-    static func storeImage(image: UIImage, fileName: String?) -> String
+    static func storeImage(image: UIImage, fileName: String?, progressView: UIProgressView) -> String
     {
         // Construct the upload request.
         var hashString = fileName
@@ -76,12 +79,31 @@ class Core: NSObject
         uploadRequest.uploadProgress = { (currSent, totalSent, totalExpected) in
             dispatch_sync(dispatch_get_main_queue(), { () -> Void in
                 print("\(totalSent) of \(totalExpected) bytes sent")
+                progressView.progress = Float(totalSent)/Float(totalExpected)
             })
         }
         let transferManager:AWSS3TransferManager =
             AWSS3TransferManager.defaultS3TransferManager()
         transferManager.upload(uploadRequest)
         return hashString!
+    }
+    
+    static func deleteImageList()
+    {
+        for imageName in imagesToDelete
+        {
+            deleteImage(imageName)
+        }
+        imagesToDelete.removeAll()
+    }
+    
+    static func deleteImage(imageName : String)
+    {
+        let deleteRequest = AWSS3DeleteObjectRequest.init()
+        deleteRequest.bucket = "communifi";
+        deleteRequest.key = "profile_pics/\(imageName)";
+        let s3 = AWSS3.defaultS3()
+        s3.deleteObject(deleteRequest)
     }
     
     static func getImage(button: UIButton, imageContainer: ImageContainer)
