@@ -27,7 +27,10 @@ class ProfileVC: UIViewController
         
         self.profileSavedButton.alpha = 0.0
         self.profileImageButton.maskAsCircle()
-        Core.getImage(self.profileImageButton, imageContainer: self.profile)
+        if(self.profile.imageName != "")
+        {
+            Core.getImage(self.profileImageButton, imageContainer: self.profile)
+        }
     }
     
     @IBAction func saveButtonPressed(sender: AnyObject)

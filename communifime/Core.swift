@@ -16,7 +16,7 @@ class Core: NSObject
     static var storyboard : UIStoryboard!
     
     static var fireBaseRef = Firebase(url: "https://amber-fire-7588.firebaseio.com/")
-    
+    static var allCommunities = [Community]()
     static var currentUserProfile : UserProfile!
     static var imagesToDelete = [String]()
     static var profileProgress : UIProgressView!

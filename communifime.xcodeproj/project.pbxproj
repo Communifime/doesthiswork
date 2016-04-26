@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		44800727959E91FB53B9AE04 /* Pods_communifime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40C8F944AD89407778E1C355 /* Pods_communifime.framework */; };
+		680D91501CCEEF7700A31971 /* CommunityList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680D914F1CCEEF7700A31971 /* CommunityList.swift */; };
+		680D91541CCEF2A700A31971 /* CommunityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680D91531CCEF2A700A31971 /* CommunityVC.swift */; };
+		680D91561CCEF42B00A31971 /* Community.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680D91551CCEF42B00A31971 /* Community.swift */; };
 		68148BE01CA899B40096E699 /* profile_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 68148BDF1CA899B40096E699 /* profile_icon.png */; };
 		68148BE21CA89A330096E699 /* settings_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 68148BE11CA89A330096E699 /* settings_icon.png */; };
 		68148BE41CA89AB50096E699 /* communities_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 68148BE31CA89AB50096E699 /* communities_icon.png */; };
@@ -55,6 +58,9 @@
 /* Begin PBXFileReference section */
 		40C8F944AD89407778E1C355 /* Pods_communifime.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_communifime.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EB8A789915311B577E73395 /* Pods-communifime.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-communifime.debug.xcconfig"; path = "Pods/Target Support Files/Pods-communifime/Pods-communifime.debug.xcconfig"; sourceTree = "<group>"; };
+		680D914F1CCEEF7700A31971 /* CommunityList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityList.swift; sourceTree = "<group>"; };
+		680D91531CCEF2A700A31971 /* CommunityVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityVC.swift; sourceTree = "<group>"; };
+		680D91551CCEF42B00A31971 /* Community.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Community.swift; sourceTree = "<group>"; };
 		68148BDF1CA899B40096E699 /* profile_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile_icon.png; sourceTree = "<group>"; };
 		68148BE11CA89A330096E699 /* settings_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings_icon.png; sourceTree = "<group>"; };
 		68148BE31CA89AB50096E699 /* communities_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = communities_icon.png; sourceTree = "<group>"; };
@@ -114,6 +120,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		680D91511CCEEFF500A31971 /* Community */ = {
+			isa = PBXGroup;
+			children = (
+				680D914F1CCEEF7700A31971 /* CommunityList.swift */,
+				680D91531CCEF2A700A31971 /* CommunityVC.swift */,
+			);
+			name = Community;
+			sourceTree = "<group>";
+		};
+		680D91521CCEF00E00A31971 /* Login/Registration */ = {
+			isa = PBXGroup;
+			children = (
+				68148BE51CA89DBB0096E699 /* SettingsVC.swift */,
+				68FDF16F1CA7481C0037B878 /* RegisterVC.swift */,
+				68FDF16D1CA7475B0037B878 /* LoginVC.swift */,
+			);
+			name = Login/Registration;
+			sourceTree = "<group>";
+		};
 		68148BDC1CA895F80096E699 /* images */ = {
 			isa = PBXGroup;
 			children = (
@@ -158,6 +183,7 @@
 				682733D11CB9990400DBD95B /* FormPair.swift */,
 				682733A61CB06FEC00DBD95B /* UserProfile.swift */,
 				6859CF441CCDA89F00208C90 /* ImageContainer.swift */,
+				680D91551CCEF42B00A31971 /* Community.swift */,
 			);
 			name = "Custom Objects";
 			sourceTree = "<group>";
@@ -238,11 +264,10 @@
 		68FDF16C1CA746F90037B878 /* Code Behinds */ = {
 			isa = PBXGroup;
 			children = (
+				680D91521CCEF00E00A31971 /* Login/Registration */,
+				680D91511CCEEFF500A31971 /* Community */,
 				B818DF871CB4048B00B22D10 /* Profile */,
 				B818DF841CB3F8E900B22D10 /* Class Extensions */,
-				68FDF16D1CA7475B0037B878 /* LoginVC.swift */,
-				68FDF16F1CA7481C0037B878 /* RegisterVC.swift */,
-				68148BE51CA89DBB0096E699 /* SettingsVC.swift */,
 				B818DF771CAEBE0C00B22D10 /* GetImageVC.swift */,
 			);
 			name = "Code Behinds";
@@ -423,6 +448,7 @@
 				682733C01CB55A4A00DBD95B /* PairList.swift in Sources */,
 				68FDF1701CA7481C0037B878 /* RegisterVC.swift in Sources */,
 				68FDF16E1CA7475B0037B878 /* LoginVC.swift in Sources */,
+				680D91541CCEF2A700A31971 /* CommunityVC.swift in Sources */,
 				B818DF831CB3F62B00B22D10 /* AddressView.swift in Sources */,
 				B818DF761CAEBCCC00B22D10 /* ProfileVC.swift in Sources */,
 				6824FECB1CBAE9D800C33B9D /* FamilyMember.swift in Sources */,
@@ -433,6 +459,7 @@
 				682733CE1CB98D3700DBD95B /* ProfileTextCell.swift in Sources */,
 				682733B61CB3584B00DBD95B /* ManageAddressVC.swift in Sources */,
 				6824FECF1CBAEB2D00C33B9D /* SpouseFamilyMember.swift in Sources */,
+				680D91561CCEF42B00A31971 /* Community.swift in Sources */,
 				68FDF1721CA748C70037B878 /* Core.swift in Sources */,
 				682733CC1CB98B1700DBD95B /* ProfileList.swift in Sources */,
 				68FDF1591CA7438B0037B878 /* AppDelegate.swift in Sources */,
@@ -442,6 +469,7 @@
 				68F3830F1CBBE5C9001E0587 /* ChildFamilyMember.swift in Sources */,
 				B818DF781CAEBE0C00B22D10 /* GetImageVC.swift in Sources */,
 				6859CF451CCDA89F00208C90 /* ImageContainer.swift in Sources */,
+				680D91501CCEEF7700A31971 /* CommunityList.swift in Sources */,
 				682733C41CB5D8FE00DBD95B /* ManagePairVC.swift in Sources */,
 				B818DF861CB3F99600B22D10 /* UIView+Extras.swift in Sources */,
 				682733D61CBA99B900DBD95B /* ProfilePairListCell.swift in Sources */,

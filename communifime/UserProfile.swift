@@ -51,43 +51,45 @@ class UserProfile: NSObject, ImageContainer
         
         //get current data
         self.ref.observeSingleEventOfType(.Value) { (snapshot: FDataSnapshot!) in
-            let data = snapshot.value as! NSDictionary
-            self.company = data["Company"] as! String
-            self.eyeColor = data["Eye Color"] as! String
-            self.facebook = data["Facebook"] as! String
-            self.firstName = data["First Name"] as! String
-            self.gender = data["Gender"] as! String
-            self.hairColor = data["Hair Color"] as! String
-            self.hairLength = data["Hair Length"] as! String
-            self.highSchool = data["High School"] as! String
-            self.hometown = data["Home Town"] as! String
-            self.lastName = data["Last Name"] as! String
-            self.linkedIn = data["LinkedIn"] as! String
-            self.position = data["Position"] as! String
-            self.twitter = data["Twitter"] as! String
-            self.imageName = data["Image Name"] as! String
-            self.birthDate = NSDate.aws_dateFromString(data["Birth Date"] as! String)
-            let homeAddress = data["Home Address"] as! NSDictionary
-            self.homeAddress.street1 = homeAddress["street1"] as! String
-            self.homeAddress.street2 = homeAddress["street2"] as! String
-            self.homeAddress.city = homeAddress["city"] as! String
-            self.homeAddress.state = homeAddress["state"] as! String
-            self.homeAddress.zip = homeAddress["zip"] as! String
-            
-            let workAddress = data["Work Address"] as! NSDictionary
-            self.workAddress.street1 = workAddress["street1"] as! String
-            self.workAddress.street2 = workAddress["street2"] as! String
-            self.workAddress.city = workAddress["city"] as! String
-            self.workAddress.state = workAddress["state"] as! String
-            self.workAddress.zip = workAddress["zip"] as! String
-            self.emails = Core.dictionaryToPairArray(data["Emails"] as? [String : String])
-            self.phoneNumbers = Core.dictionaryToPairArray(data["Phone Numbers"] as? [String : String])
-            self.colleges = Core.dictionaryToPairArray(data["Colleges"] as? [String : String])
-            if(data["Family Members"] != nil)
+            if(!(snapshot.value is NSNull))
             {
-                self.familyMembers = self.getFamilyMemberArray(data["Family Members"] as! [[String : AnyObject]])
+                let data = snapshot.value as! NSDictionary
+                self.company = data["Company"] as! String
+                self.eyeColor = data["Eye Color"] as! String
+                self.facebook = data["Facebook"] as! String
+                self.firstName = data["First Name"] as! String
+                self.gender = data["Gender"] as! String
+                self.hairColor = data["Hair Color"] as! String
+                self.hairLength = data["Hair Length"] as! String
+                self.highSchool = data["High School"] as! String
+                self.hometown = data["Home Town"] as! String
+                self.lastName = data["Last Name"] as! String
+                self.linkedIn = data["LinkedIn"] as! String
+                self.position = data["Position"] as! String
+                self.twitter = data["Twitter"] as! String
+                self.imageName = data["Image Name"] as! String
+                self.birthDate = NSDate.aws_dateFromString(data["Birth Date"] as! String)
+                let homeAddress = data["Home Address"] as! NSDictionary
+                self.homeAddress.street1 = homeAddress["street1"] as! String
+                self.homeAddress.street2 = homeAddress["street2"] as! String
+                self.homeAddress.city = homeAddress["city"] as! String
+                self.homeAddress.state = homeAddress["state"] as! String
+                self.homeAddress.zip = homeAddress["zip"] as! String
+                
+                let workAddress = data["Work Address"] as! NSDictionary
+                self.workAddress.street1 = workAddress["street1"] as! String
+                self.workAddress.street2 = workAddress["street2"] as! String
+                self.workAddress.city = workAddress["city"] as! String
+                self.workAddress.state = workAddress["state"] as! String
+                self.workAddress.zip = workAddress["zip"] as! String
+                self.emails = Core.dictionaryToPairArray(data["Emails"] as? [String : String])
+                self.phoneNumbers = Core.dictionaryToPairArray(data["Phone Numbers"] as? [String : String])
+                self.colleges = Core.dictionaryToPairArray(data["Colleges"] as? [String : String])
+                if(data["Family Members"] != nil)
+                {
+                    self.familyMembers = self.getFamilyMemberArray(data["Family Members"] as! [[String : AnyObject]])
+                }
             }
-            
         }
     }
     
