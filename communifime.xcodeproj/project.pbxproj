@@ -37,6 +37,9 @@
 		682733D61CBA99B900DBD95B /* ProfilePairListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682733D51CBA99B900DBD95B /* ProfilePairListCell.swift */; };
 		68388A4B1CD199A700AE1CF9 /* nologo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 68388A4A1CD199A700AE1CF9 /* nologo.jpg */; };
 		68388A4D1CD19B1000AE1CF9 /* CommunitySettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68388A4C1CD19B1000AE1CF9 /* CommunitySettingsVC.swift */; };
+		68388A511CD2997E00AE1CF9 /* CommunityTabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68388A501CD2997E00AE1CF9 /* CommunityTabBarVC.swift */; };
+		68388A531CD29B0900AE1CF9 /* SubCommunityList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68388A521CD29B0900AE1CF9 /* SubCommunityList.swift */; };
+		68388A551CD2A22000AE1CF9 /* ManageSubCommunityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68388A541CD2A22000AE1CF9 /* ManageSubCommunityVC.swift */; };
 		6859CF431CC6CF8700208C90 /* Accounts in Resources */ = {isa = PBXBuildFile; fileRef = 6859CF421CC6CF8700208C90 /* Accounts */; };
 		6859CF451CCDA89F00208C90 /* ImageContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6859CF441CCDA89F00208C90 /* ImageContainer.swift */; };
 		6859CF471CCDB7C000208C90 /* loadingImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 6859CF461CCDB7C000208C90 /* loadingImage.png */; };
@@ -90,6 +93,9 @@
 		682733D51CBA99B900DBD95B /* ProfilePairListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePairListCell.swift; sourceTree = "<group>"; };
 		68388A4A1CD199A700AE1CF9 /* nologo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nologo.jpg; sourceTree = "<group>"; };
 		68388A4C1CD19B1000AE1CF9 /* CommunitySettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunitySettingsVC.swift; sourceTree = "<group>"; };
+		68388A501CD2997E00AE1CF9 /* CommunityTabBarVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityTabBarVC.swift; sourceTree = "<group>"; };
+		68388A521CD29B0900AE1CF9 /* SubCommunityList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubCommunityList.swift; sourceTree = "<group>"; };
+		68388A541CD2A22000AE1CF9 /* ManageSubCommunityVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageSubCommunityVC.swift; sourceTree = "<group>"; };
 		6859CF421CC6CF8700208C90 /* Accounts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Accounts; sourceTree = "<group>"; };
 		6859CF441CCDA89F00208C90 /* ImageContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageContainer.swift; sourceTree = "<group>"; };
 		6859CF461CCDB7C000208C90 /* loadingImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loadingImage.png; sourceTree = "<group>"; };
@@ -132,6 +138,9 @@
 				680D914F1CCEEF7700A31971 /* CommunityList.swift */,
 				680D91531CCEF2A700A31971 /* CommunityVC.swift */,
 				68388A4C1CD19B1000AE1CF9 /* CommunitySettingsVC.swift */,
+				68388A501CD2997E00AE1CF9 /* CommunityTabBarVC.swift */,
+				68388A521CD29B0900AE1CF9 /* SubCommunityList.swift */,
+				68388A541CD2A22000AE1CF9 /* ManageSubCommunityVC.swift */,
 			);
 			name = Community;
 			sourceTree = "<group>";
@@ -467,6 +476,7 @@
 				682733C61CB5EDE400DBD95B /* Pair.swift in Sources */,
 				6824FED11CBAF43600C33B9D /* FamilyList.swift in Sources */,
 				682733CE1CB98D3700DBD95B /* ProfileTextCell.swift in Sources */,
+				68388A551CD2A22000AE1CF9 /* ManageSubCommunityVC.swift in Sources */,
 				682733B61CB3584B00DBD95B /* ManageAddressVC.swift in Sources */,
 				6824FECF1CBAEB2D00C33B9D /* SpouseFamilyMember.swift in Sources */,
 				680D91561CCEF42B00A31971 /* Community.swift in Sources */,
@@ -478,6 +488,7 @@
 				682733D21CB9990400DBD95B /* FormPair.swift in Sources */,
 				68148BE61CA89DBB0096E699 /* SettingsVC.swift in Sources */,
 				68F3830F1CBBE5C9001E0587 /* ChildFamilyMember.swift in Sources */,
+				68388A511CD2997E00AE1CF9 /* CommunityTabBarVC.swift in Sources */,
 				B818DF781CAEBE0C00B22D10 /* GetImageVC.swift in Sources */,
 				6859CF451CCDA89F00208C90 /* ImageContainer.swift in Sources */,
 				B84F567F1CD249C600419AF7 /* CommunityPermissions.swift in Sources */,
@@ -485,6 +496,7 @@
 				682733C41CB5D8FE00DBD95B /* ManagePairVC.swift in Sources */,
 				B818DF861CB3F99600B22D10 /* UIView+Extras.swift in Sources */,
 				682733D61CBA99B900DBD95B /* ProfilePairListCell.swift in Sources */,
+				68388A531CD29B0900AE1CF9 /* SubCommunityList.swift in Sources */,
 				682733A71CB06FEC00DBD95B /* UserProfile.swift in Sources */,
 				6824FED41CBAFBFE00C33B9D /* ManageSpouseVC.swift in Sources */,
 				68F3830D1CBBDC56001E0587 /* ProfileDateCell.swift in Sources */,

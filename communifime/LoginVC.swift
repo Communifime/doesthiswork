@@ -41,6 +41,7 @@ class LoginVC: UIViewController
         //get the current user profile
 //******This needs to be updated
         Core.currentUserProfile = UserProfile(authData: Core.fireBaseRef.authData)
+        Core.addPermissionToCache()
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("TabBarController")
         self.presentViewController(vc!, animated: true, completion: nil)
     }

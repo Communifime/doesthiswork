@@ -11,6 +11,7 @@ import UIKit
 class CommunitySettingsVC: UIViewController,UITextFieldDelegate
 {
     
+    @IBOutlet weak var savedLabel: UILabel!
     @IBOutlet weak var logoImageButton: UIButton!
     @IBOutlet weak var descriptionTV: UITextView!
     @IBOutlet weak var communityNameTF: UITextField!
@@ -23,7 +24,9 @@ class CommunitySettingsVC: UIViewController,UITextFieldDelegate
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        self.perms = Core.getPermissionsForCommunity(self.community)
+        self.community = (self.tabBarController as! CommunityTabBarVC).community
+        self.savedLabel.alpha = 0.0
+        self.perms = Core.getPermissionFromCache(self.community)
         if(perms.infoShare == "full")
         {
             self.infoShareSegments.selectedSegmentIndex = 1
@@ -73,7 +76,7 @@ class CommunitySettingsVC: UIViewController,UITextFieldDelegate
         }
         perms.infoShare = infoShare
         perms.contact = contact
-        perms.save()
+        perms.save(self.savedLabel)
     }
     
     @IBAction func updateSettingsButtonPressed(sender : UIButton)
@@ -81,7 +84,7 @@ class CommunitySettingsVC: UIViewController,UITextFieldDelegate
         self.community.name = self.communityNameTF.text
         self.community.communityDescription = self.descriptionTV.text
         self.community.image = self.logoImageButton.currentBackgroundImage
-        self.community.save()
+        self.community.save(self.savedLabel)
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool

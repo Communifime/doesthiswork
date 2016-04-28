@@ -21,7 +21,7 @@ class Core: NSObject
     static var communityPermissionsCache = [CommunityPermissions]()
     static var imagesToDelete = [String]()
     
-    static func getPermissionsForCommunity(community: Community) -> CommunityPermissions?
+    static func getPermissionFromCache(community: Community) -> CommunityPermissions?
     {
         //check cache
         for perm in communityPermissionsCache
@@ -31,20 +31,28 @@ class Core: NSObject
                 return perm
             }
         }
-        
+        return nil
+    }
+    
+    static func addPermissionToCache()
+    {
         //retrieve from firebase
-        let ref = fireBaseRef.childByAppendingPath("community_permissions").childByAppendingPath(fireBaseRef.authData.uid).childByAppendingPath(community.key)
-        let perm = CommunityPermissions()
-        perm.communityKey = community.key
-        
+        let ref = fireBaseRef.childByAppendingPath("community_permissions").childByAppendingPath(fireBaseRef.authData.uid)
         ref.observeSingleEventOfType(.Value) { (snapshot: FDataSnapshot!) in
             if(!(snapshot.value is NSNull))
             {
-                perm.infoShare = snapshot.value["infoShare"]!
-                perm.contact = snapshot.value["contact"]!
+                print(snapshot.key)
+                let data = snapshot.value as! NSDictionary
+                for datum in data
+                {
+                    let perm = CommunityPermissions()
+                    perm.communityKey = datum.key as! String
+                    perm.infoShare = datum.value["infoShare"]!
+                    perm.contact = datum.value["contact"]!
+                    communityPermissionsCache.append(perm)
+                }
             }
         }
-        return perm
     }
     
     static func dictionaryToPairArray(pairDictionary : [String : String]?) -> [Pair]
