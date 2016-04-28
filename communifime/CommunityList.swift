@@ -28,7 +28,7 @@ class CommunityList: UITableViewController
                 aCommunity.imageName = datum.value["imageName"] as! String
                 aCommunity.admin = datum.value["admin"] as! String
                 Core.allCommunities.append(aCommunity)
-                if(aCommunity.admin == Core.fireBaseRef.authData.uid!)
+                if(aCommunity.admin != nil && aCommunity.admin == Core.fireBaseRef.authData.uid!)
                 {
                     self.data.append(aCommunity)
                     self.tableView.reloadData()

@@ -55,6 +55,7 @@
 		B818DF781CAEBE0C00B22D10 /* GetImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B818DF771CAEBE0C00B22D10 /* GetImageVC.swift */; };
 		B818DF831CB3F62B00B22D10 /* AddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B818DF821CB3F62B00B22D10 /* AddressView.swift */; };
 		B818DF861CB3F99600B22D10 /* UIView+Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = B818DF851CB3F99600B22D10 /* UIView+Extras.swift */; };
+		B84F567F1CD249C600419AF7 /* CommunityPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84F567E1CD249C600419AF7 /* CommunityPermissions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -109,6 +110,7 @@
 		B818DF771CAEBE0C00B22D10 /* GetImageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetImageVC.swift; sourceTree = "<group>"; };
 		B818DF821CB3F62B00B22D10 /* AddressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressView.swift; sourceTree = "<group>"; };
 		B818DF851CB3F99600B22D10 /* UIView+Extras.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extras.swift"; sourceTree = "<group>"; };
+		B84F567E1CD249C600419AF7 /* CommunityPermissions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityPermissions.swift; sourceTree = "<group>"; };
 		E44AEA3FD95E8E89CD3B6CE8 /* Pods-communifime.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-communifime.release.xcconfig"; path = "Pods/Target Support Files/Pods-communifime/Pods-communifime.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -190,6 +192,7 @@
 				682733A61CB06FEC00DBD95B /* UserProfile.swift */,
 				6859CF441CCDA89F00208C90 /* ImageContainer.swift */,
 				680D91551CCEF42B00A31971 /* Community.swift */,
+				B84F567E1CD249C600419AF7 /* CommunityPermissions.swift */,
 			);
 			name = "Custom Objects";
 			sourceTree = "<group>";
@@ -477,6 +480,7 @@
 				68F3830F1CBBE5C9001E0587 /* ChildFamilyMember.swift in Sources */,
 				B818DF781CAEBE0C00B22D10 /* GetImageVC.swift in Sources */,
 				6859CF451CCDA89F00208C90 /* ImageContainer.swift in Sources */,
+				B84F567F1CD249C600419AF7 /* CommunityPermissions.swift in Sources */,
 				680D91501CCEEF7700A31971 /* CommunityList.swift in Sources */,
 				682733C41CB5D8FE00DBD95B /* ManagePairVC.swift in Sources */,
 				B818DF861CB3F99600B22D10 /* UIView+Extras.swift in Sources */,

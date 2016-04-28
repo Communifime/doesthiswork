@@ -18,7 +18,34 @@ class Core: NSObject
     static var fireBaseRef = Firebase(url: "https://amber-fire-7588.firebaseio.com/")
     static var allCommunities = [Community]()
     static var currentUserProfile : UserProfile!
+    static var communityPermissionsCache = [CommunityPermissions]()
     static var imagesToDelete = [String]()
+    
+    static func getPermissionsForCommunity(community: Community) -> CommunityPermissions?
+    {
+        //check cache
+        for perm in communityPermissionsCache
+        {
+            if(perm.communityKey == community.key)
+            {
+                return perm
+            }
+        }
+        
+        //retrieve from firebase
+        let ref = fireBaseRef.childByAppendingPath("community_permissions").childByAppendingPath(fireBaseRef.authData.uid).childByAppendingPath(community.key)
+        let perm = CommunityPermissions()
+        perm.communityKey = community.key
+        
+        ref.observeSingleEventOfType(.Value) { (snapshot: FDataSnapshot!) in
+            if(!(snapshot.value is NSNull))
+            {
+                perm.infoShare = snapshot.value["infoShare"]!
+                perm.contact = snapshot.value["contact"]!
+            }
+        }
+        return perm
+    }
     
     static func dictionaryToPairArray(pairDictionary : [String : String]?) -> [Pair]
     {

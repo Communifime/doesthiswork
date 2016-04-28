@@ -19,9 +19,25 @@ class CommunitySettingsVC: UIViewController,UITextFieldDelegate
     @IBOutlet weak var adminStack: UIStackView!
     
     var community : Community!
-    
-    override func viewDidLoad() {
+    var perms : CommunityPermissions!
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
+        self.perms = Core.getPermissionsForCommunity(self.community)
+        if(perms.infoShare == "full")
+        {
+            self.infoShareSegments.selectedSegmentIndex = 1
+        }
+        
+        if(perms.contact == "email")
+        {
+            self.contactSegments.selectedSegmentIndex = 1
+        }
+        else if(perms.contact == "both")
+        {
+            self.contactSegments.selectedSegmentIndex = 2
+        }
+        
         if(self.community.admin == Core.fireBaseRef.authData.uid)
         {
             adminStack.hidden = false
@@ -40,7 +56,6 @@ class CommunitySettingsVC: UIViewController,UITextFieldDelegate
 
     @IBAction func saveButtonPressed(sender: UIButton)
     {
-        let ref = Core.fireBaseRef.childByAppendingPath("communities").childByAppendingPath(self.community.key).childByAppendingPath("members").childByAppendingPath(Core.fireBaseRef.authData.uid)
         var infoShare = "partial"
         if(self.infoShareSegments.selectedSegmentIndex == 1)
         {
@@ -56,7 +71,9 @@ class CommunitySettingsVC: UIViewController,UITextFieldDelegate
         {
             contact = "email"
         }
-        ADD stuff here!
+        perms.infoShare = infoShare
+        perms.contact = contact
+        perms.save()
     }
     
     @IBAction func updateSettingsButtonPressed(sender : UIButton)

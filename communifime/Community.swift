@@ -18,6 +18,7 @@ class Community: NSObject, ImageContainer
     var image : UIImage?
     var imageChanged = false
     
+    
     func save()
     {
         //update image if needed
