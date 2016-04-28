@@ -197,7 +197,7 @@ class UserProfile: NSObject, ImageContainer
         profile["Image Name"] = self.imageName
         if(self.image != currProfileImage)
         {
-            Core.storeImage(currProfileImage, fileName: self.imageName, progressView: Core.profileProgress)
+            Core.storeImage(currProfileImage, fileName: self.imageName, isProfile: true)
         }
         //delete the images staged for deletion
         Core.deleteImageList()

@@ -35,6 +35,8 @@
 		682733D01CB9945000DBD95B /* ProfileAddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682733CF1CB9945000DBD95B /* ProfileAddressCell.swift */; };
 		682733D21CB9990400DBD95B /* FormPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682733D11CB9990400DBD95B /* FormPair.swift */; };
 		682733D61CBA99B900DBD95B /* ProfilePairListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682733D51CBA99B900DBD95B /* ProfilePairListCell.swift */; };
+		68388A4B1CD199A700AE1CF9 /* nologo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 68388A4A1CD199A700AE1CF9 /* nologo.jpg */; };
+		68388A4D1CD19B1000AE1CF9 /* CommunitySettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68388A4C1CD19B1000AE1CF9 /* CommunitySettingsVC.swift */; };
 		6859CF431CC6CF8700208C90 /* Accounts in Resources */ = {isa = PBXBuildFile; fileRef = 6859CF421CC6CF8700208C90 /* Accounts */; };
 		6859CF451CCDA89F00208C90 /* ImageContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6859CF441CCDA89F00208C90 /* ImageContainer.swift */; };
 		6859CF471CCDB7C000208C90 /* loadingImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 6859CF461CCDB7C000208C90 /* loadingImage.png */; };
@@ -85,6 +87,8 @@
 		682733CF1CB9945000DBD95B /* ProfileAddressCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileAddressCell.swift; sourceTree = "<group>"; };
 		682733D11CB9990400DBD95B /* FormPair.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormPair.swift; sourceTree = "<group>"; };
 		682733D51CBA99B900DBD95B /* ProfilePairListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePairListCell.swift; sourceTree = "<group>"; };
+		68388A4A1CD199A700AE1CF9 /* nologo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nologo.jpg; sourceTree = "<group>"; };
+		68388A4C1CD19B1000AE1CF9 /* CommunitySettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunitySettingsVC.swift; sourceTree = "<group>"; };
 		6859CF421CC6CF8700208C90 /* Accounts */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Accounts; sourceTree = "<group>"; };
 		6859CF441CCDA89F00208C90 /* ImageContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageContainer.swift; sourceTree = "<group>"; };
 		6859CF461CCDB7C000208C90 /* loadingImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loadingImage.png; sourceTree = "<group>"; };
@@ -125,6 +129,7 @@
 			children = (
 				680D914F1CCEEF7700A31971 /* CommunityList.swift */,
 				680D91531CCEF2A700A31971 /* CommunityVC.swift */,
+				68388A4C1CD19B1000AE1CF9 /* CommunitySettingsVC.swift */,
 			);
 			name = Community;
 			sourceTree = "<group>";
@@ -142,6 +147,7 @@
 		68148BDC1CA895F80096E699 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				68388A4A1CD199A700AE1CF9 /* nologo.jpg */,
 				6859CF461CCDB7C000208C90 /* loadingImage.png */,
 				6824FED71CBB35A600C33B9D /* chevronBackground.png */,
 				682733B31CB355FD00DBD95B /* leftArrow.png */,
@@ -384,6 +390,7 @@
 				68148BE41CA89AB50096E699 /* communities_icon.png in Resources */,
 				6859CF471CCDB7C000208C90 /* loadingImage.png in Resources */,
 				68148BE01CA899B40096E699 /* profile_icon.png in Resources */,
+				68388A4B1CD199A700AE1CF9 /* nologo.jpg in Resources */,
 				68148BE81CA98FE10096E699 /* add-icon.png in Resources */,
 				68FDF15E1CA7438B0037B878 /* Main.storyboard in Resources */,
 			);
@@ -463,6 +470,7 @@
 				68FDF1721CA748C70037B878 /* Core.swift in Sources */,
 				682733CC1CB98B1700DBD95B /* ProfileList.swift in Sources */,
 				68FDF1591CA7438B0037B878 /* AppDelegate.swift in Sources */,
+				68388A4D1CD19B1000AE1CF9 /* CommunitySettingsVC.swift in Sources */,
 				682733BA1CB35A8700DBD95B /* Address.swift in Sources */,
 				682733D21CB9990400DBD95B /* FormPair.swift in Sources */,
 				68148BE61CA89DBB0096E699 /* SettingsVC.swift in Sources */,

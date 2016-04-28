@@ -19,8 +19,6 @@ class Core: NSObject
     static var allCommunities = [Community]()
     static var currentUserProfile : UserProfile!
     static var imagesToDelete = [String]()
-    static var profileProgress : UIProgressView!
-    static var familyProfileProgress : UIProgressView!
     
     static func dictionaryToPairArray(pairDictionary : [String : String]?) -> [Pair]
     {
@@ -53,33 +51,51 @@ class Core: NSObject
         buttonForImage.setBackgroundImage(image, forState: .Selected)
     }
     
-    static func storeImage(image: UIImage, fileName: String?, progressView: UIProgressView) -> String
+    static func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage
+    {
+        let scale = newWidth / image.size.width
+        let newHeight = image.size.height * scale
+        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
+        image.drawInRect(CGRectMake(0, 0, newWidth, newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        let imageData = UIImageJPEGRepresentation(newImage, 0.5);
+        UIGraphicsEndImageContext()
+        return UIImage(data: imageData!)!
+    }
+
+    static func storeImage(image: UIImage, fileName: String?, isProfile: Bool) -> String
     {
         // Construct the upload request.
         var hashString = fileName
-        if(hashString == nil)
+        if(hashString == nil || hashString == "")
         {
             let date = NSDate()
             let hashableString = NSString(format: "%f", date.timeIntervalSinceReferenceDate)
             hashString = hashableString.aws_md5String() + ".png"
         }
-        
+        var maxWidth = 250
+        var folderName = "logo_pics/"
+        if(isProfile)
+        {
+            maxWidth = 150
+            folderName = "profile_pics/"
+        }
+        let compressedImage = self.resizeImage(image, newWidth: CGFloat(maxWidth))
         let path:NSString = NSTemporaryDirectory().stringByAppendingString(hashString!)
-        let imageData = UIImagePNGRepresentation(image)
+        let imageData = UIImagePNGRepresentation(compressedImage)
         imageData!.writeToFile(path as String, atomically: true)
         let url: NSURL = NSURL(fileURLWithPath: path as String)
         let uploadRequest: AWSS3TransferManagerUploadRequest = AWSS3TransferManagerUploadRequest()
         // set the bucket
         uploadRequest.bucket = "communifi"
-        uploadRequest.key = "profile_pics/" +
+        uploadRequest.key = folderName +
             hashString!
         uploadRequest.contentType =
         "png"
         uploadRequest.body = url
         uploadRequest.uploadProgress = { (currSent, totalSent, totalExpected) in
             dispatch_sync(dispatch_get_main_queue(), { () -> Void in
-                print("\(totalSent) of \(totalExpected) bytes sent")
-                progressView.progress = Float(totalSent)/Float(totalExpected)
+                
             })
         }
         let transferManager:AWSS3TransferManager =
@@ -106,7 +122,7 @@ class Core: NSObject
         s3.deleteObject(deleteRequest)
     }
     
-    static func getImage(button: UIButton, imageContainer: ImageContainer)
+    static func getImage(button: UIButton, imageContainer: ImageContainer, isProfile: Bool)
     {
         let imagePath = NSBundle.mainBundle().pathForResource("loadingImage", ofType: "png")
         let loadingImage = UIImage(contentsOfFile: imagePath!)
@@ -121,9 +137,14 @@ class Core: NSObject
         
         // Construct the download request.
         let downloadRequest = AWSS3TransferManagerDownloadRequest.init()
+        var folderName = "logo_pics/"
+        if(isProfile)
+        {
+            folderName = "profile_pics/"
+        }
         
         downloadRequest.bucket = "communifi";
-        downloadRequest.key = "profile_pics/\(imageContainer.imageName)";
+        downloadRequest.key = "\(folderName)\(imageContainer.imageName)";
         downloadRequest.downloadingFileURL = downloadingFileURL;
         
         let transferManager = AWSS3TransferManager.defaultS3TransferManager()

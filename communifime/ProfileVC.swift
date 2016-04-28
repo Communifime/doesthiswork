@@ -10,10 +10,6 @@ import UIKit
 
 class ProfileVC: UIViewController
 {
-    
-    @IBOutlet weak var profileProgress: UIProgressView!
-    
-    @IBOutlet weak var familyProfileProgress: UIProgressView!
     @IBOutlet weak var profileSavedButton: UIButton!
     @IBOutlet weak var profileImageButton: UIButton!
     var profileList : ProfileList!
@@ -22,14 +18,11 @@ class ProfileVC: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        Core.profileProgress = self.profileProgress
-        Core.familyProfileProgress = self.familyProfileProgress
-        
         self.profileSavedButton.alpha = 0.0
         self.profileImageButton.maskAsCircle()
         if(self.profile.imageName != "")
         {
-            Core.getImage(self.profileImageButton, imageContainer: self.profile)
+            Core.getImage(self.profileImageButton, imageContainer: self.profile, isProfile: true)
         }
     }
     

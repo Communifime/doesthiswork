@@ -39,7 +39,7 @@ class FamilyMember: NSObject, ImageContainer
         //save image if needed
         if(self.imageChanged)
         {
-            Core.storeImage(self.image!, fileName: self.imageName, progressView: Core.familyProfileProgress)
+            Core.storeImage(self.image!, fileName: self.imageName, isProfile: true)
             self.imageChanged = false
         }
         return data

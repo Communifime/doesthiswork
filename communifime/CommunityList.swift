@@ -18,17 +18,21 @@ class CommunityList: UITableViewController
         super.viewDidLoad()
         let ref = Core.fireBaseRef.childByAppendingPath("communities")
         ref.observeSingleEventOfType(.Value) { (snapshot: FDataSnapshot!) in
-            let aCommunity = Community()
             let temp = snapshot.value as! NSDictionary
-            let key = temp.allKeys.first! as! String
-            let data = temp[key] as! NSDictionary
-            aCommunity.name = data["Name"] as! String
-            aCommunity.admin = data["Admin"] as! String
-            Core.allCommunities.append(aCommunity)
-            if(aCommunity.admin == Core.fireBaseRef.authData.uid!)
+            for datum in temp
             {
-                self.data.append(aCommunity)
-                self.tableView.reloadData()
+                let aCommunity = Community()
+                aCommunity.key = datum.key as! String
+                aCommunity.name = datum.value["name"] as! String
+                aCommunity.communityDescription = datum.value["description"] as! String
+                aCommunity.imageName = datum.value["imageName"] as! String
+                aCommunity.admin = datum.value["admin"] as! String
+                Core.allCommunities.append(aCommunity)
+                if(aCommunity.admin == Core.fireBaseRef.authData.uid!)
+                {
+                    self.data.append(aCommunity)
+                    self.tableView.reloadData()
+                }
             }
         }
         // Uncomment the following line to preserve selection between presentations
@@ -107,14 +111,14 @@ class CommunityList: UITableViewController
     }
     */
 
-    /*
+    
     // MARK: - Navigation
-
+/*
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        
     }
-    */
+ */   
 
 }

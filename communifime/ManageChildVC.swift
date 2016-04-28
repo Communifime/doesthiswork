@@ -41,7 +41,7 @@ class ManageChildVC: UIViewController
         
         if(self.child.imageName != "")
         {
-            Core.getImage(self.imageButton, imageContainer: self.child)
+            Core.getImage(self.imageButton, imageContainer: self.child, isProfile: true)
         }
 
         self.child.relationship = "child"

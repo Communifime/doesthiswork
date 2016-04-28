@@ -43,7 +43,7 @@ class ManageSpouseVC: UIViewController
         
         if(self.spouse.imageName != "")
         {
-            Core.getImage(self.imageButton, imageContainer: self.spouse)
+            Core.getImage(self.imageButton, imageContainer: self.spouse, isProfile: true)
         }
         spouse.relationship = "spouse"
         self.errorTV.hidden = true
