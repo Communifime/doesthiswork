@@ -17,8 +17,6 @@ class CommunityVC: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        self.community = (self.tabBarController as! CommunityTabBarVC).community
-        self.navBar.topItem?.title = self.community.name
         
         // Do any additional setup after loading the view.
     }
@@ -35,11 +33,22 @@ class CommunityVC: UIViewController
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
+        if(self.community == nil)
+        {
+            self.community = (self.tabBarController as! CommunityTabBarVC).community
+            self.navBar.topItem?.title = self.community.name
+        }
+        
         if(segue.identifier != nil)
         {
             if(segue.identifier! == "Add Sub-Community")
             {
                 let vc = segue.destinationViewController as! ManageSubCommunityVC
+                vc.community = self.community
+            }
+            else if(segue.identifier! == "SubCommunityList")
+            {
+                let vc = segue.destinationViewController as! SubCommunityList
                 vc.community = self.community
             }
         }

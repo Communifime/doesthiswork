@@ -30,6 +30,7 @@ class ManageSubCommunityVC: UIViewController
         newCom.admin = self.community.admin
         newCom.imageName = self.community.imageName
         self.community.addSubCommunity(newCom, savedLabel: self.savedLabel)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {

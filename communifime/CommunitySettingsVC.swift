@@ -12,15 +12,13 @@ class CommunitySettingsVC: UIViewController,UITextFieldDelegate
 {
     
     @IBOutlet weak var savedLabel: UILabel!
-    @IBOutlet weak var logoImageButton: UIButton!
-    @IBOutlet weak var descriptionTV: UITextView!
-    @IBOutlet weak var communityNameTF: UITextField!
     @IBOutlet weak var contactSegments: UISegmentedControl!
     @IBOutlet weak var infoShareSegments: UISegmentedControl!
-    @IBOutlet weak var adminStack: UIStackView!
+    @IBOutlet weak var adminButton: UIButton!
     
     var community : Community!
     var perms : CommunityPermissions!
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -43,17 +41,11 @@ class CommunitySettingsVC: UIViewController,UITextFieldDelegate
         
         if(self.community.admin == Core.fireBaseRef.authData.uid)
         {
-            adminStack.hidden = false
+            self.adminButton.hidden = false
         }
         else
         {
-            adminStack.hidden = true
-        }
-        self.communityNameTF.text = self.community.name
-        self.descriptionTV.text = self.community.communityDescription
-        if(self.community.imageName != "")
-        {
-            Core.getImage(self.logoImageButton, imageContainer: self.community, isProfile: false)
+            self.adminButton.hidden = false
         }
     }
 
@@ -79,14 +71,13 @@ class CommunitySettingsVC: UIViewController,UITextFieldDelegate
         perms.save(self.savedLabel)
     }
     
-    @IBAction func updateSettingsButtonPressed(sender : UIButton)
+    @IBAction func adminSettingsButtonPressed(sender : UIButton)
     {
-        self.community.name = self.communityNameTF.text
-        self.community.communityDescription = self.descriptionTV.text
-        self.community.image = self.logoImageButton.currentBackgroundImage
-        self.community.save(self.savedLabel)
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("CommunityAdminSettingsVC") as! CommunityAdminSettingsVC
+        vc.community = self.community
+        self.presentViewController(vc, animated: true, completion: nil)
     }
-    
+
     func textFieldShouldReturn(textField: UITextField) -> Bool
     {
         textField.resignFirstResponder()
@@ -102,16 +93,12 @@ class CommunitySettingsVC: UIViewController,UITextFieldDelegate
     
     // MARK: - Navigation
 
+    /*
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
     {
-        if(segue.identifier == "Set Logo Image")
-        {
-            let vc = segue.destinationViewController as! GetImageVC
-            vc.buttonForImage = self.logoImageButton
-            self.community.imageChanged = true
-        }
     }
+    */
     
 
 }

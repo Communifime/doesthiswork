@@ -18,6 +18,7 @@ class Community: NSObject, ImageContainer
     var imageName: String = ""
     var admin : String!
     var image : UIImage?
+    var approved = false
     var imageChanged = false
     var subCommunities = [Community]()
     var ref = Core.fireBaseRef.childByAppendingPath("communities")
@@ -30,7 +31,6 @@ class Community: NSObject, ImageContainer
             self.imageName = Core.storeImage(self.image!, fileName: self.imageName, isProfile: false)
         }
         
-        let ref = Core.fireBaseRef.childByAppendingPath("communities").childByAppendingPath(self.key)
         ref.setValue(self.getDictionary()) { (error, firebase) in
             UIView.animateWithDuration(0.5, animations: {
                 saveSuccessLabel.alpha = 1.0
@@ -46,8 +46,22 @@ class Community: NSObject, ImageContainer
     {
         for sub in subs
         {
-            print(sub)
-            parse the subs here!
+            let c = Community()
+            c.parentCommunity = self
+            c.key = sub.key as! String
+            c.ref = self.ref.childByAppendingPath("sub_communities").childByAppendingPath(c.key)
+            let obj = sub.value as! NSDictionary
+            c.name = obj["name"] as! String
+            c.communityDescription = obj["description"] as! String
+            c.admin = obj["admin"] as! String
+            c.imageName = obj["imageName"] as! String
+            let possibleSubs = obj["sub_communities"]
+            if(possibleSubs != nil)
+            {
+                c.loadSubCommunities(possibleSubs as! NSDictionary)
+            }
+            self.subCommunities.append(c)
+            print(c.debugDescription)
         }
     }
     
@@ -57,13 +71,12 @@ class Community: NSObject, ImageContainer
         sub.parentCommunity = self
         sub.key = ref.key
         ref.setValue(sub.getDictionary()){ (error, firebase) in
-            UIView.animateWithDuration(0.5, animations: {
-                savedLabel.alpha = 1.0
-                }, completion: { (done) in
-                    UIView.animateWithDuration(0.5, animations: {
-                        savedLabel.alpha = 0.0
-                    })
-            })
+            let currPerm = Core.getPermissionFromCache(self)
+            let perm = CommunityPermissions()
+            perm.contact = currPerm!.contact
+            perm.infoShare = currPerm!.infoShare
+            perm.communityKey = sub.key
+            perm.save(savedLabel)
         }
         self.subCommunities.append(sub)
     }
@@ -75,7 +88,7 @@ class Community: NSObject, ImageContainer
         dict["description"] = self.communityDescription
         dict["imageName"] = self.imageName
         dict["admin"] = Core.fireBaseRef.authData.uid
-        
+        dict["approved"] = self.approved
         var subComs = [String: [String: AnyObject]]()
         for sub in self.subCommunities
         {

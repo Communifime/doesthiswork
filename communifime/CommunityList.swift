@@ -29,8 +29,12 @@ class CommunityList: UITableViewController
                 aCommunity.communityDescription = datum.value["description"] as! String
                 aCommunity.imageName = datum.value["imageName"] as! String
                 aCommunity.admin = datum.value["admin"] as! String
-                let subs = datum.value["sub_communities"] as! NSDictionary
-                aCommunity.loadSubCommunities(subs)
+                if((datum.value as! NSDictionary)["sub_communities"] != nil)
+                {
+                    print(datum.value["sub_communities"])
+                    let subs = datum.value["sub_communities"] as! NSDictionary
+                    aCommunity.loadSubCommunities(subs)
+                }
                 Core.allCommunities.append(aCommunity)
                 if(aCommunity.admin != nil && aCommunity.admin == Core.fireBaseRef.authData.uid!)
                 {

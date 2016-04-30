@@ -10,10 +10,21 @@ import UIKit
 
 class SubCommunityList: UITableViewController
 {
-
-    override func viewDidLoad() {
+    var community: Community!
+    var data = [Community]()
+    
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-
+        
+        //get the approved sub-communities
+        for c in self.community.subCommunities
+        {
+            if(c.approved)
+            {
+                self.data.append(c)
+            }
+        }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -35,7 +46,7 @@ class SubCommunityList: UITableViewController
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 10
+        return self.data.count
     }
 
     
@@ -43,10 +54,17 @@ class SubCommunityList: UITableViewController
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
 
         // Configure the cell...
-        cell.textLabel?.text = "blah"
+        let c = self.data[indexPath.row]
+        cell.textLabel?.text = c.name
         return cell
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("CommunityTabBarVC") as! CommunityTabBarVC
+        vc.community = self.data[indexPath.row]
+        self.presentViewController(vc, animated: true, completion: nil)
+    }
 
     /*
     // Override to support conditional editing of the table view.

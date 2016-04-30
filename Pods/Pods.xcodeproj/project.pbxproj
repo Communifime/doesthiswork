@@ -535,20 +535,6 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>1AC535C8945C46687F5C43AA1BE14F5E</key>
-		<dict>
-			<key>fileRef</key>
-			<string>ED39489FDF9C491964DB9D3B42200351</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
 		<key>1AFB3BB8FB606E2EF31614DB69D8FC86</key>
 		<dict>
 			<key>fileRef</key>
@@ -1117,20 +1103,6 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
-		<key>2EA9CED6C79DA81E042BF3CFAB2C4496</key>
-		<dict>
-			<key>fileRef</key>
-			<string>EC3B4C7BF044F83AE8A77790F319F564</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
-		</dict>
 		<key>2F007C64DF95A3E78D6E456FC40E97FE</key>
 		<dict>
 			<key>children</key>
@@ -1373,6 +1345,20 @@
 				<key>ATTRIBUTES</key>
 				<array>
 					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>338EF0BB537BD32737FB9AB8284478BF</key>
+		<dict>
+			<key>fileRef</key>
+			<string>EC3B4C7BF044F83AE8A77790F319F564</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Private</string>
 				</array>
 			</dict>
 		</dict>
@@ -3297,17 +3283,17 @@
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
-		<key>81D2746E9D3BD5E9A7605BBED25B7D66</key>
+		<key>81D3342B73A73A34175EE88735B57BE7</key>
 		<dict>
 			<key>fileRef</key>
-			<string>5B895FC04894AA94D7D5732BDA61BDB0</string>
+			<string>ED30357435CA27917E1FF53A45B21E39</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 			<key>settings</key>
 			<dict>
 				<key>ATTRIBUTES</key>
 				<array>
-					<string>Public</string>
+					<string>Private</string>
 				</array>
 			</dict>
 		</dict>
@@ -4337,10 +4323,10 @@
 				<string>7BD416044F416509840B1B76B780CE69</string>
 				<string>44C00ECFEB7BAEBD9802DA84620AAE25</string>
 				<string>6B2207D9D65915352ECCD85B7864B357</string>
-				<string>2EA9CED6C79DA81E042BF3CFAB2C4496</string>
-				<string>1AC535C8945C46687F5C43AA1BE14F5E</string>
-				<string>D86030CE912260FC9B223779C30EB662</string>
-				<string>81D2746E9D3BD5E9A7605BBED25B7D66</string>
+				<string>338EF0BB537BD32737FB9AB8284478BF</string>
+				<string>C1153D2FAFDD38485AC527D0875461CF</string>
+				<string>81D3342B73A73A34175EE88735B57BE7</string>
+				<string>FFF04E3B49AD7928F07391B09DE60392</string>
 				<string>FC803D07A40AB633045A46A00311422F</string>
 				<string>F47B19414D9C971D1DAC465C73B237D1</string>
 				<string>A92744D6AAE6D713D4F48F211AE01697</string>
@@ -4623,6 +4609,20 @@
 			<string>1B884A93798011E71BC7D46EA55D1098</string>
 			<key>isa</key>
 			<string>PBXBuildFile</string>
+		</dict>
+		<key>C1153D2FAFDD38485AC527D0875461CF</key>
+		<dict>
+			<key>fileRef</key>
+			<string>ED39489FDF9C491964DB9D3B42200351</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Private</string>
+				</array>
+			</dict>
 		</dict>
 		<key>C1DF27A3F541B347B8C3237131DD2407</key>
 		<dict>
@@ -5146,20 +5146,6 @@
 			<string>AWSS3/AWSS3Service.h</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D86030CE912260FC9B223779C30EB662</key>
-		<dict>
-			<key>fileRef</key>
-			<string>ED30357435CA27917E1FF53A45B21E39</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-			<key>settings</key>
-			<dict>
-				<key>ATTRIBUTES</key>
-				<array>
-					<string>Public</string>
-				</array>
-			</dict>
 		</dict>
 		<key>D886B560DCACAFC6F5A85E06F8FA98F3</key>
 		<dict>
@@ -6298,6 +6284,20 @@
 			<string>3B41A9B1D49827D58E203AF61D34F608</string>
 			<key>targetProxy</key>
 			<string>23ADBAE325DDB8A256F5D43AC162A129</string>
+		</dict>
+		<key>FFF04E3B49AD7928F07391B09DE60392</key>
+		<dict>
+			<key>fileRef</key>
+			<string>5B895FC04894AA94D7D5732BDA61BDB0</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Private</string>
+				</array>
+			</dict>
 		</dict>
 	</dict>
 	<key>rootObject</key>
