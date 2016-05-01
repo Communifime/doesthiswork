@@ -10,6 +10,11 @@ import UIKit
 
 extension UIView
 {
+    @IBAction func hideKeyBoard(sender: UIView)
+    {
+        sender.resignFirstResponder()
+    }
+    
     func maskAsCircle()
     {
         let v = self

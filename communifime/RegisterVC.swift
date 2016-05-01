@@ -16,6 +16,8 @@ class RegisterVC: UIViewController
     @IBOutlet weak var passwordTF: UITextField!
     @IBOutlet weak var emailTF: UITextField!
     @IBOutlet weak var confirmEmailTF: UITextField!
+    @IBOutlet weak var firstNameTF: UITextField!
+    @IBOutlet weak var lastNameTF: UITextField!
     
     override func viewDidLoad()
     {
@@ -56,6 +58,14 @@ class RegisterVC: UIViewController
         {
             errorMessage = "Email addresses do not match"
         }
+        else if(self.firstNameTF.text?.characters.count == 0)
+        {
+            errorMessage = "You must enter a first name"
+        }
+        else if(self.lastNameTF.text?.characters.count == 0)
+        {
+            errorMessage = "You must enter a last name"
+        }
         else
         {
             self.errorTextView.text = ""
@@ -81,14 +91,19 @@ class RegisterVC: UIViewController
                             }
                             else
                             {
-                                //let uid = result["uid"] as? String
-                                let alert = UIAlertController(title: "Success", message: "Account Successfully Created - You may now login", preferredStyle: .Alert)
-                                let okAction = UIAlertAction(title: "OK", style: .Default
-                                    , handler: { (action: UIAlertAction) in
-                                    self.dismissViewControllerAnimated(false, completion: nil)
+                                ref.authUser(self.emailTF.text!, password: self.passwordTF.text!, withCompletionBlock: { (error, authData) in
+                                    let profile = UserProfile(authData: ref.authData)
+                                    profile.firstName = self.firstNameTF.text!
+                                    profile.lastName = self.lastNameTF.text!
+                                    let p = Pair(name: "primary email", value: self.emailTF.text!)
+                                    profile.emails.append(p)
+                                    profile.save(nil, currProfileImage: nil)
+                                    Core.currentUserProfile = profile
+                                    Core.addPermissionToCache()
+                                    let vc = self.storyboard?.instantiateViewControllerWithIdentifier("TabBarController")
+                                    self.presentViewController(vc!, animated: true, completion: nil)
                                 })
-                                alert.addAction(okAction)
-                                self.presentViewController(alert, animated: true, completion: nil)
+                                
                             }
             })
         }

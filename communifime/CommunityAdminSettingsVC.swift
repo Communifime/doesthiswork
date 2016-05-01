@@ -16,7 +16,7 @@ class CommunityAdminSettingsVC: UIViewController
     @IBOutlet weak var communityNameTF: UITextField!
     
     var community : Community!
-
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -56,7 +56,10 @@ class CommunityAdminSettingsVC: UIViewController
             vc.buttonForImage = self.logoImageButton
             self.community.imageChanged = true
         }
+        else if(segue.identifier == "Approve Sub-Communities")
+        {
+            let vc = segue.destinationViewController as! SubCommunityRequestsVC
+            vc.community = self.community
+        }
     }
-    
-
 }

@@ -41,7 +41,6 @@ class Core: NSObject
         ref.observeSingleEventOfType(.Value) { (snapshot: FDataSnapshot!) in
             if(!(snapshot.value is NSNull))
             {
-                print(snapshot.key)
                 let data = snapshot.value as! NSDictionary
                 for datum in data
                 {

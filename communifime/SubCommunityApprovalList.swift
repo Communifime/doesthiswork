@@ -1,41 +1,51 @@
 //
-//  SubCommunityList.swift
+//  SubCommunityApprovalList.swift
 //  communifime
 //
-//  Created by Michael Litman on 4/28/16.
+//  Created by Michael Litman on 5/1/16.
 //  Copyright © 2016 Communifime. All rights reserved.
 //
 
 import UIKit
 
-class SubCommunityList: UITableViewController
+class SubCommunityApprovalList: UITableViewController
 {
-    var community: Community!
+    var community : Community!
     var data = [Community]()
-    
+    var selected = [Bool]()
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.fillData()
     }
 
-    override func viewWillAppear(animated: Bool)
-    {
-        self.updateData()
-        self.tableView.reloadData()
-    }
-    
-    func updateData()
+    func fillData()
     {
         self.data.removeAll()
-        
-        //get the approved sub-communities
+        self.selected.removeAll()
         for c in self.community.subCommunities
         {
-            if(c.approved)
+            if(!c.approved)
             {
                 self.data.append(c)
+                self.selected.append(false)
             }
         }
+    }
+    
+    func approveSelected()
+    {
+        var pos = 0
+        for c in self.data
+        {
+            if(self.selected[pos])
+            {
+                c.updateApprovedAndStore(true)
+            }
+            pos += 1
+        }
+        self.fillData()
+        self.tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -62,16 +72,32 @@ class SubCommunityList: UITableViewController
         // Configure the cell...
         let c = self.data[indexPath.row]
         cell.textLabel?.text = c.name
+        if(self.selected[indexPath.row])
+        {
+            cell.accessoryType = .Checkmark
+        }
+        else
+        {
+            cell.accessoryType = .None
+        }
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("CommunityTabBarVC") as! CommunityTabBarVC
-        vc.community = self.data[indexPath.row]
-        self.presentViewController(vc, animated: true, completion: nil)
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        if(self.selected[indexPath.row])
+        {
+            self.selected[indexPath.row] = false
+            cell?.accessoryType = .None
+        }
+        else
+        {
+            self.selected[indexPath.row] = true
+            cell?.accessoryType = .Checkmark
+        }
     }
-
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {

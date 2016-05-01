@@ -18,7 +18,7 @@ class CommunitySettingsVC: UIViewController,UITextFieldDelegate
     
     var community : Community!
     var perms : CommunityPermissions!
-    
+
     override func viewDidLoad()
     {
         super.viewDidLoad()

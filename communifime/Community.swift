@@ -42,6 +42,12 @@ class Community: NSObject, ImageContainer
         }
     }
     
+    func updateApprovedAndStore(value : Bool)
+    {
+        self.approved = value
+        self.ref.updateChildValues(["approved" : self.approved])
+    }
+    
     func loadSubCommunities(subs : NSDictionary)
     {
         for sub in subs
@@ -55,6 +61,7 @@ class Community: NSObject, ImageContainer
             c.communityDescription = obj["description"] as! String
             c.admin = obj["admin"] as! String
             c.imageName = obj["imageName"] as! String
+            c.approved = obj["approved"] as! Bool
             let possibleSubs = obj["sub_communities"]
             if(possibleSubs != nil)
             {
@@ -63,6 +70,18 @@ class Community: NSObject, ImageContainer
             self.subCommunities.append(c)
             print(c.debugDescription)
         }
+    }
+    
+    func hasSubCommunityWithName(name: String) -> Bool
+    {
+        for c in self.subCommunities
+        {
+            if(c.name == name)
+            {
+                return true
+            }
+        }
+        return false
     }
     
     func addSubCommunity(sub : Community, savedLabel: UILabel)

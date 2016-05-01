@@ -14,7 +14,7 @@ class UserProfile: NSObject, ImageContainer
 {
     var firstName : String = ""
     var lastName : String = ""
-    var image : UIImage?
+    var image : UIImage? = nil
     var imageName : String = ""
     var homeAddress : Address =  Address(street1: "", street2: "", city: "", state: "", zip: "")
     var hometown : String = ""
@@ -162,7 +162,7 @@ class UserProfile: NSObject, ImageContainer
         }
     }
     
-    func save(saveSuccessButton: UIButton, currProfileImage: UIImage)
+    func save(saveSuccessButton: UIButton?, currProfileImage: UIImage?)
     {
         var profile = [String : AnyObject]()
         profile["First Name"] = self.firstName
@@ -186,7 +186,7 @@ class UserProfile: NSObject, ImageContainer
         profile["Colleges"] = Core.pairArrayToDictionary(self.colleges)
         profile["Family Members"] = self.getFamilyMembersDictionary()
         
-        if(self.imageName == "")
+        if(self.image != nil && self.imageName == "")
         {
             //generate a hash name for the image
             let date = NSDate()
@@ -195,21 +195,24 @@ class UserProfile: NSObject, ImageContainer
             self.imageName = hashString
         }
         profile["Image Name"] = self.imageName
-        if(self.image != currProfileImage)
+        if(currProfileImage != nil && self.image != currProfileImage)
         {
-            Core.storeImage(currProfileImage, fileName: self.imageName, isProfile: true)
+            Core.storeImage(currProfileImage!, fileName: self.imageName, isProfile: true)
         }
         //delete the images staged for deletion
         Core.deleteImageList()
         
         self.ref.setValue(profile) { (error, firebase) in
-            UIView.animateWithDuration(0.5, animations: {
-                saveSuccessButton.alpha = 1.0
-                }, completion: { (done) in
-                    UIView.animateWithDuration(0.5, animations: { 
-                        saveSuccessButton.alpha = 0.0
+            if(saveSuccessButton != nil)
+            {
+                UIView.animateWithDuration(0.5, animations: {
+                    saveSuccessButton!.alpha = 1.0
+                    }, completion: { (done) in
+                        UIView.animateWithDuration(0.5, animations: {
+                            saveSuccessButton!.alpha = 0.0
                     })
-            })
+                })
+            }
         }
     }
     
