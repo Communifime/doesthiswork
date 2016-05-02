@@ -45,7 +45,7 @@ class CommunitySettingsVC: UIViewController,UITextFieldDelegate
         }
         else
         {
-            self.adminButton.hidden = false
+            self.adminButton.hidden = true
         }
     }
 

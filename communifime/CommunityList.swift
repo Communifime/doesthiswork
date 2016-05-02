@@ -29,22 +29,44 @@ class CommunityList: UITableViewController
                 aCommunity.communityDescription = datum.value["description"] as! String
                 aCommunity.imageName = datum.value["imageName"] as! String
                 aCommunity.admin = datum.value["admin"] as! String
+                if((datum.value as! NSDictionary)["members"] != nil)
+                {
+                    let members = (datum.value as! NSDictionary)["members"] as! NSDictionary
+                    
+                    for member in members
+                    {
+                        aCommunity.addMember(member.key as! String, name: (member.value as! NSDictionary)["name"] as! String)
+                    }
+                }
+                
                 if((datum.value as! NSDictionary)["sub_communities"] != nil)
                 {
-                    print(datum.value["sub_communities"])
                     let subs = datum.value["sub_communities"] as! NSDictionary
                     aCommunity.loadSubCommunities(subs)
                 }
                 Core.allCommunities.append(aCommunity)
-                if(aCommunity.admin != nil && aCommunity.admin == Core.fireBaseRef.authData.uid!)
-                {
-                    self.data.append(aCommunity)
-                    self.tableView.reloadData()
-                }
-            }
+                
+                            }
         }
     }
 
+    func updateList()
+    {
+        data.removeAll()
+        permissions.removeAll()
+        for c in Core.allCommunities
+        {
+            if(c.hasMember(Core.fireBaseRef.authData.uid) ||
+                c.admin == Core.fireBaseRef.authData)
+            {
+                self.data.append(c)
+                let perm = Core.getPermissionFromCache(c)
+                self.permissions.append(perm!)
+            }
+        }
+        self.tableView.reloadData()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

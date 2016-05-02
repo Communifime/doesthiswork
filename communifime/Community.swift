@@ -18,10 +18,35 @@ class Community: NSObject, ImageContainer
     var imageName: String = ""
     var admin : String!
     var image : UIImage?
+    var members = [String : String]()
     var approved = false
     var imageChanged = false
     var subCommunities = [Community]()
     var ref = Core.fireBaseRef.childByAppendingPath("communities")
+    
+    func addMember(uid: String, name : String)
+    {
+        self.members[uid] = name
+    }
+    
+    func addAndStoreMember(uid: String , name : String)
+    {
+        self.addMember(uid, name: name)
+        let ref = self.ref.childByAppendingPath("members").childByAppendingPath(uid)
+        ref.setValue(["name" : name])
+    }
+    
+    func hasMember(uid : String) -> Bool
+    {
+        for key in self.members.keys
+        {
+            if(key == uid)
+            {
+                return true
+            }
+        }
+        return false
+    }
     
     func save(saveSuccessLabel : UILabel)
     {

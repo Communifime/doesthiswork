@@ -7,16 +7,82 @@
 //
 
 import UIKit
+import Firebase
 
 class JoinCommunityVC: UIViewController
 {
-
     @IBOutlet weak var communityPasswordTF: UITextField!
     @IBOutlet weak var communityIDTF: UITextField!
-    override func viewDidLoad() {
+    @IBOutlet weak var errorTV: UITextView!
+    
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.errorTV.hidden = true
+    }
+    
+    func validateForm() -> Bool
+    {
+        var msg = ""
+        if(communityIDTF.text == "")
+        {
+            msg = "You must enter a Community ID"
+        }
+        else if(communityPasswordTF.text == "")
+        {
+            msg = "You must enter a password"
+        }
+        if(msg != "")
+        {
+            self.errorTV.text = msg
+            self.errorTV.textColor = UIColor.redColor()
+            self.errorTV.hidden = false
+            return false
+        }
+        self.errorTV.text = ""
+        self.errorTV.hidden = true
+        return true
+    }
+    
+    @IBAction func joinButtonPressed(sender : AnyObject)
+    {
+        if(self.validateForm())
+        {
+            let ref = Core.fireBaseRef.childByAppendingPath("communities").childByAppendingPath(self.communityIDTF.text!)
+            ref.observeSingleEventOfType(.Value, withBlock: { (snapshot: FDataSnapshot!) in
+                print(snapshot)
+                if(!(snapshot.value is NSNull))
+                {
+                    let password = snapshot.value["password"] as! String
+                    if(password == self.communityPasswordTF.text!)
+                    {
+                        self.errorTV.text = ""
+                        self.errorTV.hidden = true
+                        
+                        for c in Core.allCommunities
+                        {
+                            if(c.key == self.communityIDTF.text!)
+                            {
+                                c.addAndStoreMember(Core.fireBaseRef.authData.uid, name: "\(Core.currentUserProfile.firstName) \(Core.currentUserProfile.lastName)")
+                                
+                                let perm = CommunityPermissions()
+                                perm.communityKey = self.communityIDTF.text!
+                                perm.save(nil)
+                                
+                                break
+                            }
+                        }
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                    }
+                }
+            })
+        }
+        else
+        {
+            self.errorTV.text = "Incorrect Password"
+            self.errorTV.textColor = UIColor.redColor()
+            self.errorTV.hidden = false
+        }
     }
 
     override func didReceiveMemoryWarning() {

@@ -41,6 +41,19 @@ class SubCommunityApprovalList: UITableViewController
             if(self.selected[pos])
             {
                 c.updateApprovedAndStore(true)
+                if(c.admin != Core.fireBaseRef.authData.uid)
+                {
+                    //if I am not the admin of the sub-community, add myself to it the community as an automatic member
+                    c.addAndStoreMember(Core.fireBaseRef.authData.uid, name: "\(Core.currentUserProfile.firstName) \(Core.currentUserProfile.lastName)")
+                    
+                    //create new permissions for this sub-community
+                    let currPerm = Core.getPermissionFromCache(self.community)
+                    let perm = CommunityPermissions()
+                    perm.communityKey = c.key
+                    perm.contact = currPerm?.contact
+                    perm.infoShare = currPerm?.infoShare
+                    perm.save(nil)
+                }
             }
             pos += 1
         }
