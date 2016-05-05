@@ -73,6 +73,16 @@ class Community: NSObject, ImageContainer
         self.ref.updateChildValues(["approved" : self.approved])
     }
     
+    func loadMembers(members: NSDictionary)
+    {
+        print(members)
+        for member in members
+        {
+            let value = member.value as! NSDictionary
+            self.addMember(member.key as! String, name: value["name"] as! String)
+        }
+    }
+    
     func loadSubCommunities(subs : NSDictionary)
     {
         for sub in subs
@@ -87,13 +97,19 @@ class Community: NSObject, ImageContainer
             c.admin = obj["admin"] as! String
             c.imageName = obj["imageName"] as! String
             c.approved = obj["approved"] as! Bool
+            
+            let possibleMembers = obj["members"]
+            if(possibleMembers != nil)
+            {
+                c.loadMembers(possibleMembers as! NSDictionary)
+            }
+            
             let possibleSubs = obj["sub_communities"]
             if(possibleSubs != nil)
             {
                 c.loadSubCommunities(possibleSubs as! NSDictionary)
             }
             self.subCommunities.append(c)
-            print(c.debugDescription)
         }
     }
     

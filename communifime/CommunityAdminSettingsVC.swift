@@ -10,6 +10,8 @@ import UIKit
 
 class CommunityAdminSettingsVC: UIViewController
 {
+    
+    @IBOutlet weak var manageMembersButton: UIButton!
     @IBOutlet weak var savedLabel: UILabel!
     @IBOutlet weak var logoImageButton: UIButton!
     @IBOutlet weak var descriptionTV: UITextView!
@@ -28,8 +30,18 @@ class CommunityAdminSettingsVC: UIViewController
         {
             Core.getImage(self.logoImageButton, imageContainer: self.community, isProfile: false)
         }
+        
+        //should we show the member list?
+        if(community.parentCommunity != nil)
+        {
+            manageMembersButton.hidden = false
+        }
+        else
+        {
+            manageMembersButton.hidden = true
+        }
     }
-
+    
     @IBAction func saveButtonPressed(sender : UIButton)
     {
         self.community.name = self.communityNameTF.text
@@ -61,5 +73,11 @@ class CommunityAdminSettingsVC: UIViewController
             let vc = segue.destinationViewController as! SubCommunityRequestsVC
             vc.community = self.community
         }
+        else if(segue.identifier == "Manage Members")
+        {
+            let vc = segue.destinationViewController as! SubCommunityManageMembersVC
+            vc.community = self.community
+        }
+
     }
 }

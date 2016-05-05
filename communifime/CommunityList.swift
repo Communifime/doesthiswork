@@ -17,6 +17,7 @@ class CommunityList: UITableViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        Core.allCommunities.removeAll()
         let ref = Core.fireBaseRef.childByAppendingPath("communities")
         ref.observeSingleEventOfType(.Value) { (snapshot: FDataSnapshot!) in
             let temp = snapshot.value as! NSDictionary
@@ -46,7 +47,7 @@ class CommunityList: UITableViewController
                 }
                 Core.allCommunities.append(aCommunity)
                 
-                            }
+            }
         }
     }
 

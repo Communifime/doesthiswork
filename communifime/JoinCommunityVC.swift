@@ -14,6 +14,7 @@ class JoinCommunityVC: UIViewController
     @IBOutlet weak var communityPasswordTF: UITextField!
     @IBOutlet weak var communityIDTF: UITextField!
     @IBOutlet weak var errorTV: UITextView!
+    var communityList : CommunityList!
     
     override func viewDidLoad()
     {
@@ -68,7 +69,8 @@ class JoinCommunityVC: UIViewController
                                 let perm = CommunityPermissions()
                                 perm.communityKey = self.communityIDTF.text!
                                 perm.save(nil)
-                                
+                                Core.communityPermissionsCache.append(perm)
+                                self.communityList.updateList()
                                 break
                             }
                         }

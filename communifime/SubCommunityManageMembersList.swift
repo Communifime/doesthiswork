@@ -1,77 +1,89 @@
 //
-//  SubCommunityList.swift
+//  SubCommunityManageMembersList.swift
 //  communifime
 //
-//  Created by Michael Litman on 4/28/16.
+//  Created by Michael Litman on 5/4/16.
 //  Copyright © 2016 Communifime. All rights reserved.
 //
 
 import UIKit
 
-class SubCommunityList: UITableViewController
+class SubCommunityManageMembersList: UITableViewController
 {
-    var community: Community!
-    var data = [Community]()
+    var community : Community!
+    var names = [String]()
+    var uids = [String]()
+    var selected = [Bool]()
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-    }
-
-    override func viewWillAppear(animated: Bool)
-    {
-        self.updateData()
-        self.tableView.reloadData()
-    }
-    
-    func updateData()
-    {
-        self.data.removeAll()
         
-        //get the approved sub-communities
-        for c in self.community.subCommunities
+        //fill data with the members of the parent community
+        //that are not already members of this community
+        let parentMembers = self.community.parentCommunity?.members
+        for pm in parentMembers!
         {
-            if(c.approved && (c.hasMember(Core.fireBaseRef.authData.uid) || c.admin == Core.fireBaseRef.authData.uid))
+            if(!self.community.hasMember(pm.0))
             {
-                self.data.append(c)
+                self.uids.append(pm.0)
+                self.names.append(pm.1)
+                self.selected.append(false)
             }
         }
     }
-    
-    override func didReceiveMemoryWarning() {
+
+    override func didReceiveMemoryWarning()
+    {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
         // #warning Incomplete implementation, return the number of rows
-        return self.data.count
+        return self.names.count
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-
-        // Configure the cell...
-        let c = self.data[indexPath.row]
-        cell.textLabel?.text = c.name
+        
+        cell.textLabel?.text = names[indexPath.row]
+        if(self.selected[indexPath.row])
+        {
+            cell.accessoryType = .Checkmark
+        }
+        else
+        {
+            cell.accessoryType = .None
+        }
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("CommunityTabBarVC") as! CommunityTabBarVC
-        vc.community = self.data[indexPath.row]
-        self.presentViewController(vc, animated: true, completion: nil)
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        if(self.selected[indexPath.row])
+        {
+            self.selected[indexPath.row] = false
+            cell?.accessoryType = .None
+        }
+        else
+        {
+            self.selected[indexPath.row] = true
+            cell?.accessoryType = .Checkmark
+        }
     }
-
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
