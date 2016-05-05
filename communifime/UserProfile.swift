@@ -273,13 +273,13 @@ class UserProfile: NSObject, ImageContainer
         
         personalPairs.append(FormPair(name: "Last Name", value: self.lastName, type: "Text"))
         
-        personalPairs.append(FormPair(name: "Gender", value: self.gender, type: "Text"))
+        personalPairs.append(FormPair(name: "Gender", value: self.gender, type: "Segments"))
         
-        personalPairs.append(FormPair(name: "Hair Color", value: self.hairColor, type: "Text"))
+        personalPairs.append(FormPair(name: "Hair Color", value: self.hairColor, type: "Segments"))
         
-        personalPairs.append(FormPair(name: "Hair Length", value: self.hairLength, type: "Text"))
+        personalPairs.append(FormPair(name: "Hair Length", value: self.hairLength, type: "Segments"))
         
-        personalPairs.append(FormPair(name: "Eye Color", value: self.eyeColor, type: "Text"))
+        personalPairs.append(FormPair(name: "Eye Color", value: self.eyeColor, type: "Segments"))
         
         personalPairs.append(FormPair(name: "Home Address", value: homeAddress, type: "Address"))
         

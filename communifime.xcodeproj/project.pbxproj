@@ -52,6 +52,10 @@
 		68ADFEE31CDAE22D00B2671E /* SubCommunityManageMembersList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68ADFEE21CDAE22D00B2671E /* SubCommunityManageMembersList.swift */; };
 		68ADFEE71CDAEB4900B2671E /* searchIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 68ADFEE61CDAEB4900B2671E /* searchIcon.png */; };
 		68ADFEE91CDAEF6300B2671E /* emailIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 68ADFEE81CDAEF6300B2671E /* emailIcon.png */; };
+		68ADFEEC1CDBEDB200B2671E /* DiscoveryFilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68ADFEEB1CDBEDB200B2671E /* DiscoveryFilterVC.swift */; };
+		68ADFEEE1CDBF31900B2671E /* DiscoveryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68ADFEED1CDBF31900B2671E /* DiscoveryVC.swift */; };
+		68ADFEF01CDBF33200B2671E /* DiscoveryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68ADFEEF1CDBF33200B2671E /* DiscoveryList.swift */; };
+		68ADFEF21CDBFAFF00B2671E /* ProfileSegmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68ADFEF11CDBFAFF00B2671E /* ProfileSegmentCell.swift */; };
 		68F3830D1CBBDC56001E0587 /* ProfileDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F3830C1CBBDC56001E0587 /* ProfileDateCell.swift */; };
 		68F3830F1CBBE5C9001E0587 /* ChildFamilyMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F3830E1CBBE5C9001E0587 /* ChildFamilyMember.swift */; };
 		68FDF1591CA7438B0037B878 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FDF1581CA7438B0037B878 /* AppDelegate.swift */; };
@@ -117,6 +121,10 @@
 		68ADFEE21CDAE22D00B2671E /* SubCommunityManageMembersList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubCommunityManageMembersList.swift; sourceTree = "<group>"; };
 		68ADFEE61CDAEB4900B2671E /* searchIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchIcon.png; sourceTree = "<group>"; };
 		68ADFEE81CDAEF6300B2671E /* emailIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = emailIcon.png; sourceTree = "<group>"; };
+		68ADFEEB1CDBEDB200B2671E /* DiscoveryFilterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryFilterVC.swift; sourceTree = "<group>"; };
+		68ADFEED1CDBF31900B2671E /* DiscoveryVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryVC.swift; sourceTree = "<group>"; };
+		68ADFEEF1CDBF33200B2671E /* DiscoveryList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryList.swift; sourceTree = "<group>"; };
+		68ADFEF11CDBFAFF00B2671E /* ProfileSegmentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileSegmentCell.swift; sourceTree = "<group>"; };
 		68F3830C1CBBDC56001E0587 /* ProfileDateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileDateCell.swift; sourceTree = "<group>"; };
 		68F3830E1CBBE5C9001E0587 /* ChildFamilyMember.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChildFamilyMember.swift; sourceTree = "<group>"; };
 		68FDF1551CA7438A0037B878 /* communifime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = communifime.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -252,6 +260,7 @@
 				682733CD1CB98D3700DBD95B /* ProfileTextCell.swift */,
 				682733D51CBA99B900DBD95B /* ProfilePairListCell.swift */,
 				68F3830C1CBBDC56001E0587 /* ProfileDateCell.swift */,
+				68ADFEF11CDBFAFF00B2671E /* ProfileSegmentCell.swift */,
 			);
 			name = "TV Cells";
 			sourceTree = "<group>";
@@ -275,6 +284,16 @@
 				68ADFEE21CDAE22D00B2671E /* SubCommunityManageMembersList.swift */,
 			);
 			name = "Sub-Community";
+			sourceTree = "<group>";
+		};
+		68ADFEEA1CDBECE600B2671E /* Discovery Center */ = {
+			isa = PBXGroup;
+			children = (
+				68ADFEEB1CDBEDB200B2671E /* DiscoveryFilterVC.swift */,
+				68ADFEED1CDBF31900B2671E /* DiscoveryVC.swift */,
+				68ADFEEF1CDBF33200B2671E /* DiscoveryList.swift */,
+			);
+			name = "Discovery Center";
 			sourceTree = "<group>";
 		};
 		68FDF14C1CA7438A0037B878 = {
@@ -317,6 +336,7 @@
 		68FDF16C1CA746F90037B878 /* Code Behinds */ = {
 			isa = PBXGroup;
 			children = (
+				68ADFEEA1CDBECE600B2671E /* Discovery Center */,
 				680D91521CCEF00E00A31971 /* Login/Registration */,
 				680D91511CCEEFF500A31971 /* Community */,
 				B818DF871CB4048B00B22D10 /* Profile */,
@@ -507,6 +527,7 @@
 				680D91541CCEF2A700A31971 /* CommunityVC.swift in Sources */,
 				B818DF831CB3F62B00B22D10 /* AddressView.swift in Sources */,
 				B818DF761CAEBCCC00B22D10 /* ProfileVC.swift in Sources */,
+				68ADFEF21CDBFAFF00B2671E /* ProfileSegmentCell.swift in Sources */,
 				6824FECB1CBAE9D800C33B9D /* FamilyMember.swift in Sources */,
 				68FDF1741CA749D70037B878 /* UIViewController+Extras.swift in Sources */,
 				682733D01CB9945000DBD95B /* ProfileAddressCell.swift in Sources */,
@@ -535,6 +556,8 @@
 				6859CF451CCDA89F00208C90 /* ImageContainer.swift in Sources */,
 				B84F567F1CD249C600419AF7 /* CommunityPermissions.swift in Sources */,
 				680D91501CCEEF7700A31971 /* CommunityList.swift in Sources */,
+				68ADFEEE1CDBF31900B2671E /* DiscoveryVC.swift in Sources */,
+				68ADFEEC1CDBEDB200B2671E /* DiscoveryFilterVC.swift in Sources */,
 				682733C41CB5D8FE00DBD95B /* ManagePairVC.swift in Sources */,
 				B818DF861CB3F99600B22D10 /* UIView+Extras.swift in Sources */,
 				682733D61CBA99B900DBD95B /* ProfilePairListCell.swift in Sources */,
@@ -543,6 +566,7 @@
 				684048281CD684D200514CE4 /* JoinCommunityVC.swift in Sources */,
 				684048211CD565CB00514CE4 /* CommunityAdminSettingsVC.swift in Sources */,
 				6824FED41CBAFBFE00C33B9D /* ManageSpouseVC.swift in Sources */,
+				68ADFEF01CDBF33200B2671E /* DiscoveryList.swift in Sources */,
 				68F3830D1CBBDC56001E0587 /* ProfileDateCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -83,6 +83,10 @@ class ProfileList: UITableViewController
         {
             return 240.0
         }
+        else if(type == "Segments")
+        {
+            return 85.0
+        }
         else
         {
             return 44.0
@@ -119,13 +123,32 @@ class ProfileList: UITableViewController
             cell.date.date = cell.data.value as! NSDate
             return cell
         }
-        else if(type == "FamilyList")
+        else if(type == "Segments")
         {
-            let cell = tableView.dequeueReusableCellWithIdentifier("pairlist", forIndexPath: indexPath) as! ProfilePairListCell
-            let data = self.data[indexPath.section][indexPath.row].value as? [FamilyMember]
-            cell.textLabel?.text = "\(self.data[indexPath.section][indexPath.row].name) - (\(data!.count))"
-            cell.data = data
-            cell.accessoryType = .DisclosureIndicator
+            let cell = tableView.dequeueReusableCellWithIdentifier("segments", forIndexPath: indexPath) as! ProfileSegmentCell
+            cell.profile = self.profile
+            cell.data = self.data[indexPath.section][indexPath.row]
+            let name = self.data[indexPath.section][indexPath.row].name
+            cell.title.text = name
+            
+            if(name == "Gender")
+            {
+                cell.segmentValues = ["male", "female"]
+            }
+            else if(name == "Hair Color")
+            {
+                cell.segmentValues = ["blonde", "brown", "black", "red", "none"]
+            }
+            else if(name == "Hair Length")
+            {
+                cell.segmentValues = ["bald", "short", "medium", "long"]
+            }
+            else if(name == "Eye Color")
+            {
+                cell.segmentValues = ["blue", "brown", "green", "hazel"]
+            }
+            let value = self.data[indexPath.section][indexPath.row].value as! String
+            cell.setSelectedSegment(value)
             return cell
         }
         else
