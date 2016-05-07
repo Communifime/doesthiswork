@@ -10,7 +10,7 @@ import UIKit
 
 class ManageChildVC: UIViewController
 {
-    
+    @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var sv: UIScrollView!
     @IBOutlet weak var imageButton: UIButton!
@@ -26,7 +26,8 @@ class ManageChildVC: UIViewController
     var child = ChildFamilyMember()
     var editMode = false
     var initialDataLoaded = false
-    
+    var readOnly = false
+
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -50,6 +51,17 @@ class ManageChildVC: UIViewController
         self.firstNameTF.maskWithUnderline()
         self.lastNameTF.maskWithUnderline()
         self.gradeTF.maskWithUnderline()
+        
+        if(self.readOnly)
+        {
+            self.saveButton.hidden = true
+            self.imageButton.userInteractionEnabled = false
+            self.firstNameTF.enabled = false
+            self.lastNameTF.enabled = false
+            self.gradeTF.enabled = false
+            self.deleteButton.hidden = true
+            self.datePicker.userInteractionEnabled = false
+        }
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ManageSpouseVC.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ManageSpouseVC.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)

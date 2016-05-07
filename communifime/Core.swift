@@ -17,6 +17,8 @@ class Core: NSObject
     
     static var fireBaseRef = Firebase(url: "https://amber-fire-7588.firebaseio.com/")
     static var allCommunities = [Community]()
+    static var myCommunities = [Community]()
+    
     static var currentUserProfile : UserProfile!
     static var communityPermissionsCache = [CommunityPermissions]()
     static var imagesToDelete = [String]()

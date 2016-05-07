@@ -13,12 +13,14 @@ class PairList: UIViewController, UITableViewDataSource, UITableViewDelegate
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var navBar: UINavigationBar!
 
+    @IBOutlet weak var addButton: UIButton!
     var type = "type"
     var parentCell : ProfilePairListCell!
     var parentVC : ProfileList!
     var data : [Pair]!
     var varName : String!
     var formPair : FormPair!
+    var readOnly = false
     
     //used for phone and email lists for family members
     var familyMember : SpouseFamilyMember?
@@ -26,6 +28,10 @@ class PairList: UIViewController, UITableViewDataSource, UITableViewDelegate
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        if(self.readOnly)
+        {
+            self.addButton.hidden = true
+        }
         navBar.topItem?.title = self.varName
     }
     
@@ -39,16 +45,23 @@ class PairList: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     @IBAction func doneButtonPressed(sender : AnyObject)
     {
-        if(self.familyMember == nil)
+        if(self.readOnly)
         {
-            self.formPair.value = self.data
-            self.parentVC.profile.setValue(self.formPair.name, value: self.data)
+            self.dismissViewControllerAnimated(true, completion: nil)
         }
         else
         {
-            //do the stuff for the Family list page
+            if(self.familyMember == nil)
+            {
+                self.formPair.value = self.data
+                self.parentVC.profile.setValue(self.formPair.name, value: self.data)
+            }
+            else
+            {
+                //do the stuff for the Family list page
+            }
+            self.dismissViewControllerAnimated(true, completion: nil)
         }
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func hasLabel(name: String) -> Bool
@@ -143,6 +156,10 @@ class PairList: UIViewController, UITableViewDataSource, UITableViewDelegate
         cell.detailTextLabel?.text = p.value
         cell.accessoryType = .DisclosureIndicator
         cell.editing = true
+        if(self.readOnly)
+        {
+            cell.userInteractionEnabled = false
+        }
         return cell
     }
     

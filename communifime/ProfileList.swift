@@ -12,16 +12,11 @@ class ProfileList: UITableViewController
 {
     var data : [[FormPair]]!
     var profile : UserProfile!
+    var readOnly = false
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func viewWillAppear(animated: Bool)
@@ -96,6 +91,8 @@ class ProfileList: UITableViewController
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let type = self.data[indexPath.section][indexPath.row].type
+        print(self.data[indexPath.section][indexPath.row].name)
+        
         if(type == "Text")
         {
             let cell = tableView.dequeueReusableCellWithIdentifier("text", forIndexPath: indexPath) as! ProfileTextCell
@@ -103,6 +100,11 @@ class ProfileList: UITableViewController
             cell.profile = self.profile
             cell.tf.placeholder = self.data[indexPath.section][indexPath.row].name
             cell.tf.text = self.data[indexPath.section][indexPath.row].value as? String
+            if(self.readOnly)
+            {
+                cell.tf.enabled = false
+                cell.userInteractionEnabled = false
+            }
             return cell
         }
         else if(type == "Address")
@@ -112,6 +114,10 @@ class ProfileList: UITableViewController
             cell.address = self.data[indexPath.section][indexPath.row].value as? Address
             cell.updateAddress()
             cell.accessoryType = .DisclosureIndicator
+            if(self.readOnly)
+            {
+                cell.userInteractionEnabled = false
+            }
             return cell
         }
         else if(type == "Date")
@@ -121,6 +127,10 @@ class ProfileList: UITableViewController
             cell.data = self.data[indexPath.section][indexPath.row]
             cell.profile = self.profile
             cell.date.date = cell.data.value as! NSDate
+            if(self.readOnly)
+            {
+                cell.userInteractionEnabled = false
+            }
             return cell
         }
         else if(type == "Segments")
@@ -149,15 +159,30 @@ class ProfileList: UITableViewController
             }
             let value = self.data[indexPath.section][indexPath.row].value as! String
             cell.setSelectedSegment(value)
+            if(self.readOnly)
+            {
+                cell.segments.userInteractionEnabled = false
+                cell.userInteractionEnabled = false
+            }
             return cell
         }
         else
         {
             let cell = tableView.dequeueReusableCellWithIdentifier("pairlist", forIndexPath: indexPath) as! ProfilePairListCell
-            let data = self.data[indexPath.section][indexPath.row].value as? [Pair]
-            cell.textLabel?.text = "\(self.data[indexPath.section][indexPath.row].name) - List (\(data!.count))"
-            cell.data = data
-            cell.accessoryType = .DisclosureIndicator
+            if(type == "FamilyList")
+            {
+                let data = self.data[indexPath.section][indexPath.row].value as? [FamilyMember]
+                cell.textLabel?.text = "\(self.data[indexPath.section][indexPath.row].name) - List (\(data!.count))"
+                cell.data = data
+                cell.accessoryType = .DisclosureIndicator
+            }
+            else
+            {
+                let data = self.data[indexPath.section][indexPath.row].value as? [Pair]
+                cell.textLabel?.text = "\(self.data[indexPath.section][indexPath.row].name) - List (\(data!.count))"
+                cell.data = data
+                cell.accessoryType = .DisclosureIndicator
+            }
             return cell
         }
     }
@@ -180,6 +205,10 @@ class ProfileList: UITableViewController
             vc.data = vc.parentCell.data as! [Pair]
             vc.formPair = self.data[indexPath.section][indexPath.row]
             vc.varName = self.data[indexPath.section][indexPath.row].name
+            if(self.readOnly)
+            {
+                vc.readOnly = true
+            }
             self.presentViewController(vc, animated: true, completion: nil)
         }
         else if(type == "FamilyList")
@@ -187,6 +216,7 @@ class ProfileList: UITableViewController
             let vc = self.storyboard?.instantiateViewControllerWithIdentifier("FamilyList") as! FamilyList
             vc.parentCell = tableView.cellForRowAtIndexPath(indexPath) as! ProfilePairListCell
             vc.parentVC = self
+            vc.readOnly = self.readOnly
             vc.data = vc.parentCell.data as! [FamilyMember]
             vc.formPair = self.data[indexPath.section][indexPath.row]
             self.presentViewController(vc, animated: true, completion: nil)

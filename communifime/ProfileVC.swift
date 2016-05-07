@@ -10,14 +10,25 @@ import UIKit
 
 class ProfileVC: UIViewController
 {
+    
+    @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var profileSavedButton: UIButton!
     @IBOutlet weak var profileImageButton: UIButton!
     var profileList : ProfileList!
     var profile = Core.currentUserProfile
+    var readOnly = false
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        if(readOnly)
+        {
+            self.saveButton.setTitle("done", forState: .Normal)
+            self.saveButton.setTitle("done", forState: .Selected)
+            self.saveButton.setTitle("done", forState: .Highlighted)
+            self.profileImageButton.userInteractionEnabled = false
+        }
+        
         self.profileSavedButton.alpha = 0.0
         self.profileImageButton.maskAsCircle()
         if(self.profile.imageName != "")
@@ -28,7 +39,14 @@ class ProfileVC: UIViewController
     
     @IBAction func saveButtonPressed(sender: AnyObject)
     {
-        self.profile.save(self.profileSavedButton, currProfileImage: self.profileImageButton.currentBackgroundImage!)
+        if(self.readOnly)
+        {
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        else
+        {
+            self.profile.save(self.profileSavedButton, currProfileImage: self.profileImageButton.currentBackgroundImage!)
+        }
     }
     
     override func didReceiveMemoryWarning()
@@ -51,7 +69,8 @@ class ProfileVC: UIViewController
         else if(segue.identifier == "ProfileList")
         {
             self.profileList = segue.destinationViewController as! ProfileList
-            self.profileList.data = Core.currentUserProfile.getFormObjects()
+            self.profileList.data = self.profile.getFormObjects()
+            self.profileList.readOnly = self.readOnly
             self.profileList.profile = self.profile
         }
     }

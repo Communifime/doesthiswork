@@ -11,14 +11,21 @@ import UIKit
 class FamilyList: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var addButton: UIButton!
+    
     var data : [FamilyMember]!
     var parentCell : ProfilePairListCell!
     var parentVC : ProfileList!
     var formPair : FormPair!
-
+    var readOnly = false
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        if(readOnly)
+        {
+            self.addButton.hidden = true
+        }
     }
     
     func addFamilyMember(member: FamilyMember)
@@ -100,6 +107,7 @@ class FamilyList: UIViewController, UITableViewDelegate, UITableViewDataSource
             vc.parentFamilyList = self
             vc.spouse = member as! SpouseFamilyMember
             vc.editMode = true
+            vc.readOnly = self.readOnly
             self.presentViewController(vc, animated: true, completion: nil)
         }
         else
@@ -108,6 +116,7 @@ class FamilyList: UIViewController, UITableViewDelegate, UITableViewDataSource
             vc.parentFamilyList = self
             vc.child = member as! ChildFamilyMember
             vc.editMode = true
+            vc.readOnly = self.readOnly
             self.presentViewController(vc, animated: true, completion: nil)
         }
     }

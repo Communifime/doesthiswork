@@ -12,6 +12,7 @@ class ManageSpouseVC: UIViewController
 {
 
     @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var sv: UIScrollView!
     @IBOutlet weak var imageButton: UIButton!
     @IBOutlet weak var firstNameTF: UITextField!
@@ -28,6 +29,7 @@ class ManageSpouseVC: UIViewController
     var spouse = SpouseFamilyMember()
     var editMode = false
     var initialDataLoaded = false
+    var readOnly = false
     
     override func viewDidLoad()
     {
@@ -52,6 +54,18 @@ class ManageSpouseVC: UIViewController
         self.lastNameTF.maskWithUnderline()
         self.companyTF.maskWithUnderline()
         self.positionTF.maskWithUnderline()
+        
+        if(self.readOnly)
+        {
+            self.imageButton.userInteractionEnabled = false
+            self.firstNameTF.enabled = false
+            self.lastNameTF.enabled = false
+            self.companyTF.enabled = false
+            self.positionTF.enabled = false
+            self.deleteButton.hidden = true
+            self.saveButton.hidden = true
+            self.datePicker.userInteractionEnabled = false
+        }
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ManageSpouseVC.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ManageSpouseVC.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
@@ -198,6 +212,7 @@ class ManageSpouseVC: UIViewController
         vc.varName = "Phone Numbers"
         vc.data = self.spouse.phoneNumbers
         vc.familyMember = self.spouse
+        vc.readOnly = self.readOnly
         self.presentViewController(vc, animated: true, completion: nil)
 
     }
@@ -208,6 +223,7 @@ class ManageSpouseVC: UIViewController
         vc.varName = "Email Addresses"
         vc.data = self.spouse.emails
         vc.familyMember = self.spouse
+        vc.readOnly = self.readOnly
         self.presentViewController(vc, animated: true, completion: nil)
     }
     

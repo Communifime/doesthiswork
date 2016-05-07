@@ -10,15 +10,23 @@ import UIKit
 
 class DiscoveryList: UITableViewController
 {
-
-    override func viewDidLoad() {
+    var uids = [String]()
+    var profiles = [UserProfile]()
+    
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        for community in Core.myCommunities
+        {
+            for member in community.members
+            {
+                if(!uids.contains(member.1))
+                {
+                    uids.append(member.1)
+                    profiles.append(UserProfile(uid: member.0))
+                }
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,18 +43,28 @@ class DiscoveryList: UITableViewController
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 10
+        return uids.count
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
 
         // Configure the cell...
-        cell.textLabel?.text = "blah"
+        cell.textLabel?.text = self.uids[indexPath.row]
+        cell.accessoryType = .DisclosureIndicator
         return cell
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileVC") as! ProfileVC
+        vc.profile = self.profiles[indexPath.row]
+        vc.readOnly = true
+        self.presentViewController(vc, animated: true, completion: nil)
+        
+    }
 
     /*
     // Override to support conditional editing of the table view.

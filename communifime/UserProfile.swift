@@ -47,13 +47,24 @@ class UserProfile: NSObject, ImageContainer
     {
         super.init()
         let uid = authData.uid!
+        self.fillData(uid)
+    }
+    
+    init(uid : String)
+    {
+        super.init()
+        self.fillData(uid)
+    }
+    
+    func fillData(uid: String)
+    {
         self.ref = Core.fireBaseRef.childByAppendingPath("profile").childByAppendingPath(uid)
-        
         //get current data
         self.ref.observeSingleEventOfType(.Value) { (snapshot: FDataSnapshot!) in
             if(!(snapshot.value is NSNull))
             {
                 let data = snapshot.value as! NSDictionary
+                print(data)
                 self.company = data["Company"] as! String
                 self.eyeColor = data["Eye Color"] as! String
                 self.facebook = data["Facebook"] as! String

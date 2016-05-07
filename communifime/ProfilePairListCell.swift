@@ -11,7 +11,6 @@ import UIKit
 class ProfilePairListCell: UITableViewCell
 {
     var data : [AnyObject]!
-    
     override func awakeFromNib()
     {
         super.awakeFromNib()

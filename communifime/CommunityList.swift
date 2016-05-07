@@ -54,6 +54,7 @@ class CommunityList: UITableViewController
     func updateList()
     {
         data.removeAll()
+        Core.myCommunities.removeAll()
         permissions.removeAll()
         for c in Core.allCommunities
         {
@@ -61,6 +62,7 @@ class CommunityList: UITableViewController
                 c.admin == Core.fireBaseRef.authData)
             {
                 self.data.append(c)
+                Core.myCommunities.append(c)
                 let perm = Core.getPermissionFromCache(c)
                 self.permissions.append(perm!)
             }

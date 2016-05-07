@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -487,6 +487,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
+                        <outlet property="addButton" destination="SHC-ui-dYc" id="Vcx-4V-kMd"/>
                         <outlet property="navBar" destination="AhE-PZ-o1l" id="TXK-L0-1ps"/>
                         <outlet property="tableView" destination="i5Z-4G-2p6" id="vwt-hD-Psu"/>
                     </connections>
@@ -1066,7 +1067,7 @@
         <!--Profile-->
         <scene sceneID="ptU-Wy-Skw">
             <objects>
-                <viewController id="nba-EG-7b8" customClass="ProfileVC" customModule="communifime" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileVC" id="nba-EG-7b8" customClass="ProfileVC" customModule="communifime" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Lkz-ao-f5Q"/>
                         <viewControllerLayoutGuide type="bottom" id="Lju-UA-z5U"/>
@@ -1143,6 +1144,7 @@
                     <connections>
                         <outlet property="profileImageButton" destination="MJ9-cK-27m" id="Ooj-Yh-Z01"/>
                         <outlet property="profileSavedButton" destination="slp-Ve-MMW" id="IM2-fD-0hv"/>
+                        <outlet property="saveButton" destination="6Qa-wh-Dxz" id="Ob2-WR-XCN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bL3-d6-zDh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1609,6 +1611,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
+                        <outlet property="addButton" destination="AwP-DD-F7U" id="lzo-Qd-kwa"/>
                         <outlet property="tableView" destination="Tes-LP-44H" id="DA4-bY-H1J"/>
                     </connections>
                 </viewController>
@@ -2463,6 +2466,7 @@
                         <outlet property="lastNameTF" destination="rU7-b1-eFk" id="ChX-jB-A5b"/>
                         <outlet property="phoneNumbersButton" destination="O4j-e0-ezY" id="o8A-G2-TyK"/>
                         <outlet property="positionTF" destination="dEI-16-Qmg" id="Tew-wj-Gjm"/>
+                        <outlet property="saveButton" destination="bSj-aS-aEs" id="cSC-8A-5oh"/>
                         <outlet property="sv" destination="OdE-Rx-6P2" id="1fc-XW-xnD"/>
                     </connections>
                 </viewController>
@@ -2671,6 +2675,7 @@
                         <outlet property="gradeTF" destination="zG4-nN-J0J" id="Lkm-nS-qr4"/>
                         <outlet property="imageButton" destination="IHe-KU-X7A" id="EdF-QE-BWL"/>
                         <outlet property="lastNameTF" destination="4YU-nD-NsS" id="QkR-S6-N3j"/>
+                        <outlet property="saveButton" destination="fgA-FV-gB0" id="yZy-06-TRL"/>
                         <outlet property="sv" destination="zuE-uq-PXo" id="1J1-Uk-dzY"/>
                     </connections>
                 </viewController>
@@ -3029,9 +3034,9 @@
                     </tabBar>
                     <connections>
                         <segue destination="8qV-C7-5kH" kind="relationship" relationship="viewControllers" id="bEZ-l7-Keu"/>
+                        <segue destination="akk-Xn-N93" kind="relationship" relationship="viewControllers" id="oEG-vj-5q8"/>
                         <segue destination="dKO-Lm-0ok" kind="relationship" relationship="viewControllers" id="qGf-CE-y0W"/>
                         <segue destination="nba-EG-7b8" kind="relationship" relationship="viewControllers" id="3SX-ug-TCo"/>
-                        <segue destination="akk-Xn-N93" kind="relationship" relationship="viewControllers" id="oEG-vj-5q8"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pn0-pQ-5Ab" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3059,6 +3064,6 @@
         <image name="settings_icon.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="sX2-sw-XZR"/>
+        <segue reference="8Gj-gx-3vT"/>
     </inferredMetricsTieBreakers>
 </document>
