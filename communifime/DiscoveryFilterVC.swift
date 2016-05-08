@@ -10,8 +10,9 @@ import UIKit
 
 class DiscoveryFilterVC: UIViewController
 {
-
     @IBOutlet weak var scrollView: UIScrollView!
+    var discoveryList : DiscoveryList!
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -19,6 +20,15 @@ class DiscoveryFilterVC: UIViewController
         // Do any additional setup after loading the view.
     }
 
+    @IBAction func applyButtonPressed(sender : AnyObject)
+    {
+        Determine the filter based on the form
+        var filter = [String: String]()
+        filter["First Name"] = "Mike"
+        self.discoveryList.applyFilter(filter)
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

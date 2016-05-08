@@ -10,25 +10,52 @@ import UIKit
 
 class DiscoveryList: UITableViewController
 {
-    var uids = [String]()
-    var profiles = [UserProfile]()
+    var data = [Community : [UserProfile]]()
+    var filtered_data : [Community : [UserProfile]]!
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(profileUpdatedNotification), name: "Profile Data Loaded", object: nil)
+        
         for community in Core.myCommunities
         {
+            data[community] = [UserProfile]()
             for member in community.members
             {
-                if(!uids.contains(member.1))
+                 data[community]!.append(UserProfile(uid: member.0))
+            }
+        }
+        self.applyFilter([:])
+    }
+
+    func profileUpdatedNotification()
+    {
+        self.tableView.reloadData()
+    }
+    
+    func applyFilter(filter: [String: String])
+    {
+        self.filtered_data = self.data
+        for entry in self.data
+        {
+            for profile in entry.1
+            {
+                for pair in filter
                 {
-                    uids.append(member.1)
-                    profiles.append(UserProfile(uid: member.0))
+                    if(pair.0 == "First Name" && !profile.firstName.containsString(pair.1))
+                    {
+                        let pos = self.filtered_data[entry.0]?.indexOf(profile)
+                        self.filtered_data[entry.0]?.removeAtIndex(pos!)
+                        break
+                    }
+                    
                 }
             }
         }
+        self.tableView.reloadData()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -36,14 +63,19 @@ class DiscoveryList: UITableViewController
 
     // MARK: - Table view data source
 
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String?
+    {
+        return Core.myCommunities[section].name
+    }
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return Core.myCommunities.count
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return uids.count
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        return self.filtered_data[Core.myCommunities[section]]!.count
     }
 
     
@@ -52,7 +84,9 @@ class DiscoveryList: UITableViewController
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
 
         // Configure the cell...
-        cell.textLabel?.text = self.uids[indexPath.row]
+        let community = Core.myCommunities[indexPath.section]
+        let profile = self.filtered_data[community]![indexPath.row]
+        cell.textLabel?.text = "\(profile.firstName) \(profile.lastName)"
         cell.accessoryType = .DisclosureIndicator
         return cell
     }
@@ -60,7 +94,9 @@ class DiscoveryList: UITableViewController
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileVC") as! ProfileVC
-        vc.profile = self.profiles[indexPath.row]
+        let community = Core.myCommunities[indexPath.section]
+        let profile = self.filtered_data[community]![indexPath.row]
+        vc.profile = profile
         vc.readOnly = true
         self.presentViewController(vc, animated: true, completion: nil)
         
@@ -101,13 +137,12 @@ class DiscoveryList: UITableViewController
     }
     */
 
-    /*
+    
     // MARK: - Navigation
-
+    /*
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
     }
     */
 

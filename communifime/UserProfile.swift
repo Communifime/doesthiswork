@@ -47,16 +47,16 @@ class UserProfile: NSObject, ImageContainer
     {
         super.init()
         let uid = authData.uid!
-        self.fillData(uid)
+        self.fillData(uid, notify: false)
     }
     
     init(uid : String)
     {
         super.init()
-        self.fillData(uid)
+        self.fillData(uid, notify: true)
     }
     
-    func fillData(uid: String)
+    func fillData(uid: String, notify: Bool)
     {
         self.ref = Core.fireBaseRef.childByAppendingPath("profile").childByAppendingPath(uid)
         //get current data
@@ -99,6 +99,11 @@ class UserProfile: NSObject, ImageContainer
                 if(data["Family Members"] != nil)
                 {
                     self.familyMembers = self.getFamilyMemberArray(data["Family Members"] as! [[String : AnyObject]])
+                }
+                
+                if(notify)
+                {
+                    NSNotificationCenter.defaultCenter().postNotificationName("Profile Data Loaded", object: nil)
                 }
             }
         }
