@@ -64,7 +64,6 @@ class UserProfile: NSObject, ImageContainer
             if(!(snapshot.value is NSNull))
             {
                 let data = snapshot.value as! NSDictionary
-                print(data)
                 self.company = data["Company"] as! String
                 self.eyeColor = data["Eye Color"] as! String
                 self.facebook = data["Facebook"] as! String
@@ -332,5 +331,133 @@ class UserProfile: NSObject, ImageContainer
         
         
         return [personalPairs, workPairs, educationPairs, familyPairs]
+    }
+    
+    func hasEmailContaining(s : String) -> Bool
+    {
+        for pair in self.emails
+        {
+            if(pair.value.containsString(s))
+            {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func hasPhoneContaining(s : String) -> Bool
+    {
+        for pair in self.phoneNumbers
+        {
+            if(pair.value.containsString(s))
+            {
+                return true
+            }
+        }
+        return false
+    }
+
+    func hasCollegeContaining(s : String) -> Bool
+    {
+        for pair in self.colleges
+        {
+            if(pair.value.containsString(s))
+            {
+                return true
+            }
+        }
+        return false
+    }
+
+    func hasBirthDate(aws_String: String) -> Bool
+    {
+        return self.birthDate.aws_stringValue("M/dd/yyyy") == aws_String
+    }
+    
+    func hasAddressContaining(s : String) -> Bool
+    {
+        let homeAddressString = "\(self.homeAddress.street1) \(self.homeAddress.street2) \(self.homeAddress.city) \(self.homeAddress.state) \(self.homeAddress.zip)"
+        if(homeAddressString.containsString(s))
+        {
+            return true
+        }
+        
+        let workAddressString = "\(self.workAddress.street1) \(self.workAddress.street2) \(self.workAddress.city) \(self.workAddress.state) \(self.workAddress.zip)"
+        if(workAddressString.containsString(s))
+        {
+            return true
+        }
+        return false
+    }
+    
+    func hasFamilyMemberNamed(s: String) -> Bool
+    {
+        for member in self.familyMembers
+        {
+            let name = "\(member.firstName) \(member.lastName)"
+            if(name.containsString(s))
+            {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func hasFamilyMemberWithBirthday(s: String) -> Bool
+    {
+        for member in self.familyMembers
+        {
+            let birthday = member.birthDate.aws_stringValue("M/dd/yyyy")
+            if(birthday == s)
+            {
+                return true
+            }
+        }
+        return false
+    }
+
+    func hasFamilyMemberInCompany(s: String) -> Bool
+    {
+        for member in self.familyMembers
+        {
+            if(member is SpouseFamilyMember)
+            {
+                if((member as! SpouseFamilyMember).company.containsString(s))
+                {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
+    func hasFamilyMemberWithPosition(s: String) -> Bool
+    {
+        for member in self.familyMembers
+        {
+            if(member is SpouseFamilyMember)
+            {
+                if((member as! SpouseFamilyMember).position.containsString(s))
+                {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
+    func hasFamilyMemberInGrade(s: String) -> Bool
+    {
+        for member in self.familyMembers
+        {
+            if(member is ChildFamilyMember)
+            {
+                if((member as! ChildFamilyMember).grade == s)
+                {
+                    return true
+                }
+            }
+        }
+        return false
     }
 }

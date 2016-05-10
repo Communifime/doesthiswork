@@ -43,13 +43,114 @@ class DiscoveryList: UITableViewController
             {
                 for pair in filter
                 {
-                    if(pair.0 == "First Name" && !profile.firstName.containsString(pair.1))
+                    if(pair.0 == "Name" && !"\(profile.firstName) \(profile.lastName)".containsString(pair.1))
                     {
                         let pos = self.filtered_data[entry.0]?.indexOf(profile)
                         self.filtered_data[entry.0]?.removeAtIndex(pos!)
                         break
                     }
-                    
+                    else if(pair.0 == "Email" && !profile.hasEmailContaining(pair.1))
+                    {
+                        let pos = self.filtered_data[entry.0]?.indexOf(profile)
+                        self.filtered_data[entry.0]?.removeAtIndex(pos!)
+                        break
+                    }
+                    else if(pair.0 == "Address" && !profile.hasAddressContaining(pair.1))
+                    {
+                        let pos = self.filtered_data[entry.0]?.indexOf(profile)
+                        self.filtered_data[entry.0]?.removeAtIndex(pos!)
+                        break
+                    }
+                    else if(pair.0 == "Phone" && !profile.hasPhoneContaining(pair.1))
+                    {
+                        let pos = self.filtered_data[entry.0]?.indexOf(profile)
+                        self.filtered_data[entry.0]?.removeAtIndex(pos!)
+                        break
+                    }
+                    else if(pair.0 == "Company" && !profile.company.containsString(pair.1))
+                    {
+                        let pos = self.filtered_data[entry.0]?.indexOf(profile)
+                        self.filtered_data[entry.0]?.removeAtIndex(pos!)
+                        break
+                    }
+                    else if(pair.0 == "Position" && !profile.position.containsString(pair.1))
+                    {
+                        let pos = self.filtered_data[entry.0]?.indexOf(profile)
+                        self.filtered_data[entry.0]?.removeAtIndex(pos!)
+                        break
+                    }
+                    else if(pair.0 =="College" && !profile.hasCollegeContaining(pair.1))
+                    {
+                        let pos = self.filtered_data[entry.0]?.indexOf(profile)
+                        self.filtered_data[entry.0]?.removeAtIndex(pos!)
+                        break
+                    }
+                    else if(pair.0 =="High School" && !profile.highSchool.containsString(pair.1))
+                    {
+                        let pos = self.filtered_data[entry.0]?.indexOf(profile)
+                        self.filtered_data[entry.0]?.removeAtIndex(pos!)
+                        break
+                    }
+                    else if(pair.0 =="Hometown" && !profile.hometown.containsString(pair.1))
+                    {
+                        let pos = self.filtered_data[entry.0]?.indexOf(profile)
+                        self.filtered_data[entry.0]?.removeAtIndex(pos!)
+                        break
+                    }
+                    else if(pair.0 =="Gender" && !profile.gender.containsString(pair.1))
+                    {
+                        let pos = self.filtered_data[entry.0]?.indexOf(profile)
+                        self.filtered_data[entry.0]?.removeAtIndex(pos!)
+                        break
+                    }
+                    else if(pair.0 =="Hair Length" && !profile.hairLength.containsString(pair.1))
+                    {
+                        let pos = self.filtered_data[entry.0]?.indexOf(profile)
+                        self.filtered_data[entry.0]?.removeAtIndex(pos!)
+                        break
+                    }
+                    else if(pair.0 =="Eye Color" && !profile.eyeColor.containsString(pair.1))
+                    {
+                        let pos = self.filtered_data[entry.0]?.indexOf(profile)
+                        self.filtered_data[entry.0]?.removeAtIndex(pos!)
+                        break
+                    }
+                    else if(pair.0 =="Birth Date" && !profile.hasBirthDate(pair.1))
+                    {
+                        let pos = self.filtered_data[entry.0]?.indexOf(profile)
+                        self.filtered_data[entry.0]?.removeAtIndex(pos!)
+                        break
+                    }
+                    else if(pair.0 =="Family Member Name" && !profile.hasFamilyMemberNamed(pair.1))
+                    {
+                        let pos = self.filtered_data[entry.0]?.indexOf(profile)
+                        self.filtered_data[entry.0]?.removeAtIndex(pos!)
+                        break
+                    }
+                    else if(pair.0 =="Family Member Grade" && !profile.hasFamilyMemberInGrade(pair.1))
+                    {
+                        let pos = self.filtered_data[entry.0]?.indexOf(profile)
+                        self.filtered_data[entry.0]?.removeAtIndex(pos!)
+                        break
+                    }
+                    else if(pair.0 =="Family Member Company" && !profile.hasFamilyMemberInCompany(pair.1))
+                    {
+                        let pos = self.filtered_data[entry.0]?.indexOf(profile)
+                        self.filtered_data[entry.0]?.removeAtIndex(pos!)
+                        break
+                    }
+                    else if(pair.0 =="Family Member Position" && !profile.hasFamilyMemberWithPosition(pair.1))
+                    {
+                        let pos = self.filtered_data[entry.0]?.indexOf(profile)
+                        self.filtered_data[entry.0]?.removeAtIndex(pos!)
+                        break
+                    }
+                    else if(pair.0 =="Family Member Birth Date" && !profile.hasFamilyMemberWithBirthday(pair.1))
+                    {
+                        let pos = self.filtered_data[entry.0]?.indexOf(profile)
+                        self.filtered_data[entry.0]?.removeAtIndex(pos!)
+                        break
+                    }
                 }
             }
         }
