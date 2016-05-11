@@ -12,6 +12,7 @@ import AWSCore
 
 class UserProfile: NSObject, ImageContainer
 {
+    var perms = [CommunityPermissions]()
     var firstName : String = ""
     var lastName : String = ""
     var image : UIImage? = nil

@@ -18,11 +18,20 @@ class Core: NSObject
     static var fireBaseRef = Firebase(url: "https://amber-fire-7588.firebaseio.com/")
     static var allCommunities = [Community]()
     static var myCommunities = [Community]()
+    static var permsInMyCommunities = [CommunityPermissions]()
     
     static var currentUserProfile : UserProfile!
     static var communityPermissionsCache = [CommunityPermissions]()
     static var imagesToDelete = [String]()
     
+    static func fillPermsInMyCommunities()
+    {
+        let ref = fireBaseRef.childByAppendingPath("community_permissions")
+        ref.observeSingleEventOfType(.Value) { (snapshot: FDataSnapshot!) in
+            
+            GET ALL PERMISSIONS AND THEN FIGURE OUT WHICH ARE IMPORTANT TO U
+        }
+    }
     static func getPermissionFromCache(community: Community) -> CommunityPermissions?
     {
         //check cache

@@ -79,73 +79,73 @@ class DiscoveryList: UITableViewController
                         self.filtered_data[entry.0]?.removeAtIndex(pos!)
                         break
                     }
-                    else if(pair.0 =="College" && !profile.hasCollegeContaining(pair.1))
+                    else if(pair.0 == "College" && !profile.hasCollegeContaining(pair.1))
                     {
                         let pos = self.filtered_data[entry.0]?.indexOf(profile)
                         self.filtered_data[entry.0]?.removeAtIndex(pos!)
                         break
                     }
-                    else if(pair.0 =="High School" && !profile.highSchool.containsString(pair.1))
+                    else if(pair.0 == "High School" && !profile.highSchool.containsString(pair.1))
                     {
                         let pos = self.filtered_data[entry.0]?.indexOf(profile)
                         self.filtered_data[entry.0]?.removeAtIndex(pos!)
                         break
                     }
-                    else if(pair.0 =="Hometown" && !profile.hometown.containsString(pair.1))
+                    else if(pair.0 == "Hometown" && !profile.hometown.containsString(pair.1))
                     {
                         let pos = self.filtered_data[entry.0]?.indexOf(profile)
                         self.filtered_data[entry.0]?.removeAtIndex(pos!)
                         break
                     }
-                    else if(pair.0 =="Gender" && !profile.gender.containsString(pair.1))
+                    else if(pair.0 == "Gender" && profile.gender != pair.1)
                     {
                         let pos = self.filtered_data[entry.0]?.indexOf(profile)
                         self.filtered_data[entry.0]?.removeAtIndex(pos!)
                         break
                     }
-                    else if(pair.0 =="Hair Length" && !profile.hairLength.containsString(pair.1))
+                    else if(pair.0 == "Hair Length" && profile.hairLength != pair.1)
                     {
                         let pos = self.filtered_data[entry.0]?.indexOf(profile)
                         self.filtered_data[entry.0]?.removeAtIndex(pos!)
                         break
                     }
-                    else if(pair.0 =="Eye Color" && !profile.eyeColor.containsString(pair.1))
+                    else if(pair.0 == "Eye Color" && profile.eyeColor != pair.1)
                     {
                         let pos = self.filtered_data[entry.0]?.indexOf(profile)
                         self.filtered_data[entry.0]?.removeAtIndex(pos!)
                         break
                     }
-                    else if(pair.0 =="Birth Date" && !profile.hasBirthDate(pair.1))
+                    else if(pair.0 == "Birth Date" && !profile.hasBirthDate(pair.1))
                     {
                         let pos = self.filtered_data[entry.0]?.indexOf(profile)
                         self.filtered_data[entry.0]?.removeAtIndex(pos!)
                         break
                     }
-                    else if(pair.0 =="Family Member Name" && !profile.hasFamilyMemberNamed(pair.1))
+                    else if(pair.0 == "Family Member Name" && !profile.hasFamilyMemberNamed(pair.1))
                     {
                         let pos = self.filtered_data[entry.0]?.indexOf(profile)
                         self.filtered_data[entry.0]?.removeAtIndex(pos!)
                         break
                     }
-                    else if(pair.0 =="Family Member Grade" && !profile.hasFamilyMemberInGrade(pair.1))
+                    else if(pair.0 == "Family Member Grade" && !profile.hasFamilyMemberInGrade(pair.1))
                     {
                         let pos = self.filtered_data[entry.0]?.indexOf(profile)
                         self.filtered_data[entry.0]?.removeAtIndex(pos!)
                         break
                     }
-                    else if(pair.0 =="Family Member Company" && !profile.hasFamilyMemberInCompany(pair.1))
+                    else if(pair.0 == "Family Member Company" && !profile.hasFamilyMemberInCompany(pair.1))
                     {
                         let pos = self.filtered_data[entry.0]?.indexOf(profile)
                         self.filtered_data[entry.0]?.removeAtIndex(pos!)
                         break
                     }
-                    else if(pair.0 =="Family Member Position" && !profile.hasFamilyMemberWithPosition(pair.1))
+                    else if(pair.0 == "Family Member Position" && !profile.hasFamilyMemberWithPosition(pair.1))
                     {
                         let pos = self.filtered_data[entry.0]?.indexOf(profile)
                         self.filtered_data[entry.0]?.removeAtIndex(pos!)
                         break
                     }
-                    else if(pair.0 =="Family Member Birth Date" && !profile.hasFamilyMemberWithBirthday(pair.1))
+                    else if(pair.0 == "Family Member Birth Date" && !profile.hasFamilyMemberWithBirthday(pair.1))
                     {
                         let pos = self.filtered_data[entry.0]?.indexOf(profile)
                         self.filtered_data[entry.0]?.removeAtIndex(pos!)

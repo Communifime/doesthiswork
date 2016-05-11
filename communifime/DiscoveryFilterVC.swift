@@ -12,7 +12,6 @@ class DiscoveryFilterVC: UIViewController
 {
     
     @IBOutlet weak var familyMemberBirthDatePicker: UIDatePicker!
-    @IBOutlet weak var familyMemberGenderSegments: UISegmentedControl!
     @IBOutlet weak var familyMemberHighSchoolTF: UITextField!
     @IBOutlet weak var familyMemberCollegeTF: UITextField!
     @IBOutlet weak var familyMemberPositionTF: UITextField!
@@ -45,30 +44,92 @@ class DiscoveryFilterVC: UIViewController
 
     @IBAction func applyButtonPressed(sender : AnyObject)
     {
-        Only send filters where they enterd info!
         var filter = [String: String]()
-        filter["Name"] = self.nameTF.text
-        filter["Email"] = self.emailTF.text
-        filter["Address"] = self.addressTF.text
-        filter["Phone"] = self.phoneTF.text
-        filter["Company"] = self.companyTF.text
-        filter["Position"] = self.positionTF.text
-        filter["College"] = self.collegeTF.text
-        filter["High School"] = self.highSchoolTF.text
-        filter["Hometown"] = self.homeTownTF.text
-        filter["Gender"] = self.genderSegments.titleForSegmentAtIndex(self.genderSegments.selectedSegmentIndex)
-        filter["Hair Color"] = self.hairColorSegments.titleForSegmentAtIndex(self.hairColorSegments.selectedSegmentIndex)
-        filter["Hair Length"] = self.hairLengthSegments.titleForSegmentAtIndex(self.hairLengthSegments.selectedSegmentIndex)
-        filter["Eye Color"] = self.eyeColorSegments.titleForSegmentAtIndex(self.eyeColorSegments.selectedSegmentIndex)
-        filter["Birth Date"] = self.birthdatePicker.date.aws_stringValue("M/dd/yyyy")
-        filter["Family Member Name"] = self.familyMemberNameTF.text
-        filter["Family Member Grade"] = self.familyMemberGradeTF.text
-        filter["Family Member Company"] = self.familyMemberCompanyTF.text
-        filter["Family Member Position"] = self.familyMemberPositionTF.text
-        filter["Family Member College"] = self.familyMemberCollegeTF.text
-        filter["Family Member High School"] = self.familyMemberHighSchoolTF.text
-        filter["Family Member Gender"] = self.familyMemberGenderSegments.titleForSegmentAtIndex(self.familyMemberGenderSegments.selectedSegmentIndex)
-        filter["Family Member Birth Date"] = self.familyMemberBirthDatePicker.date.aws_stringValue("M/dd/yyyy")
+        let today = NSDate().aws_stringValue("M/dd/yyyy")
+        if(self.nameTF.text != "")
+        {
+            filter["Name"] = self.nameTF.text
+        }
+        if(self.emailTF.text != "")
+        {
+            filter["Email"] = self.emailTF.text
+        }
+        if(self.addressTF.text != "")
+        {
+            filter["Address"] = self.addressTF.text
+        }
+        if(self.phoneTF.text != "")
+        {
+            filter["Phone"] = self.phoneTF.text
+        }
+        if(self.companyTF.text != "")
+        {
+            filter["Company"] = self.companyTF.text
+        }
+        if(self.positionTF.text != "")
+        {
+            filter["Position"] = self.positionTF.text
+        }
+        if(self.collegeTF.text != "")
+        {
+            filter["College"] = self.collegeTF.text
+        }
+        if(self.highSchoolTF.text != "")
+        {
+            filter["High School"] = self.highSchoolTF.text
+        }
+        if(self.homeTownTF.text != "")
+        {
+            filter["Hometown"] = self.homeTownTF.text
+        }
+        if(self.genderSegments.titleForSegmentAtIndex(self.genderSegments.selectedSegmentIndex) != "N/A")
+        {
+            filter["Gender"] = self.genderSegments.titleForSegmentAtIndex(self.genderSegments.selectedSegmentIndex)
+        }
+        if(self.hairColorSegments.titleForSegmentAtIndex(self.hairColorSegments.selectedSegmentIndex) != "N/A")
+        {
+            filter["Hair Color"] = self.hairColorSegments.titleForSegmentAtIndex(self.hairColorSegments.selectedSegmentIndex)
+        }
+        if(self.hairLengthSegments.titleForSegmentAtIndex(self.hairLengthSegments.selectedSegmentIndex) != "N/A")
+        {
+            filter["Hair Length"] = self.hairLengthSegments.titleForSegmentAtIndex(self.hairLengthSegments.selectedSegmentIndex)
+        }
+        if(self.eyeColorSegments.titleForSegmentAtIndex(self.eyeColorSegments.selectedSegmentIndex) != "N/A")
+        {
+            filter["Eye Color"] = self.eyeColorSegments.titleForSegmentAtIndex(self.eyeColorSegments.selectedSegmentIndex)
+        }
+        if(self.birthdatePicker.date.aws_stringValue("M/dd/yyyy") != today)
+        {
+            filter["Birth Date"] = self.birthdatePicker.date.aws_stringValue("M/dd/yyyy")
+        }
+        if(self.familyMemberNameTF.text != "")
+        {
+            filter["Family Member Name"] = self.familyMemberNameTF.text
+        }
+        if(self.familyMemberGradeTF.text != "")
+        {
+            filter["Family Member Grade"] = self.familyMemberGradeTF.text
+        }
+        if(self.familyMemberCollegeTF.text != "")
+        {
+            filter["Family Member College"] = self.familyMemberCollegeTF.text
+        }
+        if(self.familyMemberCompanyTF.text != "")
+        {
+            filter["Family Member Company"] = self.familyMemberCompanyTF.text
+        }
+        if(self.familyMemberPositionTF.text != "")
+        {
+            filter["Family Member Position"] = self.familyMemberPositionTF.text
+        }
+        if(self.familyMemberHighSchoolTF.text != "")
+        {
+            filter["Family Member High School"] = self.familyMemberHighSchoolTF.text
+        }
+     if(self.familyMemberBirthDatePicker.date.aws_stringValue("M/dd/yyyy") != today)
+        {
+            filter["Family Member Birth Date"] = self.familyMemberBirthDatePicker.date.aws_stringValue("M/dd/yyyy")
+        }
         self.discoveryList.applyFilter(filter)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
