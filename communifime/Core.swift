@@ -18,18 +18,86 @@ class Core: NSObject
     static var fireBaseRef = Firebase(url: "https://amber-fire-7588.firebaseio.com/")
     static var allCommunities = [Community]()
     static var myCommunities = [Community]()
-    static var permsInMyCommunities = [CommunityPermissions]()
+    static var allPermissions = [CommunityPermissions]()
     
     static var currentUserProfile : UserProfile!
     static var communityPermissionsCache = [CommunityPermissions]()
     static var imagesToDelete = [String]()
+    static var discoveryListObserver : DiscoveryList!
     
-    static func fillPermsInMyCommunities()
+    /*
+     returns true if the logged in user has full view perms
+     for the uid that was passed in based on comparing all
+     the communities the two users have in common and the BEST
+     perm within those
+     */
+    static func hasFullViewPermission(uid : String) -> Bool
     {
+        for community in myCommunities
+        {
+            for perm in allPermissions
+            {
+                if(perm.communityKey == community.key && perm.uid == uid && perm.infoShare == "full")
+                {
+                    return true
+                }
+            }
+            
+            //check sub-communities
+            if(community.subCommunities.count > 0)
+            {
+                if(checkSubCommunityFullPerms(uid, subs: community.subCommunities))
+                {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
+    static func checkSubCommunityFullPerms(uid: String, subs: [Community]) -> Bool
+    {
+        var answer = false
+        for sub in subs
+        {
+            for perm in allPermissions
+            {
+                if(perm.communityKey == sub.key && perm.uid == uid && perm.infoShare == "full")
+                {
+                    return true
+                }
+            }
+            
+            if(sub.subCommunities.count > 0)
+            {
+                answer = answer || checkSubCommunityFullPerms(uid, subs: sub.subCommunities)
+            }
+        }
+        return answer
+    }
+    
+    static func getAllPerms()
+    {
+        allPermissions.removeAll()
         let ref = fireBaseRef.childByAppendingPath("community_permissions")
         ref.observeSingleEventOfType(.Value) { (snapshot: FDataSnapshot!) in
             
-            GET ALL PERMISSIONS AND THEN FIGURE OUT WHICH ARE IMPORTANT TO U
+            for snap in snapshot.value as! NSDictionary
+            {
+                let uid = snap.key as! String
+                let perms = snap.value as! NSDictionary
+                for perm in perms
+                {
+                    let communityKey = perm.key as! String
+                    let newPermission = CommunityPermissions(uid: uid)
+                    let parts = perm.value as! NSDictionary
+                    
+                    newPermission.communityKey = communityKey
+                    newPermission.contact = parts["contact"] as! String
+                    newPermission.infoShare = parts["infoShare"] as! String
+                    allPermissions.append(newPermission)
+                }
+            }
         }
     }
     static func getPermissionFromCache(community: Community) -> CommunityPermissions?
@@ -37,7 +105,7 @@ class Core: NSObject
         //check cache
         for perm in communityPermissionsCache
         {
-            if(perm.communityKey == community.key)
+            if(perm.communityKey == community.key && perm.uid == Core.fireBaseRef.authData.uid)
             {
                 return perm
             }
@@ -55,7 +123,7 @@ class Core: NSObject
                 let data = snapshot.value as! NSDictionary
                 for datum in data
                 {
-                    let perm = CommunityPermissions()
+                    let perm = CommunityPermissions(uid: Core.fireBaseRef.authData.uid)
                     perm.communityKey = datum.key as! String
                     perm.infoShare = datum.value["infoShare"]!
                     perm.contact = datum.value["contact"]!

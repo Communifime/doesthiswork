@@ -51,7 +51,6 @@ class JoinCommunityVC: UIViewController
         {
             let ref = Core.fireBaseRef.childByAppendingPath("communities").childByAppendingPath(self.communityIDTF.text!)
             ref.observeSingleEventOfType(.Value, withBlock: { (snapshot: FDataSnapshot!) in
-                print(snapshot)
                 if(!(snapshot.value is NSNull))
                 {
                     let password = snapshot.value["password"] as! String
@@ -66,7 +65,7 @@ class JoinCommunityVC: UIViewController
                             {
                                 c.addAndStoreMember(Core.fireBaseRef.authData.uid, name: "\(Core.currentUserProfile.firstName) \(Core.currentUserProfile.lastName)")
                                 
-                                let perm = CommunityPermissions()
+                                let perm = CommunityPermissions(uid: Core.fireBaseRef.authData.uid)
                                 perm.communityKey = self.communityIDTF.text!
                                 perm.save(nil)
                                 Core.communityPermissionsCache.append(perm)

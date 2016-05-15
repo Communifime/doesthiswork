@@ -12,6 +12,7 @@ import AWSCore
 
 class UserProfile: NSObject, ImageContainer
 {
+    var uid : String!
     var perms = [CommunityPermissions]()
     var firstName : String = ""
     var lastName : String = ""
@@ -47,14 +48,15 @@ class UserProfile: NSObject, ImageContainer
     init(authData : FAuthData)
     {
         super.init()
-        let uid = authData.uid!
-        self.fillData(uid, notify: false)
+        self.uid = authData.uid!
+        self.fillData(self.uid, notify: false)
     }
     
     init(uid : String)
     {
         super.init()
-        self.fillData(uid, notify: true)
+        self.uid = uid
+        self.fillData(self.uid, notify: true)
     }
     
     func fillData(uid: String, notify: Bool)
@@ -202,7 +204,7 @@ class UserProfile: NSObject, ImageContainer
         profile["Colleges"] = Core.pairArrayToDictionary(self.colleges)
         profile["Family Members"] = self.getFamilyMembersDictionary()
         
-        if(self.image != nil && self.imageName == "")
+        if(self.imageName == "")
         {
             //generate a hash name for the image
             let date = NSDate()
@@ -210,9 +212,9 @@ class UserProfile: NSObject, ImageContainer
             let hashString = hashableString.aws_md5String() + ".png"
             self.imageName = hashString
         }
-        profile["Image Name"] = self.imageName
         if(currProfileImage != nil && self.image != currProfileImage)
         {
+            profile["Image Name"] = self.imageName
             Core.storeImage(currProfileImage!, fileName: self.imageName, isProfile: true)
         }
         //delete the images staged for deletion

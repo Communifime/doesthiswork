@@ -38,9 +38,14 @@ class LoginVC: UIViewController
     
     func postLoginSetup()
     {
+        if(Core.discoveryListObserver != nil)
+        {
+             NSNotificationCenter.defaultCenter().removeObserver(Core.discoveryListObserver)
+        }
         //get the current user profile
         Core.currentUserProfile = UserProfile(authData: Core.fireBaseRef.authData)
         Core.addPermissionToCache()
+        Core.getAllPerms()
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("TabBarController")
         self.presentViewController(vc!, animated: true, completion: nil)
     }

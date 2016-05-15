@@ -16,7 +16,10 @@ class DiscoveryList: UITableViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.data.removeAll()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(profileUpdatedNotification), name: "Profile Data Loaded", object: nil)
+        //Let core know about me so I can be removed as an observer upon login
+        Core.discoveryListObserver = self
         
         for community in Core.myCommunities
         {
@@ -176,6 +179,10 @@ class DiscoveryList: UITableViewController
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
+        print(Core.myCommunities[section].debugDescription)
+        print(self.filtered_data.debugDescription)
+        print(self.filtered_data[Core.myCommunities[section]])
+        print(self.filtered_data[Core.myCommunities[section]]!.count)
         return self.filtered_data[Core.myCommunities[section]]!.count
     }
 
@@ -199,6 +206,7 @@ class DiscoveryList: UITableViewController
         let profile = self.filtered_data[community]![indexPath.row]
         vc.profile = profile
         vc.readOnly = true
+        vc.fullView = Core.hasFullViewPermission(profile.uid)
         self.presentViewController(vc, animated: true, completion: nil)
         
     }

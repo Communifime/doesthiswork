@@ -132,7 +132,7 @@ class Community: NSObject, ImageContainer
         sub.key = ref.key
         ref.setValue(sub.getDictionary()){ (error, firebase) in
             let currPerm = Core.getPermissionFromCache(self)
-            let perm = CommunityPermissions()
+            let perm = CommunityPermissions(uid: Core.fireBaseRef.authData.uid)
             perm.contact = currPerm!.contact
             perm.infoShare = currPerm!.infoShare
             perm.communityKey = sub.key

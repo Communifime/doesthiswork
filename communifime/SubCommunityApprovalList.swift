@@ -51,7 +51,7 @@ class SubCommunityApprovalList: UITableViewController
                         
                         //create new permissions for this sub-community
                         let currPerm = Core.getPermissionFromCache(self.community)
-                        let perm = CommunityPermissions()
+                        let perm = CommunityPermissions(uid: Core.fireBaseRef.authData.uid)
                         perm.communityKey = c.key
                         perm.contact = currPerm?.contact
                         perm.infoShare = currPerm?.infoShare

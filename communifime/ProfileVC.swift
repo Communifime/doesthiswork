@@ -17,6 +17,7 @@ class ProfileVC: UIViewController
     var profileList : ProfileList!
     var profile = Core.currentUserProfile
     var readOnly = false
+    var fullView = false
     
     override func viewDidLoad()
     {
@@ -71,6 +72,7 @@ class ProfileVC: UIViewController
             self.profileList = segue.destinationViewController as! ProfileList
             self.profileList.data = self.profile.getFormObjects()
             self.profileList.readOnly = self.readOnly
+            self.profileList.fullView = self.fullView
             self.profileList.profile = self.profile
         }
     }

@@ -13,6 +13,7 @@ class ProfileList: UITableViewController
     var data : [[FormPair]]!
     var profile : UserProfile!
     var readOnly = false
+    var fullView = false
     
     override func viewDidLoad()
     {
@@ -104,6 +105,10 @@ class ProfileList: UITableViewController
             {
                 cell.tf.enabled = false
                 cell.userInteractionEnabled = false
+                if(!self.fullView && cell.data.name != "First Name" && cell.data.name != "Last Name")
+                {
+                    cell.tf.text = "HIDDEN"
+                }
             }
             return cell
         }

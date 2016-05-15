@@ -15,9 +15,16 @@ class CommunityPermissions: NSObject
     var infoShare : String! = "partial"
     var contact : String! = "in-mail"
     var ref = Core.fireBaseRef.childByAppendingPath("community_permissions")
+    var uid : String
+    
+    init(uid: String)
+    {
+        self.uid = uid
+    }
+    
     func save(saveSuccessButton : UILabel?)
     {
-        let ref = self.ref.childByAppendingPath(Core.fireBaseRef.authData.uid).childByAppendingPath(self.communityKey)
+        let ref = self.ref.childByAppendingPath(self.uid).childByAppendingPath(self.communityKey)
         var dict = [String: AnyObject]()
         dict["infoShare"] = self.infoShare
         dict["contact"] = self.contact
