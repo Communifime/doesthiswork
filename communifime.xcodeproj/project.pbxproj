@@ -16,6 +16,7 @@
 		68148BE41CA89AB50096E699 /* communities_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 68148BE31CA89AB50096E699 /* communities_icon.png */; };
 		68148BE61CA89DBB0096E699 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68148BE51CA89DBB0096E699 /* SettingsVC.swift */; };
 		68148BE81CA98FE10096E699 /* add-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 68148BE71CA98FE10096E699 /* add-icon.png */; };
+		681BB2FC1CE969EF00BBAD98 /* InMailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681BB2FB1CE969EF00BBAD98 /* InMailVC.swift */; };
 		6824FECB1CBAE9D800C33B9D /* FamilyMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6824FECA1CBAE9D800C33B9D /* FamilyMember.swift */; };
 		6824FECF1CBAEB2D00C33B9D /* SpouseFamilyMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6824FECE1CBAEB2D00C33B9D /* SpouseFamilyMember.swift */; };
 		6824FED11CBAF43600C33B9D /* FamilyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6824FED01CBAF43600C33B9D /* FamilyList.swift */; };
@@ -85,6 +86,7 @@
 		68148BE31CA89AB50096E699 /* communities_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = communities_icon.png; sourceTree = "<group>"; };
 		68148BE51CA89DBB0096E699 /* SettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		68148BE71CA98FE10096E699 /* add-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add-icon.png"; sourceTree = "<group>"; };
+		681BB2FB1CE969EF00BBAD98 /* InMailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InMailVC.swift; sourceTree = "<group>"; };
 		6824FECA1CBAE9D800C33B9D /* FamilyMember.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyMember.swift; sourceTree = "<group>"; };
 		6824FECE1CBAEB2D00C33B9D /* SpouseFamilyMember.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpouseFamilyMember.swift; sourceTree = "<group>"; };
 		6824FED01CBAF43600C33B9D /* FamilyList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyList.swift; sourceTree = "<group>"; };
@@ -199,6 +201,14 @@
 				68148BDF1CA899B40096E699 /* profile_icon.png */,
 			);
 			name = images;
+			sourceTree = "<group>";
+		};
+		681BB2FA1CE969B700BBAD98 /* Communication Center */ = {
+			isa = PBXGroup;
+			children = (
+				681BB2FB1CE969EF00BBAD98 /* InMailVC.swift */,
+			);
+			name = "Communication Center";
 			sourceTree = "<group>";
 		};
 		6824FECC1CBAEAB300C33B9D /* Family */ = {
@@ -336,6 +346,7 @@
 		68FDF16C1CA746F90037B878 /* Code Behinds */ = {
 			isa = PBXGroup;
 			children = (
+				681BB2FA1CE969B700BBAD98 /* Communication Center */,
 				68ADFEEA1CDBECE600B2671E /* Discovery Center */,
 				680D91521CCEF00E00A31971 /* Login/Registration */,
 				680D91511CCEEFF500A31971 /* Community */,
@@ -526,6 +537,7 @@
 				68FDF16E1CA7475B0037B878 /* LoginVC.swift in Sources */,
 				680D91541CCEF2A700A31971 /* CommunityVC.swift in Sources */,
 				B818DF831CB3F62B00B22D10 /* AddressView.swift in Sources */,
+				681BB2FC1CE969EF00BBAD98 /* InMailVC.swift in Sources */,
 				B818DF761CAEBCCC00B22D10 /* ProfileVC.swift in Sources */,
 				68ADFEF21CDBFAFF00B2671E /* ProfileSegmentCell.swift in Sources */,
 				6824FECB1CBAE9D800C33B9D /* FamilyMember.swift in Sources */,
@@ -611,7 +623,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -633,7 +645,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "20606061-9aff-4de1-ac7a-17d59a44020f";
+				PROVISIONING_PROFILE = "b5305ead-2839-4f9e-a9b0-81534e34dd74";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -657,7 +669,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -672,7 +684,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "20606061-9aff-4de1-ac7a-17d59a44020f";
+				PROVISIONING_PROFILE = "b5305ead-2839-4f9e-a9b0-81534e34dd74";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -683,10 +695,12 @@
 			baseConfigurationReference = 4EB8A789915311B577E73395 /* Pods-communifime.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mike Litman (4X76CP793V)";
 				INFOPLIST_FILE = communifime/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.greenberg.communifime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "20606061-9aff-4de1-ac7a-17d59a44020f";
 			};
 			name = Debug;
 		};
@@ -695,10 +709,12 @@
 			baseConfigurationReference = E44AEA3FD95E8E89CD3B6CE8 /* Pods-communifime.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mike Litman (4X76CP793V)";
 				INFOPLIST_FILE = communifime/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.greenberg.communifime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "20606061-9aff-4de1-ac7a-17d59a44020f";
 			};
 			name = Release;
 		};

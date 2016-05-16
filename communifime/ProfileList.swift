@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileList: UITableViewController
+class ProfileList: UITableViewController, UITextFieldDelegate
 {
     var data : [[FormPair]]!
     var profile : UserProfile!
@@ -23,6 +23,12 @@ class ProfileList: UITableViewController
     override func viewWillAppear(animated: Bool)
     {
         self.tableView.reloadData()
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool
+    {
+        self.view.endEditing(true)
+        return false
     }
     
     override func didReceiveMemoryWarning() {
@@ -99,6 +105,7 @@ class ProfileList: UITableViewController
             let cell = tableView.dequeueReusableCellWithIdentifier("text", forIndexPath: indexPath) as! ProfileTextCell
             cell.data = self.data[indexPath.section][indexPath.row]
             cell.profile = self.profile
+            cell.tf.delegate = self
             cell.tf.placeholder = self.data[indexPath.section][indexPath.row].name
             cell.tf.text = self.data[indexPath.section][indexPath.row].value as? String
             if(self.readOnly)

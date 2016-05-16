@@ -12,6 +12,7 @@ class DiscoveryList: UITableViewController
 {
     var data = [Community : [UserProfile]]()
     var filtered_data : [Community : [UserProfile]]!
+    var currentFilter = [String : String]()
     
     override func viewDidLoad()
     {
@@ -39,6 +40,7 @@ class DiscoveryList: UITableViewController
     
     func applyFilter(filter: [String: String])
     {
+        self.currentFilter = filter
         self.filtered_data = self.data
         for entry in self.data
         {

@@ -6,5 +6,6 @@ use_frameworks!
 target 'communifime' do
 pod 'Firebase', '>= 2.5.1'
 pod 'AWSS3'
+pod 'CGLMail'
 end
 

@@ -24,6 +24,14 @@ class ManagePairVC: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        if(self.varName == "phone numbers")
+        {
+            self.value.keyboardType = .NumberPad
+        }
+        else if(self.varName == "emails")
+        {
+            self.value.keyboardType = .EmailAddress
+        }
         self.errorTV.alpha = 0.0
         if(editMode)
         {

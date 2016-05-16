@@ -34,14 +34,138 @@ class DiscoveryFilterVC: UIViewController
     @IBOutlet weak var nameTF: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
     var discoveryList : DiscoveryList!
+    var filter : [String : String]!
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.filter = self.discoveryList.currentFilter
+        self.fillForm()
         scrollView.contentSize = CGSize(width: scrollView.frame.size.width, height: 2500)
         // Do any additional setup after loading the view.
     }
 
+    func fillForm()
+    {
+        for pair in self.filter
+        {
+            if(pair.0 == "Name")
+            {
+                self.nameTF.text = pair.1
+            }
+            else if(pair.0 == "Email")
+            {
+                self.emailTF.text = pair.1
+            }
+            else if(pair.0 == "Address")
+            {
+                self.addressTF.text = pair.1
+            }
+            else if(pair.0 == "Phone")
+            {
+                self.phoneTF.text = pair.1
+            }
+            else if(pair.0 == "Company")
+            {
+                self.companyTF.text = pair.1
+            }
+            else if(pair.0 == "Position")
+            {
+                self.positionTF.text = pair.1
+            }
+            else if(pair.0 == "College")
+            {
+                self.collegeTF.text = pair.1
+            }
+            else if(pair.0 == "High School")
+            {
+                self.highSchoolTF.text = pair.1
+            }
+            else if(pair.0 == "Hometown")
+            {
+                self.homeTownTF.text = pair.1
+            }
+            else if(pair.0 == "Gender")
+            {
+                for i in 0..<self.genderSegments.numberOfSegments
+                {
+                    if(self.genderSegments.titleForSegmentAtIndex(i) == pair.1)
+                    {
+                        self.genderSegments.selectedSegmentIndex = i
+                        break
+                    }
+                }
+            }
+            else if(pair.0 == "Hair Color")
+            {
+                for i in 0..<self.hairColorSegments.numberOfSegments
+                {
+                    if(self.hairColorSegments.titleForSegmentAtIndex(i) == pair.1)
+                    {
+                        self.hairColorSegments.selectedSegmentIndex = i
+                        break
+                    }
+                }
+            }
+            else if(pair.0 == "Hair Length")
+            {
+                for i in 0..<self.hairLengthSegments.numberOfSegments
+                {
+                    if(self.hairLengthSegments.titleForSegmentAtIndex(i) == pair.1)
+                    {
+                        self.hairLengthSegments.selectedSegmentIndex = i
+                        break
+                    }
+                }
+            }
+            else if(pair.0 == "Eye Color")
+            {
+                for i in 0..<self.eyeColorSegments.numberOfSegments
+                {
+                    if(self.eyeColorSegments.titleForSegmentAtIndex(i) == pair.1)
+                    {
+                        self.eyeColorSegments.selectedSegmentIndex = i
+                        break
+                    }
+                }
+            }
+            else if(pair.0 == "Birth Date")
+            {
+                let date = NSDate.aws_dateFromString(pair.1, format: "M/dd/yyyy")
+                self.birthdatePicker.date = date
+            }
+            else if(pair.0 == "Family Member Grade")
+            {
+                self.familyMemberGradeTF.text = pair.1
+            }
+            else if(pair.0 == "Family Member Name")
+            {
+                self.familyMemberNameTF.text = pair.1
+            }
+            else if(pair.0 == "Family Member College")
+            {
+                self.familyMemberCollegeTF.text = pair.1
+            }
+            else if(pair.0 == "Family Member Company")
+            {
+                self.familyMemberCompanyTF.text = pair.1
+            }
+            else if(pair.0 == "Family Member Position")
+            {
+                self.familyMemberPositionTF.text = pair.1
+            }
+            else if(pair.0 == "Family Member High School")
+            {
+                self.familyMemberHighSchoolTF.text = pair.1
+            }
+            else if(pair.0 == "Family Member Birth Date")
+            {
+                let date = NSDate.aws_dateFromString(pair.1, format: "M/dd/yyyy")
+                self.familyMemberBirthDatePicker.date = date
+            }
+        }
+    }
+    
     @IBAction func applyButtonPressed(sender : AnyObject)
     {
         var filter = [String: String]()
@@ -126,7 +250,7 @@ class DiscoveryFilterVC: UIViewController
         {
             filter["Family Member High School"] = self.familyMemberHighSchoolTF.text
         }
-     if(self.familyMemberBirthDatePicker.date.aws_stringValue("M/dd/yyyy") != today)
+        if(self.familyMemberBirthDatePicker.date.aws_stringValue("M/dd/yyyy") != today)
         {
             filter["Family Member Birth Date"] = self.familyMemberBirthDatePicker.date.aws_stringValue("M/dd/yyyy")
         }

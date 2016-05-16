@@ -2,15 +2,18 @@ PODS:
   - AWSCore (2.4.1)
   - AWSS3 (2.4.1):
     - AWSCore (= 2.4.1)
+  - CGLMail (0.1.1)
   - Firebase (2.5.1)
 
 DEPENDENCIES:
   - AWSS3
+  - CGLMail
   - Firebase (>= 2.5.1)
 
 SPEC CHECKSUMS:
   AWSCore: 9bfd632f04aaf12053e639d2a9120372844beb0d
   AWSS3: d7a3a694ffc4010e90b14755b5b9dbf70989c117
+  CGLMail: 91fbbf8a1c0283bb804798dce471f840b0f58488
   Firebase: 3565ea88b830f28f2c77ecc524622bc71a20d085
 
 COCOAPODS: 0.39.0

@@ -10,9 +10,7 @@ import UIKit
 
 class ProfileAddressCell: UITableViewCell
 {
-    @IBOutlet weak var zipLabel: UILabel!
-    @IBOutlet weak var stateLabel: UILabel!
-    @IBOutlet weak var cityLabel: UILabel!
+    @IBOutlet weak var cityStateZipLabel: UILabel!
     @IBOutlet weak var street2Label: UILabel!
     @IBOutlet weak var street1Label: UILabel!
     @IBOutlet weak var addressNameLabel: UILabel!
@@ -30,17 +28,13 @@ class ProfileAddressCell: UITableViewCell
         {
             self.street1Label.text = "Street"
             self.street2Label.text = "Street"
-            self.cityLabel.text = "City"
-            self.stateLabel.text = "State"
-            self.zipLabel.text = "Zip"
+            self.cityStateZipLabel.text = "City, State ZIP"
         }
         else
         {
             self.street1Label.text = address!.street1
             self.street2Label.text = address!.street2
-            self.cityLabel.text = address!.city
-            self.stateLabel.text = address!.state
-            self.zipLabel.text = address!.zip
+            self.cityStateZipLabel.text = "\(address!.city), \(address!.state) \(address!.zip)"
         }
     }
 
