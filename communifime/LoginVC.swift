@@ -42,6 +42,12 @@ class LoginVC: UIViewController
         {
              NSNotificationCenter.defaultCenter().removeObserver(Core.discoveryListObserver)
         }
+        
+        if(Core.communicationListObserver != nil)
+        {
+            NSNotificationCenter.defaultCenter().removeObserver(Core.communicationListObserver)
+        }
+
         //get the current user profile
         Core.currentUserProfile = UserProfile(authData: Core.fireBaseRef.authData)
         Core.addPermissionToCache()

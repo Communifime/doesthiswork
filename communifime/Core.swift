@@ -24,6 +24,7 @@ class Core: NSObject
     static var communityPermissionsCache = [CommunityPermissions]()
     static var imagesToDelete = [String]()
     static var discoveryListObserver : DiscoveryList!
+    static var communicationListObserver : CommunicationList!
     
     /*
      returns true if the logged in user has full view perms
@@ -74,6 +75,97 @@ class Core: NSObject
             }
         }
         return answer
+    }
+    
+    static func getCommunicationSettings(uid: String) -> String
+    {
+        var inMail = false
+        var email = false
+        var both = false
+        
+        for community in myCommunities
+        {
+            for perm in allPermissions
+            {
+                if(perm.communityKey == community.key && perm.uid == uid)
+                {
+                    if(perm.contact == "in-mail")
+                    {
+                        inMail = true
+                    }
+                    else if(perm.contact == "email")
+                    {
+                        email = true
+                    }
+                    else if(perm.contact == "both")
+                    {
+                        both = true
+                    }
+                }
+            }
+            
+            //check sub-communities
+            if(community.subCommunities.count > 0)
+            {
+                var comms = [false, false, false]
+                self.getSubCommunityCommunicationSettings(uid, subs: community.subCommunities, comms: &comms)
+                if(comms[0])
+                {
+                    inMail = true
+                }
+                else if(comms[1])
+                {
+                    email = true
+                }
+                else if(comms[2])
+                {
+                    both = true
+                }
+            }
+        }
+        if(both)
+        {
+            return "Both"
+        }
+        else if(email)
+        {
+            return "Email"
+        }
+        else
+        {
+            return "In-Mail"
+        }
+    }
+    
+    static func getSubCommunityCommunicationSettings(uid: String, subs: [Community], inout comms: [Bool])
+    {
+        for sub in subs
+        {
+            for perm in allPermissions
+            {
+                if(perm.communityKey == sub.key && perm.uid == uid)
+                {
+                    if(perm.contact == "in-mail")
+                    {
+                        comms[0] = true
+                    }
+                    else if(perm.contact == "email")
+                    {
+                        comms[1] = true
+                    }
+                    else if(perm.contact == "both")
+                    {
+                        comms[2] = true
+                    }
+
+                }
+            }
+            
+            if(sub.subCommunities.count > 0)
+            {
+                getSubCommunityCommunicationSettings(uid, subs: sub.subCommunities, comms: &comms)
+            }
+        }
     }
     
     static func getAllPerms()

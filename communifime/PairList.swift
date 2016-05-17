@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CGLMail
 
 class PairList: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
@@ -156,7 +157,7 @@ class PairList: UIViewController, UITableViewDataSource, UITableViewDelegate
         cell.detailTextLabel?.text = p.value
         cell.accessoryType = .DisclosureIndicator
         cell.editing = true
-        if(self.readOnly)
+        if(self.readOnly && varName != "emails")
         {
             cell.userInteractionEnabled = false
         }
@@ -165,12 +166,26 @@ class PairList: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("ManagePairVC") as! ManagePairVC
-        vc.parentPairList = self
-        vc.varName = self.varName
-        vc.editMode = true
-        vc.editPair = self.data[indexPath.row]
-        self.presentViewController(vc, animated: true, completion: nil)
+        if(self.readOnly && varName == "emails")
+        {
+            let commPerm = Core.getCommunicationSettings(self.parentVC.profile.uid)
+            if(commPerm == "Email" || commPerm == "Both")
+            {
+                let cell = tableView.cellForRowAtIndexPath(indexPath)
+                let vc = CGLMailHelper.mailViewControllerWithRecipients([(cell?.detailTextLabel?.text!)!], subject: "", message: "", isHTML: false, includeAppInfo: false, completion: nil)
+                self.presentViewController(vc, animated: true, completion: nil)
+            }
+        }
+        else
+        {
+            let vc = self.storyboard?.instantiateViewControllerWithIdentifier("ManagePairVC") as! ManagePairVC
+            vc.parentPairList = self
+            vc.varName = self.varName
+            vc.editMode = true
+            vc.editPair = self.data[indexPath.row]
+            self.presentViewController(vc, animated: true, completion: nil)
+
+        }
     }
 
     /*

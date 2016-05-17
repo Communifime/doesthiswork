@@ -11,6 +11,7 @@ import UIKit
 class ProfileVC: UIViewController
 {
     
+    @IBOutlet weak var sendInMailButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var profileSavedButton: UIButton!
     @IBOutlet weak var profileImageButton: UIButton!
@@ -22,8 +23,14 @@ class ProfileVC: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.sendInMailButton.hidden = true
         if(readOnly)
         {
+            let commPerms = Core.getCommunicationSettings(self.profile.uid)
+            if(commPerms == "In-Mail" || commPerms == "Both")
+            {
+                self.sendInMailButton.hidden = false
+            }
             self.saveButton.setTitle("done", forState: .Normal)
             self.saveButton.setTitle("done", forState: .Selected)
             self.saveButton.setTitle("done", forState: .Highlighted)
@@ -74,6 +81,11 @@ class ProfileVC: UIViewController
             self.profileList.readOnly = self.readOnly
             self.profileList.fullView = self.fullView
             self.profileList.profile = self.profile
+        }
+        else if(segue.identifier == "Send In-Mail")
+        {
+            let vc = segue.destinationViewController as! SendInMailVC
+            vc.profile = self.profile
         }
     }
     
