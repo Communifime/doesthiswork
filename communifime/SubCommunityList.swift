@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class SubCommunityList: UITableViewController
 {
@@ -29,9 +30,10 @@ class SubCommunityList: UITableViewController
         self.data.removeAll()
         
         //get the approved sub-communities
+        let uid = FIRAuth.auth()!.currentUser!.uid
         for c in self.community.subCommunities
         {
-            if(c.approved && (c.hasMember(Core.fireBaseRef.authData.uid) || c.admin == Core.fireBaseRef.authData.uid))
+            if(c.approved && (c.hasMember(uid) || c.admin == uid))
             {
                 self.data.append(c)
             }

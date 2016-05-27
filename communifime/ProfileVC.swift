@@ -85,7 +85,8 @@ class ProfileVC: UIViewController
         else if(segue.identifier == "Send In-Mail")
         {
             let vc = segue.destinationViewController as! SendInMailVC
-            vc.profile = self.profile
+            vc.toUID = self.profile.uid
+            vc.toName = "\(self.profile.firstName) \(self.profile.lastName)"
         }
     }
     

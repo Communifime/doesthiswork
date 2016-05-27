@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 class CommunitySettingsVC: UIViewController,UITextFieldDelegate
 {
@@ -39,7 +41,8 @@ class CommunitySettingsVC: UIViewController,UITextFieldDelegate
             self.contactSegments.selectedSegmentIndex = 2
         }
         
-        if(self.community.admin == Core.fireBaseRef.authData.uid)
+        let uid = FIRAuth.auth()!.currentUser!.uid
+        if(self.community.admin == uid)
         {
             self.adminButton.hidden = false
         }

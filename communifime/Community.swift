@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
 
 class Community: NSObject, ImageContainer
 {
@@ -22,7 +23,7 @@ class Community: NSObject, ImageContainer
     var approved = false
     var imageChanged = false
     var subCommunities = [Community]()
-    var ref = Core.fireBaseRef.childByAppendingPath("communities")
+    var ref = Core.fireBaseRef.child("communities")
     
     func addMember(uid: String, name : String)
     {
@@ -32,7 +33,7 @@ class Community: NSObject, ImageContainer
     func addAndStoreMember(uid: String , name : String)
     {
         self.addMember(uid, name: name)
-        let ref = self.ref.childByAppendingPath("members").childByAppendingPath(uid)
+        let ref = self.ref.child("members").child(uid)
         ref.setValue(["name" : name])
     }
     
@@ -90,7 +91,7 @@ class Community: NSObject, ImageContainer
             let c = Community()
             c.parentCommunity = self
             c.key = sub.key as! String
-            c.ref = self.ref.childByAppendingPath("sub_communities").childByAppendingPath(c.key)
+            c.ref = self.ref.child("sub_communities").child(c.key)
             let obj = sub.value as! NSDictionary
             c.name = obj["name"] as! String
             c.communityDescription = obj["description"] as! String
@@ -127,12 +128,13 @@ class Community: NSObject, ImageContainer
     
     func addSubCommunity(sub : Community, savedLabel: UILabel)
     {
-        let ref = self.ref.childByAppendingPath("sub_communities").childByAutoId()
+        let ref = self.ref.child("sub_communities").childByAutoId()
         sub.parentCommunity = self
         sub.key = ref.key
         ref.setValue(sub.getDictionary()){ (error, firebase) in
             let currPerm = Core.getPermissionFromCache(self)
-            let perm = CommunityPermissions(uid: Core.fireBaseRef.authData.uid)
+            let uid = FIRAuth.auth()!.currentUser!.uid
+            let perm = CommunityPermissions(uid: uid)
             perm.contact = currPerm!.contact
             perm.infoShare = currPerm!.infoShare
             perm.communityKey = sub.key
@@ -147,7 +149,7 @@ class Community: NSObject, ImageContainer
         dict["name"] = self.name
         dict["description"] = self.communityDescription
         dict["imageName"] = self.imageName
-        dict["admin"] = Core.fireBaseRef.authData.uid
+        dict["admin"] = FIRAuth.auth()?.currentUser?.uid
         dict["approved"] = self.approved
         var subComs = [String: [String: AnyObject]]()
         for sub in self.subCommunities

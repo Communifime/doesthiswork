@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 class ManageSubCommunityVC: UIViewController
 {
@@ -60,7 +62,7 @@ class ManageSubCommunityVC: UIViewController
             let newCom = Community()
             newCom.name = self.nameTF.text!
             newCom.communityDescription = self.descriptionTV.text
-            newCom.admin = Core.fireBaseRef.authData.uid
+            newCom.admin = FIRAuth.auth()?.currentUser?.uid
             newCom.imageName = self.community.imageName
             self.community.addSubCommunity(newCom, savedLabel: self.savedLabel)
             self.dismissViewControllerAnimated(true, completion: nil)

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>917602538793-dmo0b0pgceoh26cd6mk07bc8i8lgdkp3.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.917602538793-dmo0b0pgceoh26cd6mk07bc8i8lgdkp3</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDPwz5ubtswBz5svNi3SG7UMUeeP2Ws-yI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>917602538793</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.greenberg.communifime</string>
+	<key>PROJECT_ID</key>
+	<string>amber-fire-7588</string>
+	<key>STORAGE_BUCKET</key>
+	<string>amber-fire-7588.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:917602538793:ios:914495d984335fea</string>
+	<key>DATABASE_URL</key>
+	<string>https://amber-fire-7588.firebaseio.com</string>
+</dict>
+</plist>

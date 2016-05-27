@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseDatabase
+import FirebaseAuth
 
 class CommunityList: UITableViewController
 {
@@ -18,14 +19,14 @@ class CommunityList: UITableViewController
     {
         super.viewDidLoad()
         Core.allCommunities.removeAll()
-        let ref = Core.fireBaseRef.childByAppendingPath("communities")
-        ref.observeSingleEventOfType(.Value) { (snapshot: FDataSnapshot!) in
+        let ref = Core.fireBaseRef.child("communities")
+        ref.observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot!) in
             let temp = snapshot.value as! NSDictionary
             for datum in temp
             {
                 let aCommunity = Community()
                 aCommunity.key = datum.key as! String
-                aCommunity.ref = aCommunity.ref.childByAppendingPath(aCommunity.key)
+                aCommunity.ref = aCommunity.ref.child(aCommunity.key)
                 aCommunity.name = datum.value["name"] as! String
                 aCommunity.communityDescription = datum.value["description"] as! String
                 aCommunity.imageName = datum.value["imageName"] as! String
@@ -56,10 +57,11 @@ class CommunityList: UITableViewController
         data.removeAll()
         Core.myCommunities.removeAll()
         permissions.removeAll()
+        let uid = FIRAuth.auth()!.currentUser!.uid
         for c in Core.allCommunities
         {
-            if(c.hasMember(Core.fireBaseRef.authData.uid) ||
-                c.admin == Core.fireBaseRef.authData)
+            if(c.hasMember(uid) ||
+                c.admin == uid)
             {
                 self.data.append(c)
                 Core.myCommunities.append(c)

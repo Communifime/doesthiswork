@@ -7,15 +7,16 @@
 //
 
 import UIKit
-import Firebase
 import AWSS3
 import AWSCore
+import Firebase
+import FirebaseDatabase
+import FirebaseAuth
 
 class Core: NSObject
 {
     static var storyboard : UIStoryboard!
-    
-    static var fireBaseRef = Firebase(url: "https://amber-fire-7588.firebaseio.com/")
+    static var fireBaseRef = FIRDatabase.database().reference()
     static var allCommunities = [Community]()
     static var myCommunities = [Community]()
     static var allPermissions = [CommunityPermissions]()
@@ -24,7 +25,6 @@ class Core: NSObject
     static var communityPermissionsCache = [CommunityPermissions]()
     static var imagesToDelete = [String]()
     static var discoveryListObserver : DiscoveryList!
-    static var communicationListObserver : CommunicationList!
     
     /*
      returns true if the logged in user has full view perms
@@ -171,8 +171,9 @@ class Core: NSObject
     static func getAllPerms()
     {
         allPermissions.removeAll()
-        let ref = fireBaseRef.childByAppendingPath("community_permissions")
-        ref.observeSingleEventOfType(.Value) { (snapshot: FDataSnapshot!) in
+        let ref = fireBaseRef.child("community_permissions")
+    
+        ref.observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot!) in
             
             for snap in snapshot.value as! NSDictionary
             {
@@ -195,9 +196,11 @@ class Core: NSObject
     static func getPermissionFromCache(community: Community) -> CommunityPermissions?
     {
         //check cache
+        let uid = FIRAuth.auth()?.currentUser?.uid
+        
         for perm in communityPermissionsCache
         {
-            if(perm.communityKey == community.key && perm.uid == Core.fireBaseRef.authData.uid)
+            if(perm.communityKey == community.key && perm.uid == uid)
             {
                 return perm
             }
@@ -208,14 +211,14 @@ class Core: NSObject
     static func addPermissionToCache()
     {
         //retrieve from firebase
-        let ref = fireBaseRef.childByAppendingPath("community_permissions").childByAppendingPath(fireBaseRef.authData.uid)
-        ref.observeSingleEventOfType(.Value) { (snapshot: FDataSnapshot!) in
+        let ref = fireBaseRef.child("community_permissions").child((FIRAuth.auth()?.currentUser!.uid)!)
+        ref.observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot!) in
             if(!(snapshot.value is NSNull))
             {
                 let data = snapshot.value as! NSDictionary
                 for datum in data
                 {
-                    let perm = CommunityPermissions(uid: Core.fireBaseRef.authData.uid)
+                    let perm = CommunityPermissions(uid: (FIRAuth.auth()?.currentUser!.uid)!)
                     perm.communityKey = datum.key as! String
                     perm.infoShare = datum.value["infoShare"]!
                     perm.contact = datum.value["contact"]!

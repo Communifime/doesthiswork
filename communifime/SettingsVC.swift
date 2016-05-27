@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 class SettingsVC: UIViewController {
 
@@ -22,7 +24,7 @@ class SettingsVC: UIViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        self.currentEmailLabel.text = Core.fireBaseRef.authData.providerData["email"]! as? String
+        self.currentEmailLabel.text = FIRAuth.auth()?.currentUser!.email!
         self.errorTextView.text = ""
 
         // Do any additional setup after loading the view.
@@ -30,7 +32,7 @@ class SettingsVC: UIViewController {
     
     @IBAction func logoutButtonPressed(sender: AnyObject)
     {
-        Core.fireBaseRef.unauth()
+        try! FIRAuth.auth()?.signOut()
         let loginViewController = self.storyboard!.instantiateViewControllerWithIdentifier("LoginVC")
         UIApplication.sharedApplication().keyWindow?.rootViewController = loginViewController
     }
@@ -107,47 +109,46 @@ class SettingsVC: UIViewController {
         {
             let alert = UIAlertController(title: "Confirm", message: "Are you sure you want to update your email?", preferredStyle: .Alert)
             let yesAction = UIAlertAction(title: "Yes", style: .Default, handler: { (action: UIAlertAction) in
-                let ref = Core.fireBaseRef
-                ref.changeEmailForUser(self.currentEmailLabel.text!, password: self.newEmailpasswordTF.text!,
-                    toNewEmail: self.newEmailTF.text!, withCompletionBlock: { error in
-                        if error != nil
-                        {
-                            self.errorTextView.text = error.localizedDescription
-                            self.errorTextView.textColor = UIColor.redColor()
-                        }
-                        else
-                        {
-                            //re-authenticate so the update email is available
-                            Core.fireBaseRef.authUser(self.newEmailTF.text!, password: self.newEmailpasswordTF.text, withCompletionBlock: { error, authData in
-                                if(error == nil)
-                                {
-                                    self.currentEmailLabel.text = self.newEmailTF.text!
-                                    self.newEmailTF.text = ""
-                                    self.confirmNewEmailTF.text = ""
-                                    self.newEmailpasswordTF.text = ""
-                                    let successAlert = UIAlertController(title: "Success", message: "Your email has been successfully updated", preferredStyle: .Alert)
-                                    let okAction = UIAlertAction(title: "Ok", style: .Default, handler: nil)
-                                    successAlert.addAction(okAction)
-                                    self.presentViewController(successAlert, animated: true, completion: nil)
-                                }
-                                else
-                                {
-                                    /*
-                                     should never happen if the previous worked, but just 
-                                     in case there is a network outage between the two 
-                                     calls this is to be safe.
-                                     */
-                                    let errorAlert = UIAlertController(title: "Failure", message: "Your email has been successfully updated, but re-authentication failed, please logout and log back in to finish the update.", preferredStyle: .Alert)
-                                    let okAction = UIAlertAction(title: "Ok", style: .Cancel, handler: { (action: UIAlertAction) in
-                                        Core.fireBaseRef.unauth()
-                                        self.dismissViewControllerAnimated(true, completion: nil)
-                                    })
-                                    errorAlert.addAction(okAction)
-                                    self.presentViewController(errorAlert, animated: true, completion: nil)
-                                }
-                            })
-                            
-                        }
+                let user = FIRAuth.auth()?.currentUser!
+                user?.updateEmail(self.newEmailTF.text!, completion: { (error: NSError?) in
+                    if error != nil
+                    {
+                        self.errorTextView.text = error!.localizedDescription
+                        self.errorTextView.textColor = UIColor.redColor()
+                    }
+                    else
+                    {
+                        //re-authenticate so the update email is available
+                        FIRAuth.auth()?.signInWithEmail(self.newEmailTF.text!, password: self.newEmailpasswordTF.text!, completion: { (user: FIRUser?, error: NSError?) in
+                            if(error == nil)
+                            {
+                                self.currentEmailLabel.text = self.newEmailTF.text!
+                                self.newEmailTF.text = ""
+                                self.confirmNewEmailTF.text = ""
+                                self.newEmailpasswordTF.text = ""
+                                let successAlert = UIAlertController(title: "Success", message: "Your email has been successfully updated", preferredStyle: .Alert)
+                                let okAction = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+                                successAlert.addAction(okAction)
+                                self.presentViewController(successAlert, animated: true, completion: nil)
+                            }
+                            else
+                            {
+                                /*
+                                 should never happen if the previous worked, but just
+                                 in case there is a network outage between the two
+                                 calls this is to be safe.
+                                 */
+                                let errorAlert = UIAlertController(title: "Failure", message: "Your email has been successfully updated, but re-authentication failed, please logout and log back in to finish the update.", preferredStyle: .Alert)
+                                let okAction = UIAlertAction(title: "Ok", style: .Cancel, handler: { (action: UIAlertAction) in
+                                    try! FIRAuth.auth()?.signOut()
+                                    self.dismissViewControllerAnimated(true, completion: nil)
+                                })
+                                errorAlert.addAction(okAction)
+                                self.presentViewController(errorAlert, animated: true, completion: nil)
+                            }
+                        })
+                    }
+
                 })
             })
             let noAction = UIAlertAction(title: "No", style: .Cancel, handler: nil)
@@ -163,11 +164,11 @@ class SettingsVC: UIViewController {
         {
             let alert = UIAlertController(title: "Confirm", message: "Are you sure you want to update your password?", preferredStyle: .Alert)
             let yesAction = UIAlertAction(title: "Yes", style: .Default, handler: { (action: UIAlertAction) in
-                let ref = Core.fireBaseRef
-                ref.changePasswordForUser(self.currentEmailLabel.text!, fromOld: self.newPasswordpasswordTF.text!, toNew: self.newPasswordTF.text!, withCompletionBlock: { (error:NSError!) in
+                let user = FIRAuth.auth()?.currentUser!
+                user?.updatePassword(self.newPasswordpasswordTF.text!, completion: { (error: NSError?) in
                     if error != nil
                     {
-                        self.errorTextView.text = error.localizedDescription
+                        self.errorTextView.text = error!.localizedDescription
                         self.errorTextView.textColor = UIColor.redColor()
                     }
                     else

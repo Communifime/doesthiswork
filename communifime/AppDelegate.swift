@@ -9,6 +9,7 @@
 import UIKit
 import AWSCore
 import AWSS3
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate
@@ -18,7 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
-    {        
+    {
+        //Firebase
+        FIRApp.configure()
+        
         //AWS Cognito Authentication Stuff
         let credentialsProvider = AWSCognitoCredentialsProvider(regionType:.USEast1,
                                                                 identityPoolId:"us-east-1:a61723a9-26b0-4360-a099-619ec7f28e53")

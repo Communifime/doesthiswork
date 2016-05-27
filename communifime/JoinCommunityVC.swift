@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
+import FirebaseAuth
 
 class JoinCommunityVC: UIViewController
 {
@@ -49,23 +51,23 @@ class JoinCommunityVC: UIViewController
     {
         if(self.validateForm())
         {
-            let ref = Core.fireBaseRef.childByAppendingPath("communities").childByAppendingPath(self.communityIDTF.text!)
-            ref.observeSingleEventOfType(.Value, withBlock: { (snapshot: FDataSnapshot!) in
+            let ref = Core.fireBaseRef.child("communities").child(self.communityIDTF.text!)
+            ref.observeSingleEventOfType(.Value, withBlock: { (snapshot: FIRDataSnapshot!) in
                 if(!(snapshot.value is NSNull))
                 {
-                    let password = snapshot.value["password"] as! String
+                    let password = snapshot.value!["password"] as! String
                     if(password == self.communityPasswordTF.text!)
                     {
                         self.errorTV.text = ""
                         self.errorTV.hidden = true
-                        
+                        let uid = FIRAuth.auth()!.currentUser!.uid
                         for c in Core.allCommunities
                         {
                             if(c.key == self.communityIDTF.text!)
                             {
-                                c.addAndStoreMember(Core.fireBaseRef.authData.uid, name: "\(Core.currentUserProfile.firstName) \(Core.currentUserProfile.lastName)")
+                                c.addAndStoreMember(uid, name: "\(Core.currentUserProfile.firstName) \(Core.currentUserProfile.lastName)")
                                 
-                                let perm = CommunityPermissions(uid: Core.fireBaseRef.authData.uid)
+                                let perm = CommunityPermissions(uid: uid)
                                 perm.communityKey = self.communityIDTF.text!
                                 perm.save(nil)
                                 Core.communityPermissionsCache.append(perm)

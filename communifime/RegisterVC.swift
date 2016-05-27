@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
 
 class RegisterVC: UIViewController
 {
@@ -80,31 +81,29 @@ class RegisterVC: UIViewController
     {
         if(self.validateForm())
         {
-            let ref = Core.fireBaseRef
-            ref.createUser(self.emailTF.text!, password: self.passwordTF.text!,
-                           withValueCompletionBlock: { error, result in
-                            if error != nil
-                            {
-                                // There was an error creating the account
-                                self.errorTextView.text = error.localizedDescription
-                                self.errorTextView.textColor = UIColor.redColor()
-                            }
-                            else
-                            {
-                                ref.authUser(self.emailTF.text!, password: self.passwordTF.text!, withCompletionBlock: { (error, authData) in
-                                    let profile = UserProfile(authData: ref.authData)
-                                    profile.firstName = self.firstNameTF.text!
-                                    profile.lastName = self.lastNameTF.text!
-                                    let p = Pair(name: "primary email", value: self.emailTF.text!)
-                                    profile.emails.append(p)
-                                    profile.save(nil, currProfileImage: nil)
-                                    Core.currentUserProfile = profile
-                                    Core.addPermissionToCache()
-                                    let vc = self.storyboard?.instantiateViewControllerWithIdentifier("TabBarController")
-                                    self.presentViewController(vc!, animated: true, completion: nil)
-                                })
-                                
-                            }
+            FIRAuth.auth()?.createUserWithEmail(self.emailTF.text!, password: self.passwordTF.text!, completion: { (user: FIRUser?, error: NSError?) in
+                if error != nil
+                {
+                    // There was an error creating the account
+                    self.errorTextView.text = error!.localizedDescription
+                    self.errorTextView.textColor = UIColor.redColor()
+                }
+                else
+                {
+                    FIRAuth.auth()?.signInWithEmail(self.emailTF.text!, password: self.passwordTF.text!, completion: { (user: FIRUser?, error: NSError?) in
+                        let profile = UserProfile(uid: (FIRAuth.auth()?.currentUser?.uid)!)
+                        profile.firstName = self.firstNameTF.text!
+                        profile.lastName = self.lastNameTF.text!
+                        let p = Pair(name: "primary email", value: self.emailTF.text!)
+                        profile.emails.append(p)
+                        profile.save(nil, currProfileImage: nil)
+                        Core.currentUserProfile = profile
+                        Core.addPermissionToCache()
+                        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("TabBarController")
+                        self.presentViewController(vc!, animated: true, completion: nil)
+                    })
+                }
+
             })
         }
     }

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 class LoginVC: UIViewController
 {
@@ -30,7 +32,7 @@ class LoginVC: UIViewController
 
     override func viewDidAppear(animated: Bool)
     {
-        if(Core.fireBaseRef.authData != nil)
+        if(FIRAuth.auth()?.currentUser != nil)
         {
             self.postLoginSetup()
         }
@@ -43,13 +45,9 @@ class LoginVC: UIViewController
              NSNotificationCenter.defaultCenter().removeObserver(Core.discoveryListObserver)
         }
         
-        if(Core.communicationListObserver != nil)
-        {
-            NSNotificationCenter.defaultCenter().removeObserver(Core.communicationListObserver)
-        }
-
         //get the current user profile
-        Core.currentUserProfile = UserProfile(authData: Core.fireBaseRef.authData)
+        let uid = FIRAuth.auth()!.currentUser!.uid
+        Core.currentUserProfile = UserProfile(uid: uid)
         Core.addPermissionToCache()
         Core.getAllPerms()
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("TabBarController")
@@ -103,19 +101,17 @@ class LoginVC: UIViewController
     {
         if(validateLoginForm())
         {
-            let ref = Core.fireBaseRef
-            ref.authUser(self.usernameTF.text!, password: self.passwordTF.text!,
-                         withCompletionBlock: { error, authData in
-                            if error != nil
-                            {
-                                self.errorTextView.text = error.localizedDescription
-                                self.errorTextView.textColor = UIColor.redColor()
-                            }
-                            else
-                            {
-                                // We are now logged in
-                                self.postLoginSetup()
-                            }
+            FIRAuth.auth()?.signInWithEmail(self.usernameTF.text!, password: self.passwordTF.text!, completion: { (user: FIRUser?, error: NSError?) in
+                if error != nil
+                {
+                    self.errorTextView.text = error!.localizedDescription
+                    self.errorTextView.textColor = UIColor.redColor()
+                }
+                else
+                {
+                    // We are now logged in
+                    self.postLoginSetup()
+                }
             })
         }
     }
@@ -124,11 +120,10 @@ class LoginVC: UIViewController
     {
         if(validateResetPasswordForm())
         {
-            let ref = Core.fireBaseRef
-            ref.resetPasswordForUser(self.resetPasswordEmailTF.text!, withCompletionBlock: { error in
+            FIRAuth.auth()?.sendPasswordResetWithEmail(self.resetPasswordEmailTF.text!, completion: { (error: NSError?) in
                 if error != nil
                 {
-                    self.errorTextView.text = error.localizedDescription
+                    self.errorTextView.text = error!.localizedDescription
                     self.errorTextView.textColor = UIColor.redColor()
                 }
                 else

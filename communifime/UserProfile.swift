@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import Firebase
 import AWSCore
+import FirebaseDatabase
 
 class UserProfile: NSObject, ImageContainer
 {
@@ -43,15 +43,8 @@ class UserProfile: NSObject, ImageContainer
     //Family
     var familyMembers = [FamilyMember]()
     
-    var ref : Firebase!
+    //var ref : FIRDatabaseReference!
 
-    init(authData : FAuthData)
-    {
-        super.init()
-        self.uid = authData.uid!
-        self.fillData(self.uid, notify: false)
-    }
-    
     init(uid : String)
     {
         super.init()
@@ -61,9 +54,9 @@ class UserProfile: NSObject, ImageContainer
     
     func fillData(uid: String, notify: Bool)
     {
-        self.ref = Core.fireBaseRef.childByAppendingPath("profile").childByAppendingPath(uid)
+        let ref = Core.fireBaseRef.child("profile").child(uid)
         //get current data
-        self.ref.observeSingleEventOfType(.Value) { (snapshot: FDataSnapshot!) in
+        ref.observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot!) in
             if(!(snapshot.value is NSNull))
             {
                 let data = snapshot.value as! NSDictionary
@@ -217,10 +210,15 @@ class UserProfile: NSObject, ImageContainer
             profile["Image Name"] = self.imageName
             Core.storeImage(currProfileImage!, fileName: self.imageName, isProfile: true)
         }
+        else
+        {
+            profile["Image Name"] = ""
+        }
         //delete the images staged for deletion
         Core.deleteImageList()
         
-        self.ref.setValue(profile) { (error, firebase) in
+        let ref = Core.fireBaseRef.child("profile").child(uid)
+        ref.setValue(profile) { (error, firebase) in
             if(saveSuccessButton != nil)
             {
                 UIView.animateWithDuration(0.5, animations: {

@@ -7,14 +7,13 @@
 //
 
 import UIKit
-import Firebase
 
 class CommunityPermissions: NSObject
 {
     var communityKey : String!
     var infoShare : String! = "partial"
     var contact : String! = "in-mail"
-    var ref = Core.fireBaseRef.childByAppendingPath("community_permissions")
+    var ref = Core.fireBaseRef.child("community_permissions")
     var uid : String
     
     init(uid: String)
@@ -24,7 +23,7 @@ class CommunityPermissions: NSObject
     
     func save(saveSuccessButton : UILabel?)
     {
-        let ref = self.ref.childByAppendingPath(self.uid).childByAppendingPath(self.communityKey)
+        let ref = self.ref.child(self.uid).child(self.communityKey)
         var dict = [String: AnyObject]()
         dict["infoShare"] = self.infoShare
         dict["contact"] = self.contact

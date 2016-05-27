@@ -7,36 +7,22 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 class CommunicationList: UITableViewController
 {
-    var data = [Community : [UserProfile]]()
-    
+    var data = [String : [String: String]]()
+    var keys = [String]()
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        self.data.removeAll()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(profileUpdatedNotification), name: "Profile Data Loaded", object: nil)
-        //Let core know about me so I can be removed as an observer upon login
-        Core.communicationListObserver = self
-        
-        for community in Core.myCommunities
-        {
-            data[community] = [UserProfile]()
-            for member in community.members
-            {
-                if(member.0 == Core.fireBaseRef.authData.uid)
-                {
-                    continue
-                }
-                data[community]!.append(UserProfile(uid: member.0))
-            }
+        let ref = Core.fireBaseRef.child("inMail").child(Core.currentUserProfile.uid).child("inbox")
+        ref.observeEventType(.ChildAdded) { (snapshot: FIRDataSnapshot!) in
+            self.data[snapshot.key] = snapshot.value as? [String:String]
+            self.keys.append(snapshot.key)
+            self.tableView.reloadData()
         }
-    }
-    
-    func profileUpdatedNotification()
-    {
-        self.tableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -45,20 +31,14 @@ class CommunicationList: UITableViewController
     }
     
     // MARK: - Table view data source
-    
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String?
-    {
-        return Core.myCommunities[section].name
-    }
-    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return Core.myCommunities.count
+        return 1
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return self.data[Core.myCommunities[section]]!.count
+        return self.keys.count
     }
     
     
@@ -66,18 +46,21 @@ class CommunicationList: UITableViewController
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
         
-        // Configure the cell...
-        let community = Core.myCommunities[indexPath.section]
-        let profile = self.data[community]![indexPath.row]
-        cell.textLabel?.text = "\(profile.firstName) \(profile.lastName)"
-        cell.accessoryType = .DisclosureIndicator
-        cell.detailTextLabel?.text = Core.getCommunicationSettings(profile.uid)
+        let message = self.data[self.keys[indexPath.row]]!
+        cell.textLabel?.text = message["subject"]!
+        cell.detailTextLabel?.text = "from: \(message["fromName"]!)"
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
-        
+        let message = self.data[self.keys[indexPath.row]]!
+        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("SendInMailVC") as! SendInMailVC
+        vc.toName = "\(Core.currentUserProfile.firstName) \(Core.currentUserProfile.lastName)"
+        vc.fromUID = message["fromUID"]!
+        vc.readOnlyMode = true
+        vc.currMessage = message
+        self.presentViewController(vc, animated: true, completion: nil)
     }
     
     /*

@@ -1,11 +1,14 @@
 # Uncomment this line to define a global platform for your project
-# platform :ios, '8.0'
-# Uncomment this line if you're using Swift
-use_frameworks!
+platform :ios, '9.0'
 
 target 'communifime' do
-pod 'Firebase', '>= 2.5.1'
-pod 'AWSS3'
-pod 'CGLMail'
-end
+  # Comment this line if you're not using Swift and don't want to use dynamic frameworks
+use_frameworks!
 
+  # Pods for communifime
+pod 'Firebase'
+pod 'Firebase/Database'
+pod 'Firebase/Auth'
+pod 'CGLMail'
+pod 'AWSS3'
+end
