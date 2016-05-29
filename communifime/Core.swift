@@ -174,21 +174,23 @@ class Core: NSObject
         let ref = fireBaseRef.child("community_permissions")
     
         ref.observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot!) in
-            
-            for snap in snapshot.value as! NSDictionary
+            if(!(snapshot.value is NSNull))
             {
-                let uid = snap.key as! String
-                let perms = snap.value as! NSDictionary
-                for perm in perms
+                for snap in snapshot.value as! NSDictionary
                 {
-                    let communityKey = perm.key as! String
-                    let newPermission = CommunityPermissions(uid: uid)
-                    let parts = perm.value as! NSDictionary
-                    
-                    newPermission.communityKey = communityKey
-                    newPermission.contact = parts["contact"] as! String
-                    newPermission.infoShare = parts["infoShare"] as! String
-                    allPermissions.append(newPermission)
+                    let uid = snap.key as! String
+                    let perms = snap.value as! NSDictionary
+                    for perm in perms
+                    {
+                        let communityKey = perm.key as! String
+                        let newPermission = CommunityPermissions(uid: uid)
+                        let parts = perm.value as! NSDictionary
+                        
+                        newPermission.communityKey = communityKey
+                        newPermission.contact = parts["contact"] as! String
+                        newPermission.infoShare = parts["infoShare"] as! String
+                        allPermissions.append(newPermission)
+                    }
                 }
             }
         }

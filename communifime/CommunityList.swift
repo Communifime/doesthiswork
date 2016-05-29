@@ -21,33 +21,36 @@ class CommunityList: UITableViewController
         Core.allCommunities.removeAll()
         let ref = Core.fireBaseRef.child("communities")
         ref.observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot!) in
-            let temp = snapshot.value as! NSDictionary
-            for datum in temp
+            if(!(snapshot.value is NSNull))
             {
-                let aCommunity = Community()
-                aCommunity.key = datum.key as! String
-                aCommunity.ref = aCommunity.ref.child(aCommunity.key)
-                aCommunity.name = datum.value["name"] as! String
-                aCommunity.communityDescription = datum.value["description"] as! String
-                aCommunity.imageName = datum.value["imageName"] as! String
-                aCommunity.admin = datum.value["admin"] as! String
-                if((datum.value as! NSDictionary)["members"] != nil)
+                let temp = snapshot.value as! NSDictionary
+                for datum in temp
                 {
-                    let members = (datum.value as! NSDictionary)["members"] as! NSDictionary
-                    
-                    for member in members
+                    let aCommunity = Community()
+                    aCommunity.key = datum.key as! String
+                    aCommunity.ref = aCommunity.ref.child(aCommunity.key)
+                    aCommunity.name = datum.value["name"] as! String
+                    aCommunity.communityDescription = datum.value["description"] as! String
+                    aCommunity.imageName = datum.value["imageName"] as! String
+                    aCommunity.admin = datum.value["admin"] as! String
+                    if((datum.value as! NSDictionary)["members"] != nil)
                     {
-                        aCommunity.addMember(member.key as! String, name: (member.value as! NSDictionary)["name"] as! String)
+                        let members = (datum.value as! NSDictionary)["members"] as! NSDictionary
+                        
+                        for member in members
+                        {
+                            aCommunity.addMember(member.key as! String, name: (member.value as! NSDictionary)["name"] as! String)
+                        }
                     }
+                    
+                    if((datum.value as! NSDictionary)["sub_communities"] != nil)
+                    {
+                        let subs = datum.value["sub_communities"] as! NSDictionary
+                        aCommunity.loadSubCommunities(subs)
+                    }
+                    Core.allCommunities.append(aCommunity)
+                    
                 }
-                
-                if((datum.value as! NSDictionary)["sub_communities"] != nil)
-                {
-                    let subs = datum.value["sub_communities"] as! NSDictionary
-                    aCommunity.loadSubCommunities(subs)
-                }
-                Core.allCommunities.append(aCommunity)
-                
             }
         }
     }
@@ -96,7 +99,7 @@ class CommunityList: UITableViewController
         // Configure the cell...
         let community = self.data[indexPath.row]
         cell.textLabel?.text = community.name
-        cell.detailTextLabel?.text = "admin - \(community.admin)"
+        //cell.detailTextLabel?.text = "admin - \(community.admin)"
         return cell
     }
     

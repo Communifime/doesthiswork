@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import FirebaseDatabase
 
 class LoginVC: UIViewController
 {
@@ -47,6 +48,7 @@ class LoginVC: UIViewController
         
         //get the current user profile
         let uid = FIRAuth.auth()!.currentUser!.uid
+        
         Core.currentUserProfile = UserProfile(uid: uid)
         Core.addPermissionToCache()
         Core.getAllPerms()
@@ -137,7 +139,11 @@ class LoginVC: UIViewController
                             self.resetPasswordStackView.hidden = true
                     })
                     alert.addAction(okAction)
-                    self.presentViewController(alert, animated: true, completion: nil)
+                    dispatch_async(dispatch_get_main_queue())
+                    {
+                        self.presentViewController(alert, animated: true, completion: nil)
+                    }
+                    
                 }
             })
         }

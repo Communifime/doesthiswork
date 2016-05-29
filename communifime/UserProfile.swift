@@ -23,11 +23,11 @@ class UserProfile: NSObject, ImageContainer
     var facebook : String = ""
     var twitter : String = ""
     var linkedIn : String = ""
-    var gender : String = ""
+    var gender : String = "male"
     var birthDate : NSDate = NSDate()
-    var hairColor : String = ""
-    var hairLength : String = ""
-    var eyeColor : String = ""
+    var hairColor : String = "blonde"
+    var hairLength : String = "bald"
+    var eyeColor : String = "blue"
     var emails = [Pair]()
     var phoneNumbers = [Pair]()
     
@@ -197,22 +197,23 @@ class UserProfile: NSObject, ImageContainer
         profile["Colleges"] = Core.pairArrayToDictionary(self.colleges)
         profile["Family Members"] = self.getFamilyMembersDictionary()
         
-        if(self.imageName == "")
-        {
-            //generate a hash name for the image
-            let date = NSDate()
-            let hashableString = NSString(format: "%f", date.timeIntervalSinceReferenceDate)
-            let hashString = hashableString.aws_md5String() + ".png"
-            self.imageName = hashString
-        }
         if(currProfileImage != nil && self.image != currProfileImage)
         {
+            if(self.imageName == "")
+            {
+                //generate a hash name for the image
+                let date = NSDate()
+                let hashableString = NSString(format: "%f", date.timeIntervalSinceReferenceDate)
+                let hashString = hashableString.aws_md5String() + ".png"
+                self.imageName = hashString
+            }
+
             profile["Image Name"] = self.imageName
             Core.storeImage(currProfileImage!, fileName: self.imageName, isProfile: true)
         }
         else
         {
-            profile["Image Name"] = ""
+            profile["Image Name"] = self.imageName
         }
         //delete the images staged for deletion
         Core.deleteImageList()
