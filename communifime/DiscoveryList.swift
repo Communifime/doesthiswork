@@ -191,13 +191,18 @@ class DiscoveryList: UITableViewController
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! DiscoveryListCell
 
         // Configure the cell...
         let community = Core.myCommunities[indexPath.section]
         let profile = self.filtered_data[community]![indexPath.row]
-        cell.textLabel?.text = "\(profile.firstName) \(profile.lastName)"
+        cell.name.text = "\(profile.firstName) \(profile.lastName)"
         cell.accessoryType = .DisclosureIndicator
+        
+        if(profile.imageName != "")
+        {
+            Core.getImage(cell.profileImageView, imageName: profile.imageName, isProfile: true)
+        }
         return cell
     }
     

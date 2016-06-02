@@ -51,6 +51,7 @@
 		6859CF451CCDA89F00208C90 /* ImageContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6859CF441CCDA89F00208C90 /* ImageContainer.swift */; };
 		6859CF471CCDB7C000208C90 /* loadingImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 6859CF461CCDB7C000208C90 /* loadingImage.png */; };
 		686415771CD6FD1F00B265A7 /* CommunityMainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686415761CD6FD1F00B265A7 /* CommunityMainVC.swift */; };
+		689302FC1D00E826002F480B /* DiscoveryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689302FB1D00E826002F480B /* DiscoveryListCell.swift */; };
 		68ADFEE11CDAE21400B2671E /* SubCommunityManageMembersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68ADFEE01CDAE21400B2671E /* SubCommunityManageMembersVC.swift */; };
 		68ADFEE31CDAE22D00B2671E /* SubCommunityManageMembersList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68ADFEE21CDAE22D00B2671E /* SubCommunityManageMembersList.swift */; };
 		68ADFEE71CDAEB4900B2671E /* searchIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 68ADFEE61CDAEB4900B2671E /* searchIcon.png */; };
@@ -126,6 +127,7 @@
 		6859CF441CCDA89F00208C90 /* ImageContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageContainer.swift; sourceTree = "<group>"; };
 		6859CF461CCDB7C000208C90 /* loadingImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loadingImage.png; sourceTree = "<group>"; };
 		686415761CD6FD1F00B265A7 /* CommunityMainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityMainVC.swift; sourceTree = "<group>"; };
+		689302FB1D00E826002F480B /* DiscoveryListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryListCell.swift; sourceTree = "<group>"; };
 		68ADFEE01CDAE21400B2671E /* SubCommunityManageMembersVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubCommunityManageMembersVC.swift; sourceTree = "<group>"; };
 		68ADFEE21CDAE22D00B2671E /* SubCommunityManageMembersList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubCommunityManageMembersList.swift; sourceTree = "<group>"; };
 		68ADFEE61CDAEB4900B2671E /* searchIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchIcon.png; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 				68ADFEEB1CDBEDB200B2671E /* DiscoveryFilterVC.swift */,
 				68ADFEED1CDBF31900B2671E /* DiscoveryVC.swift */,
 				68ADFEEF1CDBF33200B2671E /* DiscoveryList.swift */,
+				689302FB1D00E826002F480B /* DiscoveryListCell.swift */,
 			);
 			name = "Discovery Center";
 			sourceTree = "<group>";
@@ -551,6 +554,7 @@
 				B818DF761CAEBCCC00B22D10 /* ProfileVC.swift in Sources */,
 				68ADFEF21CDBFAFF00B2671E /* ProfileSegmentCell.swift in Sources */,
 				6824FECB1CBAE9D800C33B9D /* FamilyMember.swift in Sources */,
+				689302FC1D00E826002F480B /* DiscoveryListCell.swift in Sources */,
 				68FDF1741CA749D70037B878 /* UIViewController+Extras.swift in Sources */,
 				682733D01CB9945000DBD95B /* ProfileAddressCell.swift in Sources */,
 				68ADFEE11CDAE21400B2671E /* SubCommunityManageMembersVC.swift in Sources */,

@@ -25,6 +25,7 @@ class Core: NSObject
     static var communityPermissionsCache = [CommunityPermissions]()
     static var imagesToDelete = [String]()
     static var discoveryListObserver : DiscoveryList!
+    static var imageCache = [String: UIImage]()
     
     /*
      returns true if the logged in user has full view perms
@@ -291,6 +292,10 @@ class Core: NSObject
             folderName = "profile_pics/"
         }
         let compressedImage = self.resizeImage(image, newWidth: CGFloat(maxWidth))
+        
+        //save to local cache
+        imageCache[hashString!] = compressedImage
+        
         let path:NSString = NSTemporaryDirectory().stringByAppendingString(hashString!)
         let imageData = UIImagePNGRepresentation(compressedImage)
         imageData!.writeToFile(path as String, atomically: true)
@@ -334,6 +339,16 @@ class Core: NSObject
     
     static func getImage(button: UIButton, imageContainer: ImageContainer, isProfile: Bool)
     {
+        //check local cache
+        if(imageCache[imageContainer.imageName] != nil)
+        {
+            let image = imageCache[imageContainer.imageName]!
+            button.setBackgroundImage(image, forState: .Normal)
+            button.setBackgroundImage(image, forState: .Highlighted)
+            button.setBackgroundImage(image, forState: .Selected)
+            return
+        }
+        
         let imagePath = NSBundle.mainBundle().pathForResource("loadingImage", ofType: "png")
         let loadingImage = UIImage(contentsOfFile: imagePath!)
         button.setBackgroundImage(loadingImage, forState: .Normal)
@@ -375,6 +390,47 @@ class Core: NSObject
         }
     }
     
+    static func getImage(iv: UIImageView, imageName: String, isProfile: Bool)
+    {
+        //check local cache
+        if(imageCache[imageName] != nil)
+        {
+            let image = imageCache[imageName]!
+            iv.image = image
+            return
+        }
+
+        let imagePath = NSBundle.mainBundle().pathForResource("loadingImage", ofType: "png")
+        let loadingImage = UIImage(contentsOfFile: imagePath!)
+        iv.image = loadingImage
+        
+        // Construct the NSURL for the download location.
+        let downloadingFilePath = NSTemporaryDirectory().stringByAppendingString(imageName)
+        
+        let downloadingFileURL = NSURL.fileURLWithPath(downloadingFilePath)
+        
+        // Construct the download request.
+        let downloadRequest = AWSS3TransferManagerDownloadRequest.init()
+        var folderName = "logo_pics/"
+        if(isProfile)
+        {
+            folderName = "profile_pics/"
+        }
+        
+        downloadRequest.bucket = "communifi";
+        downloadRequest.key = "\(folderName)\(imageName)";
+        downloadRequest.downloadingFileURL = downloadingFileURL;
+        
+        let transferManager = AWSS3TransferManager.defaultS3TransferManager()
+        transferManager.download(downloadRequest).continueWithSuccessBlock { (task) -> AnyObject? in
+            dispatch_async(dispatch_get_main_queue(), {
+                let image = UIImage(contentsOfFile: downloadingFilePath)
+                iv.image = image!
+            })
+            return nil
+        }
+    }
+
     static func isValidEmail(testStr:String) -> Bool
     {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
