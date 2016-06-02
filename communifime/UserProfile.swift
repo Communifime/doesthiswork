@@ -75,7 +75,7 @@ class UserProfile: NSObject, ImageContainer
                 self.twitter = data["Twitter"] as! String
                 self.imageName = data["Image Name"] as! String
                 self.birthDate = NSDate.aws_dateFromString(data["Birth Date"] as! String)
-                let homeAddress = data["Home Address"] as! NSDictionary
+                let homeAddress = data["Home Address"] as!  NSDictionary
                 self.homeAddress.street1 = homeAddress["street1"] as! String
                 self.homeAddress.street2 = homeAddress["street2"] as! String
                 self.homeAddress.city = homeAddress["city"] as! String

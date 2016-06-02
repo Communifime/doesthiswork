@@ -3064,7 +3064,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Usm-7P-X2c">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Usm-7P-X2c">
                                 <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                                 <items>
                                     <navigationItem title="Join Community" id="aVu-gE-B4s">
@@ -3081,17 +3081,17 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Community ID" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xca-iN-t3w">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Community ID" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xca-iN-t3w">
                                 <rect key="frame" x="89" y="81" width="250" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Community Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hyC-3T-khE">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Community Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hyC-3T-khE">
                                 <rect key="frame" x="89" y="119" width="250" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
                             </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" editable="NO" text="error" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XzU-lY-hDT">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="error" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XzU-lY-hDT">
                                 <rect key="frame" x="89" y="157" width="250" height="85"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -3103,6 +3103,20 @@
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Xca-iN-t3w" firstAttribute="leading" secondItem="hyC-3T-khE" secondAttribute="leading" id="61D-vQ-CL9"/>
+                            <constraint firstItem="Usm-7P-X2c" firstAttribute="top" secondItem="oj2-V8-qD6" secondAttribute="bottom" id="6Bo-zP-xRf"/>
+                            <constraint firstItem="XzU-lY-hDT" firstAttribute="top" secondItem="hyC-3T-khE" secondAttribute="bottom" constant="8" symbolic="YES" id="82E-9P-g8h"/>
+                            <constraint firstAttribute="trailing" secondItem="Usm-7P-X2c" secondAttribute="trailing" id="9uN-Ck-0CS"/>
+                            <constraint firstItem="Xca-iN-t3w" firstAttribute="leading" secondItem="MAG-nw-s6C" secondAttribute="leadingMargin" constant="69" id="9w5-3f-I2j"/>
+                            <constraint firstItem="hyC-3T-khE" firstAttribute="top" secondItem="Xca-iN-t3w" secondAttribute="bottom" constant="8" symbolic="YES" id="WtY-Rc-jyo"/>
+                            <constraint firstItem="Xca-iN-t3w" firstAttribute="top" secondItem="Usm-7P-X2c" secondAttribute="bottom" constant="17" id="X62-vn-XmI"/>
+                            <constraint firstItem="hyC-3T-khE" firstAttribute="trailing" secondItem="XzU-lY-hDT" secondAttribute="trailing" id="c2m-6E-DUS"/>
+                            <constraint firstItem="Usm-7P-X2c" firstAttribute="leading" secondItem="MAG-nw-s6C" secondAttribute="leading" id="dsn-cq-IkV"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Xca-iN-t3w" secondAttribute="trailing" constant="55" id="iqR-hd-3K2"/>
+                            <constraint firstItem="hyC-3T-khE" firstAttribute="leading" secondItem="XzU-lY-hDT" secondAttribute="leading" id="szc-5A-Jql"/>
+                            <constraint firstItem="Xca-iN-t3w" firstAttribute="trailing" secondItem="hyC-3T-khE" secondAttribute="trailing" id="zjx-cK-eWz"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
