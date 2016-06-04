@@ -18,6 +18,12 @@ class DiscoveryVC: UIViewController
         // Do any additional setup after loading the view.
     }
 
+    @IBAction func resetFilterButtonPressed(sender: AnyObject)
+    {
+        self.discoveryList.currentFilter.removeAll()
+        self.discoveryList.applyFilter(self.discoveryList.currentFilter)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

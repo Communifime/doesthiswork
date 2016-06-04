@@ -41,7 +41,8 @@ class DiscoveryFilterVC: UIViewController
         super.viewDidLoad()
         self.filter = self.discoveryList.currentFilter
         self.fillForm()
-        scrollView.contentSize = CGSize(width: scrollView.frame.size.width, height: 2500)
+        scrollView.contentSize = CGSize(width: hairColorSegments.frame.size.width, height: 2500)
+        
         // Do any additional setup after loading the view.
     }
 

@@ -114,6 +114,12 @@ class DiscoveryList: UITableViewController
                         self.filtered_data[entry.0]?.removeAtIndex(pos!)
                         break
                     }
+                    else if(pair.0 == "Hair Color" && profile.hairColor != pair.1)
+                    {
+                        let pos = self.filtered_data[entry.0]?.indexOf(profile)
+                        self.filtered_data[entry.0]?.removeAtIndex(pos!)
+                        break
+                    }
                     else if(pair.0 == "Eye Color" && profile.eyeColor != pair.1)
                     {
                         let pos = self.filtered_data[entry.0]?.indexOf(profile)
