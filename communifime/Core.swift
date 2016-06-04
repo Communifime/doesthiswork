@@ -26,7 +26,29 @@ class Core: NSObject
     static var imagesToDelete = [String]()
     static var discoveryListObserver : DiscoveryList!
     static var imageCache = [String: UIImage]()
+    static var appAdmin = false
     
+    static func setAppAdmin()
+    {
+        let ref = fireBaseRef.child("admins")
+        let uid = FIRAuth.auth()?.currentUser?.uid
+        ref.observeSingleEventOfType(.Value) { (snapshot:FIRDataSnapshot) in
+            if(!(snapshot.value is NSNull))
+            {
+                print(snapshot.value)
+                let objects = snapshot.value as! NSArray
+                for obj in objects
+                {
+                    if(obj as! String == uid!)
+                    {
+                        appAdmin = true
+                        return
+                    }
+                }
+                appAdmin = false
+            }
+        }
+    }
     /*
      returns true if the logged in user has full view perms
      for the uid that was passed in based on comparing all

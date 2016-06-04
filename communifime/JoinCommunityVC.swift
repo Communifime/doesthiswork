@@ -16,12 +16,22 @@ class JoinCommunityVC: UIViewController
     @IBOutlet weak var communityPasswordTF: UITextField!
     @IBOutlet weak var communityIDTF: UITextField!
     @IBOutlet weak var errorTV: UITextView!
+    @IBOutlet weak var newCommunityView: UIView!
+    
     var communityList : CommunityList!
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         self.errorTV.hidden = true
+        if(Core.appAdmin)
+        {
+            newCommunityView.hidden = false
+        }
+        else
+        {
+            newCommunityView.hidden = true
+        }
     }
     
     func validateForm() -> Bool

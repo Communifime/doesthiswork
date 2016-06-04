@@ -48,7 +48,7 @@ class LoginVC: UIViewController
         
         //get the current user profile
         let uid = FIRAuth.auth()!.currentUser!.uid
-        
+        Core.setAppAdmin()
         Core.currentUserProfile = UserProfile(uid: uid)
         Core.addPermissionToCache()
         Core.getAllPerms()
