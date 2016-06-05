@@ -27,6 +27,8 @@ class Core: NSObject
     static var discoveryListObserver : DiscoveryList!
     static var imageCache = [String: UIImage]()
     static var appAdmin = false
+    static var adminCommunityList : AdminCommunityList!
+    static var communityList : CommunityList!
     
     static func setAppAdmin()
     {

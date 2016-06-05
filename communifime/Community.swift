@@ -76,7 +76,6 @@ class Community: NSObject, ImageContainer
     
     func loadMembers(members: NSDictionary)
     {
-        print(members)
         for member in members
         {
             let value = member.value as! NSDictionary
@@ -151,6 +150,13 @@ class Community: NSObject, ImageContainer
         dict["imageName"] = self.imageName
         dict["admin"] = FIRAuth.auth()?.currentUser?.uid
         dict["approved"] = self.approved
+        var members = [String : [String: String]]()
+        for member in self.members
+        {
+            members[member.0] = ["name":member.1]
+        }
+        dict["members"] = members
+        
         var subComs = [String: [String: AnyObject]]()
         for sub in self.subCommunities
         {

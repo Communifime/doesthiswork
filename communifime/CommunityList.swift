@@ -18,6 +18,12 @@ class CommunityList: UITableViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        Core.communityList = self
+        self.getCommunities()
+    }
+    
+    func getCommunities()
+    {
         Core.allCommunities.removeAll()
         let ref = Core.fireBaseRef.child("communities")
         ref.observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot!) in
@@ -54,7 +60,7 @@ class CommunityList: UITableViewController
             }
         }
     }
-
+    
     func updateList()
     {
         data.removeAll()

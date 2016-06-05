@@ -19,6 +19,7 @@ class AdminCommunityList: UITableViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        Core.adminCommunityList = self
         self.loadTableData()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

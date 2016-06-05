@@ -52,6 +52,50 @@ class AdminManageCommunityVC: UIViewController
                 self.communityList.loadTableData()
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
+            else
+            {
+                //this is a new community, make sure they selected an admin
+                if(self.adminList.selectedIndex == -1)
+                {
+                    let alert = UIAlertController(title: "Error", message: "You must select an admin for the community", preferredStyle: .Alert)
+                    let okAction = UIAlertAction(title: "Ok", style: .Default, handler: { (action: UIAlertAction) in
+                        
+                    })
+                    alert.addAction(okAction)
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
+                else
+                {
+                    var community = [String: AnyObject]()
+                    community["admin"] = self.adminList.uids[self.adminList.selectedIndex]
+                    community["approved"] = false
+                    community["description"] = ""
+                    community["imageName"] = ""
+                    let obj = self.adminList.data[self.adminList.selectedIndex]
+                    let name = "\(obj["First Name"]!) \(obj["Last Name"]!)"
+                    let admin = community["admin"] as! String
+                    let members = [admin : ["name" : name]]
+                    community["members"] = members
+                    community["name"] = self.communityName.text!
+                    let date = NSDate()
+                    let hashableString = NSString(format: "%f", date.timeIntervalSinceReferenceDate)
+                    let hashString = hashableString.aws_md5String()
+                    community["password"] = hashString
+                    let ref = Core.fireBaseRef.child("communities").childByAutoId()
+                    ref.setValue(community)
+                    
+                    let permRef = Core.fireBaseRef.child("community_permissions").child(admin).child(ref.key)
+                    let perms = ["contact":"in-mail","infoShare":"partial"]
+                    permRef.setValue(perms)
+                    Core.addPermissionToCache()
+                    Core.getAllPerms()
+
+                    Core.adminCommunityList.loadTableData()
+                    Core.communityList.getCommunities()
+                    Core.communityList.updateList()
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                }
+            }
         }
     }
     
