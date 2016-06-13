@@ -32,23 +32,25 @@ class Core: NSObject
     
     static func setAppAdmin()
     {
+        //Step 1 of login process
         let ref = fireBaseRef.child("admins")
-        let uid = FIRAuth.auth()?.currentUser?.uid
+        let uid = FIRAuth.auth()!.currentUser!.uid
         ref.observeSingleEventOfType(.Value) { (snapshot:FIRDataSnapshot) in
             if(!(snapshot.value is NSNull))
             {
-                print(snapshot.value)
                 let objects = snapshot.value as! NSArray
                 for obj in objects
                 {
-                    if(obj as! String == uid!)
+                    if(obj as! String == uid)
                     {
                         appAdmin = true
+                         NSNotificationCenter.defaultCenter().postNotificationName("LoginStepComplete", object: nil)   
                         return
                     }
                 }
                 appAdmin = false
             }
+            NSNotificationCenter.defaultCenter().postNotificationName("LoginStepComplete", object: nil)      
         }
     }
     /*
@@ -218,8 +220,10 @@ class Core: NSObject
                     }
                 }
             }
+            NSNotificationCenter.defaultCenter().postNotificationName("LoginStepComplete", object: nil)
         }
     }
+    
     static func getPermissionFromCache(community: Community) -> CommunityPermissions?
     {
         //check cache
@@ -252,6 +256,7 @@ class Core: NSObject
                     communityPermissionsCache.append(perm)
                 }
             }
+            NSNotificationCenter.defaultCenter().postNotificationName("LoginStepComplete", object: nil)
         }
     }
     

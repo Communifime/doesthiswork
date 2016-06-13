@@ -13,17 +13,18 @@ import FirebaseDatabase
 
 class LoginVC: UIViewController
 {
-
+    @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var resetPasswordEmailTF: UITextField!
     @IBOutlet weak var usernameTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
     @IBOutlet weak var errorTextView: UITextView!
     @IBOutlet weak var resetPasswordStackView: UIStackView!
+    var semaphore = 0
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
+        self.loadingView.hidden = true
         //make the storyboard available everywhere
         Core.storyboard = self.storyboard
         
@@ -39,8 +40,23 @@ class LoginVC: UIViewController
         }
     }
     
+    func loginStepComplete()
+    {
+        self.semaphore -= 1
+        if(self.semaphore == 0)
+        {
+            NSNotificationCenter.defaultCenter().removeObserver(self)
+            let vc = self.storyboard?.instantiateViewControllerWithIdentifier("TabBarController")
+            self.presentViewController(vc!, animated: true, completion:{
+                self.loadingView.hidden = true
+            })
+
+        }
+    }
+    
     func postLoginSetup()
     {
+        self.loadingView.hidden = false
         if(Core.discoveryListObserver != nil)
         {
              NSNotificationCenter.defaultCenter().removeObserver(Core.discoveryListObserver)
@@ -48,12 +64,12 @@ class LoginVC: UIViewController
         
         //get the current user profile
         let uid = FIRAuth.auth()!.currentUser!.uid
+        self.semaphore = 4
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loginStepComplete), name: "LoginStepComplete", object: nil)
         Core.setAppAdmin()
         Core.currentUserProfile = UserProfile(uid: uid)
         Core.addPermissionToCache()
         Core.getAllPerms()
-        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("TabBarController")
-        self.presentViewController(vc!, animated: true, completion: nil)
     }
     
     func validateLoginForm() -> Bool

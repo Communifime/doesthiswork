@@ -80,7 +80,7 @@ class AdminManageCommunityVC: UIViewController
                     let date = NSDate()
                     let hashableString = NSString(format: "%f", date.timeIntervalSinceReferenceDate)
                     let hashString = hashableString.aws_md5String()
-                    community["password"] = hashString
+                    community["password"] = hashString.substringToIndex(hashString.startIndex.advancedBy(5))
                     let ref = Core.fireBaseRef.child("communities").childByAutoId()
                     ref.setValue(community)
                     

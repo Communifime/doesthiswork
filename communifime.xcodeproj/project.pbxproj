@@ -18,7 +18,6 @@
 		681BB2FC1CE969EF00BBAD98 /* InMailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681BB2FB1CE969EF00BBAD98 /* InMailVC.swift */; };
 		681BB2FE1CEA9E9D00BBAD98 /* CommunicationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681BB2FD1CEA9E9D00BBAD98 /* CommunicationList.swift */; };
 		681BB3001CEAADCF00BBAD98 /* SendInMailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 681BB2FF1CEAADCF00BBAD98 /* SendInMailVC.swift */; };
-		681D16251CFA7C0E00681D73 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 681D16241CFA7C0E00681D73 /* GoogleService-Info.plist */; };
 		6824FECB1CBAE9D800C33B9D /* FamilyMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6824FECA1CBAE9D800C33B9D /* FamilyMember.swift */; };
 		6824FECF1CBAEB2D00C33B9D /* SpouseFamilyMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6824FECE1CBAEB2D00C33B9D /* SpouseFamilyMember.swift */; };
 		6824FED11CBAF43600C33B9D /* FamilyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6824FED01CBAF43600C33B9D /* FamilyList.swift */; };
@@ -54,6 +53,8 @@
 		688CC4B81D036A10008810AF /* AdminCommunityList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688CC4B71D036A10008810AF /* AdminCommunityList.swift */; };
 		688CC4BA1D03704D008810AF /* AdminCommunityAdminList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688CC4B91D03704D008810AF /* AdminCommunityAdminList.swift */; };
 		688CC4BC1D037CFE008810AF /* AdminManageCommunityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688CC4BB1D037CFE008810AF /* AdminManageCommunityVC.swift */; };
+		689146A71D0E359300F5CBB6 /* CommunityListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689146A61D0E359300F5CBB6 /* CommunityListCell.swift */; };
+		689146A91D0E382300F5CBB6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 689146A81D0E382300F5CBB6 /* GoogleService-Info.plist */; };
 		689302FC1D00E826002F480B /* DiscoveryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689302FB1D00E826002F480B /* DiscoveryListCell.swift */; };
 		68ADFEE11CDAE21400B2671E /* SubCommunityManageMembersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68ADFEE01CDAE21400B2671E /* SubCommunityManageMembersVC.swift */; };
 		68ADFEE31CDAE22D00B2671E /* SubCommunityManageMembersList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68ADFEE21CDAE22D00B2671E /* SubCommunityManageMembersList.swift */; };
@@ -97,7 +98,6 @@
 		681BB2FB1CE969EF00BBAD98 /* InMailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InMailVC.swift; sourceTree = "<group>"; };
 		681BB2FD1CEA9E9D00BBAD98 /* CommunicationList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunicationList.swift; sourceTree = "<group>"; };
 		681BB2FF1CEAADCF00BBAD98 /* SendInMailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendInMailVC.swift; sourceTree = "<group>"; };
-		681D16241CFA7C0E00681D73 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6824FECA1CBAE9D800C33B9D /* FamilyMember.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyMember.swift; sourceTree = "<group>"; };
 		6824FECE1CBAEB2D00C33B9D /* SpouseFamilyMember.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpouseFamilyMember.swift; sourceTree = "<group>"; };
 		6824FED01CBAF43600C33B9D /* FamilyList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FamilyList.swift; sourceTree = "<group>"; };
@@ -133,6 +133,8 @@
 		688CC4B71D036A10008810AF /* AdminCommunityList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminCommunityList.swift; sourceTree = "<group>"; };
 		688CC4B91D03704D008810AF /* AdminCommunityAdminList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminCommunityAdminList.swift; sourceTree = "<group>"; };
 		688CC4BB1D037CFE008810AF /* AdminManageCommunityVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdminManageCommunityVC.swift; sourceTree = "<group>"; };
+		689146A61D0E359300F5CBB6 /* CommunityListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityListCell.swift; sourceTree = "<group>"; };
+		689146A81D0E382300F5CBB6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		689302FB1D00E826002F480B /* DiscoveryListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryListCell.swift; sourceTree = "<group>"; };
 		68ADFEE01CDAE21400B2671E /* SubCommunityManageMembersVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubCommunityManageMembersVC.swift; sourceTree = "<group>"; };
 		68ADFEE21CDAE22D00B2671E /* SubCommunityManageMembersList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubCommunityManageMembersList.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				684048221CD6649600514CE4 /* Sub-Community */,
 				686415761CD6FD1F00B265A7 /* CommunityMainVC.swift */,
 				680D914F1CCEEF7700A31971 /* CommunityList.swift */,
+				689146A61D0E359300F5CBB6 /* CommunityListCell.swift */,
 				680D91531CCEF2A700A31971 /* CommunityVC.swift */,
 				68388A4C1CD19B1000AE1CF9 /* CommunitySettingsVC.swift */,
 				684048201CD565CB00514CE4 /* CommunityAdminSettingsVC.swift */,
@@ -374,7 +377,7 @@
 				68FDF15F1CA7438B0037B878 /* Assets.xcassets */,
 				68FDF1611CA7438B0037B878 /* LaunchScreen.storyboard */,
 				68FDF1641CA7438B0037B878 /* Info.plist */,
-				681D16241CFA7C0E00681D73 /* GoogleService-Info.plist */,
+				689146A81D0E382300F5CBB6 /* GoogleService-Info.plist */,
 			);
 			path = communifime;
 			sourceTree = "<group>";
@@ -498,7 +501,7 @@
 				68148BE41CA89AB50096E699 /* communities_icon.png in Resources */,
 				6859CF471CCDB7C000208C90 /* loadingImage.png in Resources */,
 				68148BE01CA899B40096E699 /* profile_icon.png in Resources */,
-				681D16251CFA7C0E00681D73 /* GoogleService-Info.plist in Resources */,
+				689146A91D0E382300F5CBB6 /* GoogleService-Info.plist in Resources */,
 				68388A4B1CD199A700AE1CF9 /* nologo.jpg in Resources */,
 				68148BE81CA98FE10096E699 /* add-icon.png in Resources */,
 				68FDF15E1CA7438B0037B878 /* Main.storyboard in Resources */,
@@ -572,6 +575,7 @@
 				68ADFEF21CDBFAFF00B2671E /* ProfileSegmentCell.swift in Sources */,
 				6824FECB1CBAE9D800C33B9D /* FamilyMember.swift in Sources */,
 				689302FC1D00E826002F480B /* DiscoveryListCell.swift in Sources */,
+				689146A71D0E359300F5CBB6 /* CommunityListCell.swift in Sources */,
 				68FDF1741CA749D70037B878 /* UIViewController+Extras.swift in Sources */,
 				682733D01CB9945000DBD95B /* ProfileAddressCell.swift in Sources */,
 				68ADFEE11CDAE21400B2671E /* SubCommunityManageMembersVC.swift in Sources */,
@@ -732,12 +736,12 @@
 			baseConfigurationReference = 61E019288A73ED6888129509 /* Pods-communifime.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Mike Litman (4X76CP793V)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Mike Litman (K2Y68NGGA8)";
 				INFOPLIST_FILE = communifime/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.greenberg.communifime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "20606061-9aff-4de1-ac7a-17d59a44020f";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};

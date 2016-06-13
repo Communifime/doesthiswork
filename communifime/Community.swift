@@ -14,6 +14,7 @@ class Community: NSObject, ImageContainer
 {
     var parentCommunity : Community? = nil
     var key : String!
+    var password : String = ""
     var name : String!
     var communityDescription : String = ""
     var imageName: String = ""
@@ -130,6 +131,7 @@ class Community: NSObject, ImageContainer
         let ref = self.ref.child("sub_communities").childByAutoId()
         sub.parentCommunity = self
         sub.key = ref.key
+        sub.ref = ref
         ref.setValue(sub.getDictionary()){ (error, firebase) in
             let currPerm = Core.getPermissionFromCache(self)
             let uid = FIRAuth.auth()!.currentUser!.uid
@@ -150,6 +152,7 @@ class Community: NSObject, ImageContainer
         dict["imageName"] = self.imageName
         dict["admin"] = FIRAuth.auth()?.currentUser?.uid
         dict["approved"] = self.approved
+        dict["password"] = self.password
         var members = [String : [String: String]]()
         for member in self.members
         {

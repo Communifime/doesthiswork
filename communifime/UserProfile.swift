@@ -101,6 +101,7 @@ class UserProfile: NSObject, ImageContainer
                     NSNotificationCenter.defaultCenter().postNotificationName("Profile Data Loaded", object: nil)
                 }
             }
+            NSNotificationCenter.defaultCenter().postNotificationName("LoginStepComplete", object: nil)
         }
     }
     

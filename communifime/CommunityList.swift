@@ -36,6 +36,10 @@ class CommunityList: UITableViewController
                     aCommunity.key = datum.key as! String
                     aCommunity.ref = aCommunity.ref.child(aCommunity.key)
                     aCommunity.name = datum.value["name"] as! String
+                    if(datum.value["password"] != nil)
+                    {
+                        aCommunity.password = datum.value["password"] as! String
+                    }
                     aCommunity.communityDescription = datum.value["description"] as! String
                     aCommunity.imageName = datum.value["imageName"] as! String
                     aCommunity.admin = datum.value["admin"] as! String
@@ -55,8 +59,8 @@ class CommunityList: UITableViewController
                         aCommunity.loadSubCommunities(subs)
                     }
                     Core.allCommunities.append(aCommunity)
-                    
                 }
+                self.updateList()
             }
         }
     }
@@ -100,11 +104,27 @@ class CommunityList: UITableViewController
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! CommunityListCell
 
         // Configure the cell...
         let community = self.data[indexPath.row]
-        cell.textLabel?.text = community.name
+        cell.name.text = community.name
+        if(FIRAuth.auth()!.currentUser!.uid == community.admin)
+        {
+            cell.role.text = "role: Admin"
+            cell.role.textColor = UIColor.redColor()
+            cell.inviteButton.hidden = false
+        }
+        else
+        {
+            cell.role.text = "role: Member"
+            cell.role.textColor = UIColor.blueColor()
+            cell.inviteButton.hidden = true
+
+        }
+        cell.communityList = self
+        cell.community = community
+        
         //cell.detailTextLabel?.text = "admin - \(community.admin)"
         return cell
     }
