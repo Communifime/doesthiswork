@@ -114,12 +114,14 @@ class CommunityList: UITableViewController
             cell.role.text = "role: Admin"
             cell.role.textColor = UIColor.redColor()
             cell.inviteButton.hidden = false
+            cell.memberListButton.hidden = false
         }
         else
         {
             cell.role.text = "role: Member"
             cell.role.textColor = UIColor.blueColor()
             cell.inviteButton.hidden = true
+            cell.memberListButton.hidden = true
 
         }
         cell.communityList = self

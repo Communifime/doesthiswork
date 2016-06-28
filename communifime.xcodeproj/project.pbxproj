@@ -64,6 +64,8 @@
 		68ADFEEE1CDBF31900B2671E /* DiscoveryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68ADFEED1CDBF31900B2671E /* DiscoveryVC.swift */; };
 		68ADFEF01CDBF33200B2671E /* DiscoveryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68ADFEEF1CDBF33200B2671E /* DiscoveryList.swift */; };
 		68ADFEF21CDBFAFF00B2671E /* ProfileSegmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68ADFEF11CDBFAFF00B2671E /* ProfileSegmentCell.swift */; };
+		68C671711D22D3590061E021 /* MemberList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C671701D22D3590061E021 /* MemberList.swift */; };
+		68EFE1391D22CF2100EA60F4 /* MemberListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EFE1381D22CF2100EA60F4 /* MemberListVC.swift */; };
 		68F3830D1CBBDC56001E0587 /* ProfileDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F3830C1CBBDC56001E0587 /* ProfileDateCell.swift */; };
 		68F3830F1CBBE5C9001E0587 /* ChildFamilyMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F3830E1CBBE5C9001E0587 /* ChildFamilyMember.swift */; };
 		68FDF1591CA7438B0037B878 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FDF1581CA7438B0037B878 /* AppDelegate.swift */; };
@@ -144,6 +146,8 @@
 		68ADFEED1CDBF31900B2671E /* DiscoveryVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryVC.swift; sourceTree = "<group>"; };
 		68ADFEEF1CDBF33200B2671E /* DiscoveryList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryList.swift; sourceTree = "<group>"; };
 		68ADFEF11CDBFAFF00B2671E /* ProfileSegmentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileSegmentCell.swift; sourceTree = "<group>"; };
+		68C671701D22D3590061E021 /* MemberList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberList.swift; sourceTree = "<group>"; };
+		68EFE1381D22CF2100EA60F4 /* MemberListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberListVC.swift; sourceTree = "<group>"; };
 		68F3830C1CBBDC56001E0587 /* ProfileDateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileDateCell.swift; sourceTree = "<group>"; };
 		68F3830E1CBBE5C9001E0587 /* ChildFamilyMember.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChildFamilyMember.swift; sourceTree = "<group>"; };
 		68FDF1551CA7438A0037B878 /* communifime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = communifime.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -187,6 +191,7 @@
 		680D91511CCEEFF500A31971 /* Community */ = {
 			isa = PBXGroup;
 			children = (
+				68EFE1371D22CEFC00EA60F4 /* Members */,
 				684048221CD6649600514CE4 /* Sub-Community */,
 				686415761CD6FD1F00B265A7 /* CommunityMainVC.swift */,
 				680D914F1CCEEF7700A31971 /* CommunityList.swift */,
@@ -342,6 +347,15 @@
 				689302FB1D00E826002F480B /* DiscoveryListCell.swift */,
 			);
 			name = "Discovery Center";
+			sourceTree = "<group>";
+		};
+		68EFE1371D22CEFC00EA60F4 /* Members */ = {
+			isa = PBXGroup;
+			children = (
+				68EFE1381D22CF2100EA60F4 /* MemberListVC.swift */,
+				68C671701D22D3590061E021 /* MemberList.swift */,
+			);
+			name = Members;
 			sourceTree = "<group>";
 		};
 		68FDF14C1CA7438A0037B878 = {
@@ -600,6 +614,7 @@
 				682733BA1CB35A8700DBD95B /* Address.swift in Sources */,
 				682733D21CB9990400DBD95B /* FormPair.swift in Sources */,
 				686415771CD6FD1F00B265A7 /* CommunityMainVC.swift in Sources */,
+				68EFE1391D22CF2100EA60F4 /* MemberListVC.swift in Sources */,
 				68148BE61CA89DBB0096E699 /* SettingsVC.swift in Sources */,
 				68F3830F1CBBE5C9001E0587 /* ChildFamilyMember.swift in Sources */,
 				68388A511CD2997E00AE1CF9 /* CommunityTabBarVC.swift in Sources */,
@@ -608,6 +623,7 @@
 				6859CF451CCDA89F00208C90 /* ImageContainer.swift in Sources */,
 				B84F567F1CD249C600419AF7 /* CommunityPermissions.swift in Sources */,
 				680D91501CCEEF7700A31971 /* CommunityList.swift in Sources */,
+				68C671711D22D3590061E021 /* MemberList.swift in Sources */,
 				68ADFEEE1CDBF31900B2671E /* DiscoveryVC.swift in Sources */,
 				68ADFEEC1CDBEDB200B2671E /* DiscoveryFilterVC.swift in Sources */,
 				682733C41CB5D8FE00DBD95B /* ManagePairVC.swift in Sources */,
@@ -736,10 +752,10 @@
 			baseConfigurationReference = 61E019288A73ED6888129509 /* Pods-communifime.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Mike Litman (K2Y68NGGA8)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Communifi Corporation (ZG738C4BGG)";
 				INFOPLIST_FILE = communifime/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.greenberg.communifime;
+				PRODUCT_BUNDLE_IDENTIFIER = com.communifime.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -750,12 +766,12 @@
 			baseConfigurationReference = 218985606A28F00A68B844DA /* Pods-communifime.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Mike Litman (4X76CP793V)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Communifi Corporation (ZG738C4BGG)";
 				INFOPLIST_FILE = communifime/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.greenberg.communifime;
+				PRODUCT_BUNDLE_IDENTIFIER = com.communifime.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "20606061-9aff-4de1-ac7a-17d59a44020f";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
