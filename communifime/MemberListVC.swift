@@ -24,6 +24,22 @@ class MemberListVC: UIViewController
         // Do any additional setup after loading the view.
     }
 
+    @IBAction func segmentsChanged(sender: UISegmentedControl)
+    {
+        if(sender.selectedSegmentIndex == 0)
+        {
+            self.memberList.toggleData("ALL")
+        }
+        else if(sender.selectedSegmentIndex == 1)
+        {
+            self.memberList.toggleData("MEMBERS")
+        }
+        else
+        {
+            self.memberList.toggleData("FAMILY MEMBERS")
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -12,15 +12,16 @@ class MemberList: UITableViewController
 {
     var parentMemberListVC : MemberListVC!
     var community : Community!
-    var data = [UserProfile]()
+    var data = [[String : String]]()
+    var members = [[String : String]]()
+    var familyMembers = [[String : String]]()
+    var allMembers = [[String : String]]()
     var profiles = [UserProfile]()
-    var familyMembers = [String: [FamilyMember]]()
     var uids : [String]!
     var loaded = false
     var loadCount = 0
     var mode = "ALL"
-    var memberPos = 0
-    var familyMemberPos = 0
+    
     
     override func viewDidLoad()
     {
@@ -41,6 +42,24 @@ class MemberList: UITableViewController
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
+    func toggleData(mode: String)
+    {
+        self.mode = mode
+        if(self.mode == "ALL")
+        {
+            self.data = self.allMembers
+        }
+        else if(self.mode == "MEMBERS")
+        {
+            self.data = self.members
+        }
+        else
+        {
+            self.data = self.familyMembers
+        }
+        self.tableView.reloadData()
+    }
+    
     func profileLoaded()
     {
         loadCount += 1
@@ -48,13 +67,25 @@ class MemberList: UITableViewController
         {
             //all profiles are loaded, so family members are available
             self.loaded = true
-            self.data = self.profiles
-            for profile in self.data
+            for profile in self.profiles
             {
-                self.familyMembers[profile.uid] = profile.familyMembers
+                self.members.append(["name":"\(profile.firstName) \(profile.lastName)", "type": "member", "uid":profile.uid, "imageName":profile.imageName])
+                self.allMembers.append(["name":"\(profile.firstName) \(profile.lastName)", "type": "member", "uid":profile.uid, "imageName":profile.imageName])
+                for fm in profile.familyMembers
+                {
+                    if(fm is SpouseFamilyMember)
+                    {
+                        self.allMembers.append(["name":"\(fm.firstName) \(fm.lastName)", "type": "spouse", "imageName":fm.imageName])
+                        self.familyMembers.append(["name":"\(fm.firstName) \(fm.lastName)", "type": "spouse", "imageName":fm.imageName])
+                    }
+                    else
+                    {
+                        self.allMembers.append(["name":"\(fm.firstName) \(fm.lastName)", "type": "child", "imageName":fm.imageName])
+                        self.familyMembers.append(["name":"\(fm.firstName) \(fm.lastName)", "type": "child", "imageName":fm.imageName])
+                    }
+                }
             }
-            memberPos = 0
-            familyMemberPos = 0
+            self.data = self.allMembers
             self.tableView.reloadData()
             self.parentMemberListVC.spinner.hidden = true
             self.parentMemberListVC.segments.enabled = true
@@ -73,69 +104,72 @@ class MemberList: UITableViewController
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
         // #warning Incomplete implementation, return the number of rows
-        var familyMemberCount = 0
-        if(self.mode == "ALL")
-        {
-            for familyMembers in self.familyMembers
-            {
-                familyMemberCount += familyMembers.1.count
-            }
-        }
-        return self.data.count + familyMemberCount
+        return self.data.count
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
 
         // Configure the cell...
-        let profile = self.data[self.memberPos]
-        if(self.familyMemberPos == 0)
+        let info = self.data[indexPath.row]
+        let type = info["type"]!
+        let name = info["name"]!
+        let imageName = info["imageName"]!
+        
+        if(imageName != "")
         {
-            //show the member
+            Core.getImage(cell.imageView!, imageName: imageName, isProfile: true)
+        }
+
+        if(type == "member")
+        {
             cell.indentationLevel = 0
-            cell.textLabel?.text = "\(profile.firstName) \(profile.lastName)"
-            cell.detailTextLabel?.text = "(member)"
-            self.familyMemberPos += 1
-            
-            //move to next member if there are no family members
-            if(self.familyMembers[profile.uid]!.count == 0)
-            {
-                self.memberPos += 1
-                self.familyMemberPos = 0
-            }
+            cell.textLabel?.text = name
+            cell.detailTextLabel?.text = "member"
+            cell.accessoryType = .DisclosureIndicator
+        }
+        else if((type == "spouse" || type == "child") && self.mode == "ALL")
+        {
+            cell.indentationLevel = 2
+            cell.textLabel?.text = name
+            cell.detailTextLabel?.text = type
+            cell.accessoryType = .None
         }
         else
         {
-            //show indented family members
-            cell.indentationLevel = 2
-            let familyMember = self.familyMembers[profile.uid]![self.familyMemberPos-1]
-            cell.textLabel?.text = "\(familyMember.firstName) \(familyMember.lastName)"
-            if(familyMember is SpouseFamilyMember)
-            {
-                cell.detailTextLabel?.text = "(spouse)"
-            }
-            else
-            {
-                cell.detailTextLabel?.text = "(child)"
-            }
-            if(self.familyMemberPos == self.familyMembers[profile.uid]!.count)
-            {
-                self.familyMemberPos = 0
-                self.memberPos += 1
-            }
-            else
-            {
-                self.familyMemberPos += 1
-            }
+            cell.indentationLevel = 0
+            cell.textLabel?.text = name
+            cell.detailTextLabel?.text = type
+            cell.accessoryType = .None
         }
-        
         return cell
     }
     
-
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
+        let person = self.data[indexPath.row]
+        if(person["type"]! == "member")
+        {
+            let vc = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileVC") as! ProfileVC
+            let uid = person["uid"]!
+            for profile in self.profiles
+            {
+                if(profile.uid == uid)
+                {
+                    vc.profile = profile
+                    vc.fullView = Core.hasFullViewPermission(profile.uid)
+                    vc.readOnly = true
+                    break
+                }
+            }
+            self.presentViewController(vc, animated: true, completion: nil)
+        }
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
