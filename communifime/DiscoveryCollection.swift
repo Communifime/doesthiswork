@@ -1,14 +1,14 @@
 //
-//  DiscoveryList.swift
+//  DiscoveryCollection.swift
 //  communifime
 //
-//  Created by Michael Litman on 5/5/16.
+//  Created by Michael Litman on 6/29/16.
 //  Copyright © 2016 Communifime. All rights reserved.
 //
 
 import UIKit
 
-class DiscoveryList: UITableViewController
+class DiscoveryCollection: UICollectionViewController
 {
     var data = [Community : [UserProfile]]()
     var filtered_data : [Community : [UserProfile]]!
@@ -17,17 +17,25 @@ class DiscoveryList: UITableViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+
+        let theLayout = DiscoveryFlowLayout()
+        theLayout.numCols = 3
+        theLayout.relativeHeight = 1.15
+        theLayout.headerReferenceSize = CGSizeMake(self.collectionView!.frame.size.width, 50.0)
+        self.collectionView?.collectionViewLayout = theLayout
+        self.collectionView?.backgroundColor = UIColor.whiteColor()
+        
         self.data.removeAll()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(profileUpdatedNotification), name: "Profile Data Loaded", object: nil)
         //Let core know about me so I can be removed as an observer upon login
-        Core.discoveryListObserver = self
+        Core.discoveryCollectionObserver = self
         
         for community in Core.myCommunities
         {
             data[community] = [UserProfile]()
             for member in community.members
             {
-                 data[community]!.append(UserProfile(uid: member.0))
+                data[community]!.append(UserProfile(uid: member.0))
             }
         }
         self.applyFilter([:])
@@ -35,9 +43,9 @@ class DiscoveryList: UITableViewController
 
     func profileUpdatedNotification()
     {
-        self.tableView.reloadData()
+        self.collectionView!.reloadData()
     }
-    
+
     func applyFilter(filter: [String: String])
     {
         self.currentFilter = filter
@@ -165,54 +173,62 @@ class DiscoveryList: UITableViewController
                 }
             }
         }
-        self.tableView.reloadData()
+        self.collectionView!.reloadData()
     }
-    
-    override func didReceiveMemoryWarning() {
+
+    override func didReceiveMemoryWarning()
+    {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
+    /*
+    // MARK: - Navigation
 
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String?
-    {
-        return Core.myCommunities[section].name
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using [segue destinationViewController].
+        // Pass the selected object to the new view controller.
     }
-    
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    */
+
+    // MARK: UICollectionViewDataSource
+
+    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return Core.myCommunities.count
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+
+    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        print(Core.myCommunities[section].debugDescription)
-        print(self.filtered_data.debugDescription)
-        print(self.filtered_data[Core.myCommunities[section]])
-        print(self.filtered_data[Core.myCommunities[section]]!.count)
+        // #warning Incomplete implementation, return the number of items
         return self.filtered_data[Core.myCommunities[section]]!.count
     }
 
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! DiscoveryListCell
-
+        let header = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "header", forIndexPath: indexPath) as! DiscoveryCollectionHeader
+        header.name.text = Core.myCommunities[indexPath.section].name
+        return header
+    }
+    
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
+    {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! DiscoveryCollectionCell
+   
         // Configure the cell...
         let community = Core.myCommunities[indexPath.section]
         let profile = self.filtered_data[community]![indexPath.row]
-        cell.name.text = "\(profile.firstName) \(profile.lastName)"
-        cell.accessoryType = .DisclosureIndicator
-        
+        cell.name.text = "\(profile.firstName) \(profile.lastName)"        
         if(profile.imageName != "")
         {
             Core.getImage(cell.profileImageView, imageName: profile.imageName, isProfile: true)
         }
         return cell
     }
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath)
     {
         let vc = self.storyboard?.instantiateViewControllerWithIdentifier("ProfileVC") as! ProfileVC
         let community = Core.myCommunities[indexPath.section]
@@ -221,50 +237,36 @@ class DiscoveryList: UITableViewController
         vc.readOnly = true
         vc.fullView = Core.hasFullViewPermission(profile.uid)
         self.presentViewController(vc, animated: true, completion: nil)
-        
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
     
-    // MARK: - Navigation
+    // MARK: UICollectionViewDelegate
+
     /*
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
-    {
+    // Uncomment this method to specify if the specified item should be highlighted during tracking
+    override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    */
+
+    /*
+    // Uncomment this method to specify if the specified item should be selected
+    override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    */
+
+    /*
+    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
+    override func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
+    }
+
+    override func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
+        return false
+    }
+
+    override func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
+    
     }
     */
 

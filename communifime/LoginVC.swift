@@ -57,9 +57,9 @@ class LoginVC: UIViewController
     func postLoginSetup()
     {
         self.loadingView.hidden = false
-        if(Core.discoveryListObserver != nil)
+        if(Core.discoveryCollectionObserver != nil)
         {
-             NSNotificationCenter.defaultCenter().removeObserver(Core.discoveryListObserver)
+             NSNotificationCenter.defaultCenter().removeObserver(Core.discoveryCollectionObserver)
         }
         
         //get the current user profile

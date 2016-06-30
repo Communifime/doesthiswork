@@ -10,9 +10,10 @@ import UIKit
 
 class DiscoveryVC: UIViewController
 {
-    var discoveryList : DiscoveryList!
+    var discoveryCollection : DiscoveryCollection!
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
@@ -20,8 +21,8 @@ class DiscoveryVC: UIViewController
 
     @IBAction func resetFilterButtonPressed(sender: AnyObject)
     {
-        self.discoveryList.currentFilter.removeAll()
-        self.discoveryList.applyFilter(self.discoveryList.currentFilter)
+        self.discoveryCollection.currentFilter.removeAll()
+        self.discoveryCollection.applyFilter(self.discoveryCollection.currentFilter)
     }
     
     override func didReceiveMemoryWarning() {
@@ -38,18 +39,15 @@ class DiscoveryVC: UIViewController
     {
         if(segue.identifier != nil)
         {
-            if(segue.identifier! == "Discovery List")
+            if(segue.identifier! == "Discovery Collection")
             {
-                self.discoveryList = segue.destinationViewController as! DiscoveryList
+                self.discoveryCollection = segue.destinationViewController as! DiscoveryCollection
             }
             else if(segue.identifier! == "Filter")
             {
                 let vc = segue.destinationViewController as! DiscoveryFilterVC
-                vc.discoveryList = self.discoveryList
+                vc.discoveryCollection = self.discoveryCollection
             }
         }
-
     }
-    
-
 }

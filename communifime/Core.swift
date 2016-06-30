@@ -24,7 +24,7 @@ class Core: NSObject
     static var currentUserProfile : UserProfile!
     static var communityPermissionsCache = [CommunityPermissions]()
     static var imagesToDelete = [String]()
-    static var discoveryListObserver : DiscoveryList!
+    static var discoveryCollectionObserver : DiscoveryCollection!
     static var imageCache = [String: UIImage]()
     static var appAdmin = false
     static var adminCommunityList : AdminCommunityList!
@@ -286,9 +286,12 @@ class Core: NSObject
 
     static func setButtonImage(buttonForImage: UIButton, image: UIImage)
     {
-        buttonForImage.setBackgroundImage(image, forState: .Normal)
-        buttonForImage.setBackgroundImage(image, forState: .Highlighted)
-        buttonForImage.setBackgroundImage(image, forState: .Selected)
+        //make sure the interface updates
+        dispatch_async(dispatch_get_main_queue()) { 
+            buttonForImage.setBackgroundImage(image, forState: .Normal)
+            buttonForImage.setBackgroundImage(image, forState: .Highlighted)
+            buttonForImage.setBackgroundImage(image, forState: .Selected)
+        }
     }
     
     static func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage
@@ -371,10 +374,12 @@ class Core: NSObject
         //check local cache
         if(imageCache[imageContainer.imageName] != nil)
         {
-            let image = imageCache[imageContainer.imageName]!
-            button.setBackgroundImage(image, forState: .Normal)
-            button.setBackgroundImage(image, forState: .Highlighted)
-            button.setBackgroundImage(image, forState: .Selected)
+            dispatch_async(dispatch_get_main_queue(), { 
+                let image = imageCache[imageContainer.imageName]!
+                button.setBackgroundImage(image, forState: .Normal)
+                button.setBackgroundImage(image, forState: .Highlighted)
+                button.setBackgroundImage(image, forState: .Selected)
+            })
             return
         }
         

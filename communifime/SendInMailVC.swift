@@ -98,7 +98,7 @@ class SendInMailVC: UIViewController
                 inboxObj["message"] = self.bodyTV.text!
                 let today = NSDate().aws_stringValue(AWSDateISO8601DateFormat1)
                 inboxObj["timestamp"] = today
-                inboxRef.setValue(inboxRef, withCompletionBlock: { (error: NSError?, fb: FIRDatabaseReference) in
+                inboxRef.setValue(inboxObj, withCompletionBlock: { (error: NSError?, fb: FIRDatabaseReference) in
                     if(error == nil)
                     {
                         let sentRef = Core.fireBaseRef.child("inMail").child(Core.currentUserProfile.uid).child("sent").childByAutoId()

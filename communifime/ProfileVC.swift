@@ -72,6 +72,10 @@ class ProfileVC: UIViewController
         if(segue.identifier == "Set Profile Image")
         {
             let vc = segue.destinationViewController as! GetImageVC
+            if(self.profile.imageName != "")
+            {
+                vc.currImage = self.profileImageButton.currentBackgroundImage
+            }
             vc.buttonForImage = self.profileImageButton
         }
         else if(segue.identifier == "ProfileList")

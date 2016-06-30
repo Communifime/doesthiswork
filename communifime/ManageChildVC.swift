@@ -217,6 +217,11 @@ class ManageChildVC: UIViewController
         if(segue.identifier == "Set Image")
         {
             let vc = segue.destinationViewController as! GetImageVC
+            if(self.child.imageName != "")
+            {
+                vc.currImage = self.imageButton.currentBackgroundImage
+            }
+
             vc.buttonForImage = self.imageButton
         }
         

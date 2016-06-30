@@ -33,13 +33,13 @@ class DiscoveryFilterVC: UIViewController
     @IBOutlet weak var emailTF: UITextField!
     @IBOutlet weak var nameTF: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
-    var discoveryList : DiscoveryList!
+    var discoveryCollection : DiscoveryCollection!
     var filter : [String : String]!
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        self.filter = self.discoveryList.currentFilter
+        self.filter = self.discoveryCollection.currentFilter
         self.fillForm()
         scrollView.contentSize = CGSize(width: hairColorSegments.frame.size.width, height: 2500)
         
@@ -255,7 +255,7 @@ class DiscoveryFilterVC: UIViewController
         {
             filter["Family Member Birth Date"] = self.familyMemberBirthDatePicker.date.aws_stringValue("M/dd/yyyy")
         }
-        self.discoveryList.applyFilter(filter)
+        self.discoveryCollection.applyFilter(filter)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     

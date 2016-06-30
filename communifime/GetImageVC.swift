@@ -7,20 +7,44 @@
 //
 
 import UIKit
+import CLImageEditor
 
-class GetImageVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate
+class GetImageVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLImageEditorDelegate
 {
     @IBOutlet weak var imageView : UIImageView!
+    @IBOutlet weak var editButton : UIButton!
     var buttonForImage : UIButton!
     let imagePicker = UIImagePickerController()
+    var currImage : UIImage?
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.editButton.enabled = false
+        imagePicker.allowsEditing = true
         imagePicker.delegate = self
+        if(currImage != nil)
+        {
+            self.imageView.image = self.currImage
+            self.editButton.enabled = true
+
+        }
         // Do any additional setup after loading the view.
     }
 
+    @IBAction func editButtonPressed()
+    {
+        let editor = CLImageEditor(image: self.imageView.image, delegate: self)
+        self.presentViewController(editor, animated: true, completion: nil)
+    }
+    
+    func imageEditor(editor: CLImageEditor!, didFinishEdittingWithImage image: UIImage!)
+    {
+        self.imageView.image = image
+        self.editButton.enabled = true
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     @IBAction func saveImageButtonPressed(sender: UIButton)
     {
         self.buttonForImage.setBackgroundImage(self.imageView.image, forState: .Normal)
@@ -48,6 +72,8 @@ class GetImageVC: UIViewController, UIImagePickerControllerDelegate, UINavigatio
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imageView.contentMode = .ScaleAspectFit
             imageView.image = pickedImage
+            self.editButton.enabled = true
+
         }
         
         dismissViewControllerAnimated(true, completion: nil)

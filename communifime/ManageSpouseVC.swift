@@ -243,6 +243,10 @@ class ManageSpouseVC: UIViewController
         if(segue.identifier == "Set Image")
         {
             let vc = segue.destinationViewController as! GetImageVC
+            if(self.spouse.imageName != "")
+            {
+                vc.currImage = self.imageButton.currentBackgroundImage
+            }
             vc.buttonForImage = self.imageButton
         }
 
