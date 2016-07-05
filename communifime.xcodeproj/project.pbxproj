@@ -10,6 +10,7 @@
 		680D91501CCEEF7700A31971 /* CommunityList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680D914F1CCEEF7700A31971 /* CommunityList.swift */; };
 		680D91541CCEF2A700A31971 /* CommunityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680D91531CCEF2A700A31971 /* CommunityVC.swift */; };
 		680D91561CCEF42B00A31971 /* Community.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680D91551CCEF42B00A31971 /* Community.swift */; };
+		6810B9971D2C1091003BC196 /* MemberListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6810B9961D2C1091003BC196 /* MemberListCell.swift */; };
 		68148BE01CA899B40096E699 /* profile_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 68148BDF1CA899B40096E699 /* profile_icon.png */; };
 		68148BE21CA89A330096E699 /* settings_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 68148BE11CA89A330096E699 /* settings_icon.png */; };
 		68148BE41CA89AB50096E699 /* communities_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 68148BE31CA89AB50096E699 /* communities_icon.png */; };
@@ -94,6 +95,7 @@
 		680D914F1CCEEF7700A31971 /* CommunityList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityList.swift; sourceTree = "<group>"; };
 		680D91531CCEF2A700A31971 /* CommunityVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityVC.swift; sourceTree = "<group>"; };
 		680D91551CCEF42B00A31971 /* Community.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Community.swift; sourceTree = "<group>"; };
+		6810B9961D2C1091003BC196 /* MemberListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberListCell.swift; sourceTree = "<group>"; };
 		68148BDF1CA899B40096E699 /* profile_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile_icon.png; sourceTree = "<group>"; };
 		68148BE11CA89A330096E699 /* settings_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings_icon.png; sourceTree = "<group>"; };
 		68148BE31CA89AB50096E699 /* communities_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = communities_icon.png; sourceTree = "<group>"; };
@@ -360,6 +362,7 @@
 			children = (
 				68EFE1381D22CF2100EA60F4 /* MemberListVC.swift */,
 				68C671701D22D3590061E021 /* MemberList.swift */,
+				6810B9961D2C1091003BC196 /* MemberListCell.swift */,
 			);
 			name = Members;
 			sourceTree = "<group>";
@@ -598,6 +601,7 @@
 				6824FECB1CBAE9D800C33B9D /* FamilyMember.swift in Sources */,
 				68C671771D24B0B90061E021 /* DiscoveryCollectionCell.swift in Sources */,
 				689146A71D0E359300F5CBB6 /* CommunityListCell.swift in Sources */,
+				6810B9971D2C1091003BC196 /* MemberListCell.swift in Sources */,
 				68FDF1741CA749D70037B878 /* UIViewController+Extras.swift in Sources */,
 				682733D01CB9945000DBD95B /* ProfileAddressCell.swift in Sources */,
 				68ADFEE11CDAE21400B2671E /* SubCommunityManageMembersVC.swift in Sources */,

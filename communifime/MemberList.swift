@@ -15,12 +15,14 @@ class MemberList: UITableViewController
     var data = [[String : String]]()
     var members = [[String : String]]()
     var familyMembers = [[String : String]]()
+    var familyFirst = [[String : String]]()
     var allMembers = [[String : String]]()
     var profiles = [UserProfile]()
     var uids : [String]!
     var loaded = false
     var loadCount = 0
     var mode = "ALL"
+    var prevChild = false
     
     
     override func viewDidLoad()
@@ -53,9 +55,13 @@ class MemberList: UITableViewController
         {
             self.data = self.members
         }
-        else
+        else if(self.mode == "FAMILY MEMBERS")
         {
             self.data = self.familyMembers
+        }
+        else
+        {
+            self.data = self.familyFirst
         }
         self.tableView.reloadData()
     }
@@ -77,11 +83,15 @@ class MemberList: UITableViewController
                     {
                         self.allMembers.append(["name":"\(fm.firstName) \(fm.lastName)", "type": "spouse", "imageName":fm.imageName])
                         self.familyMembers.append(["name":"\(fm.firstName) \(fm.lastName)", "type": "spouse", "imageName":fm.imageName])
+                        self.familyFirst.append(["name":"\(fm.firstName) \(fm.lastName)", "type": "spouse", "imageName":fm.imageName])
+                        self.familyFirst.append(["name":"\(profile.firstName) \(profile.lastName)", "type": "member", "uid":profile.uid, "imageName":profile.imageName])
                     }
                     else
                     {
                         self.allMembers.append(["name":"\(fm.firstName) \(fm.lastName)", "type": "child", "imageName":fm.imageName])
                         self.familyMembers.append(["name":"\(fm.firstName) \(fm.lastName)", "type": "child", "imageName":fm.imageName])
+                        self.familyFirst.append(["name":"\(fm.firstName) \(fm.lastName)", "type": "child", "imageName":fm.imageName])
+                        self.familyFirst.append(["name":"\(profile.firstName) \(profile.lastName)", "type": "member", "uid":profile.uid, "imageName":profile.imageName])
                     }
                 }
             }
@@ -126,7 +136,15 @@ class MemberList: UITableViewController
             Core.getImage(cell.imageView!, imageName: imageName, isProfile: true)
         }
 
-        if(type == "member")
+        if(type == "member" && self.mode == "FAMILY FIRST" && self.prevChild)
+        {
+            self.prevChild = false
+            cell.indentationLevel = 5
+            cell.textLabel?.text = name
+            cell.detailTextLabel?.text = "member"
+            cell.accessoryType = .DisclosureIndicator
+        }
+        else if(type == "member")
         {
             cell.indentationLevel = 0
             cell.textLabel?.text = name
@@ -135,13 +153,15 @@ class MemberList: UITableViewController
         }
         else if((type == "spouse" || type == "child") && self.mode == "ALL")
         {
-            cell.indentationLevel = 2
+            self.prevChild = true
+            cell.indentationLevel = 5
             cell.textLabel?.text = name
             cell.detailTextLabel?.text = type
             cell.accessoryType = .None
         }
         else
         {
+            self.prevChild = true
             cell.indentationLevel = 0
             cell.textLabel?.text = name
             cell.detailTextLabel?.text = type

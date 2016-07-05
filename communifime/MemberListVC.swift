@@ -34,9 +34,13 @@ class MemberListVC: UIViewController
         {
             self.memberList.toggleData("MEMBERS")
         }
-        else
+        else if(sender.selectedSegmentIndex == 2)
         {
             self.memberList.toggleData("FAMILY MEMBERS")
+        }
+        else if(sender.selectedSegmentIndex == 3)
+        {
+            self.memberList.toggleData("FAMILY FIRST")
         }
     }
     

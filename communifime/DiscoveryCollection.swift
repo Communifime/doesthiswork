@@ -220,7 +220,8 @@ class DiscoveryCollection: UICollectionViewController
         // Configure the cell...
         let community = Core.myCommunities[indexPath.section]
         let profile = self.filtered_data[community]![indexPath.row]
-        cell.name.text = "\(profile.firstName) \(profile.lastName)"        
+        cell.fname.text = profile.firstName
+        cell.lname.text = profile.lastName
         if(profile.imageName != "")
         {
             Core.getImage(cell.profileImageView, imageName: profile.imageName, isProfile: true)

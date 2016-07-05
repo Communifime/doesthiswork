@@ -11,5 +11,7 @@ import UIKit
 class DiscoveryCollectionCell: UICollectionViewCell
 {
     @IBOutlet weak var profileImageView: UIImageView!
-    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var fname: UILabel!
+    @IBOutlet weak var lname: UILabel!
+
 }
