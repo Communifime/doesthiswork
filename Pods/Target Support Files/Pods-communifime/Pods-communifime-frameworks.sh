@@ -88,10 +88,12 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/AWSS3/AWSS3.framework"
   install_framework "$BUILT_PRODUCTS_DIR/CGLMail/CGLMail.framework"
   install_framework "$BUILT_PRODUCTS_DIR/CLImageEditor/CLImageEditor.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/TTRangeSlider/TTRangeSlider.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/AWSCore/AWSCore.framework"
   install_framework "$BUILT_PRODUCTS_DIR/AWSS3/AWSS3.framework"
   install_framework "$BUILT_PRODUCTS_DIR/CGLMail/CGLMail.framework"
   install_framework "$BUILT_PRODUCTS_DIR/CLImageEditor/CLImageEditor.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/TTRangeSlider/TTRangeSlider.framework"
 fi

@@ -62,6 +62,28 @@ class DiscoveryCollection: UICollectionViewController
                         self.filtered_data[entry.0]?.removeAtIndex(pos!)
                         break
                     }
+                    else if(pair.0 == "Family Member Age Range")
+                    {
+                        let parts = pair.1.componentsSeparatedByString(":")
+                        if(!profile.hasFamilyMemberWithAgeInRange(Int(parts[0])!, max: Int(parts[1])!))
+                        {
+                            let pos = self.filtered_data[entry.0]?.indexOf(profile)
+                            self.filtered_data[entry.0]?.removeAtIndex(pos!)
+                            break
+
+                        }
+                    }
+                    else if(pair.0 == "Age Range")
+                    {
+                        let parts = pair.1.componentsSeparatedByString(":")
+                        if(!profile.hasAgeInRange(Int(parts[0])!, max: Int(parts[1])!))
+                        {
+                            let pos = self.filtered_data[entry.0]?.indexOf(profile)
+                            self.filtered_data[entry.0]?.removeAtIndex(pos!)
+                            break
+                            
+                        }
+                    }
                     else if(pair.0 == "Email" && !profile.hasEmailContaining(pair.1))
                     {
                         let pos = self.filtered_data[entry.0]?.indexOf(profile)

@@ -16,4 +16,5 @@ pod 'CLImageEditor/ResizeTool'
 pod 'CLImageEditor/StickerTool'
 pod 'CLImageEditor/TextTool'
 pod 'CLImageEditor/SplashTool'
+pod 'TTRangeSlider'
 end

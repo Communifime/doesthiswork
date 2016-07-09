@@ -7,21 +7,22 @@
 //
 
 import UIKit
-
+import TTRangeSlider
 class DiscoveryFilterVC: UIViewController
 {
     
-    @IBOutlet weak var familyMemberBirthDatePicker: UIDatePicker!
+    @IBOutlet weak var familyAgeSlider: TTRangeSlider!
     @IBOutlet weak var familyMemberHighSchoolTF: UITextField!
     @IBOutlet weak var familyMemberCollegeTF: UITextField!
     @IBOutlet weak var familyMemberPositionTF: UITextField!
     @IBOutlet weak var familyMemberCompanyTF: UITextField!
     @IBOutlet weak var familyMemberGradeTF: UITextField!
     @IBOutlet weak var familyMemberNameTF: UITextField!
+    
+    @IBOutlet weak var ageSlider: TTRangeSlider!
     @IBOutlet weak var eyeColorSegments: UISegmentedControl!
     @IBOutlet weak var hairLengthSegments: UISegmentedControl!
     @IBOutlet weak var hairColorSegments: UISegmentedControl!
-    @IBOutlet weak var birthdatePicker: UIDatePicker!
     @IBOutlet weak var genderSegments: UISegmentedControl!
     @IBOutlet weak var homeTownTF: UITextField!
     @IBOutlet weak var highSchoolTF: UITextField!
@@ -39,6 +40,10 @@ class DiscoveryFilterVC: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        
+        
+        
         self.filter = self.discoveryCollection.currentFilter
         self.fillForm()
         scrollView.contentSize = CGSize(width: hairColorSegments.frame.size.width, height: 2500)
@@ -130,10 +135,12 @@ class DiscoveryFilterVC: UIViewController
                     }
                 }
             }
-            else if(pair.0 == "Birth Date")
+            else if(pair.0 == "Age Range")
             {
-                let date = NSDate.aws_dateFromString(pair.1, format: "M/dd/yyyy")
-                self.birthdatePicker.date = date
+                let range = pair.1
+                let parts = range.componentsSeparatedByString(":")
+                self.ageSlider.selectedMinimum = Float(parts[0])!
+                self.ageSlider.selectedMaximum = Float(parts[1])!
             }
             else if(pair.0 == "Family Member Grade")
             {
@@ -159,10 +166,12 @@ class DiscoveryFilterVC: UIViewController
             {
                 self.familyMemberHighSchoolTF.text = pair.1
             }
-            else if(pair.0 == "Family Member Birth Date")
+            else if(pair.0 == "Family Member Age Range")
             {
-                let date = NSDate.aws_dateFromString(pair.1, format: "M/dd/yyyy")
-                self.familyMemberBirthDatePicker.date = date
+                let range = pair.1
+                let parts = range.componentsSeparatedByString(":")
+                self.familyAgeSlider.selectedMinimum = Float(parts[0])!
+                self.familyAgeSlider.selectedMaximum = Float(parts[1])!
             }
         }
     }
@@ -170,7 +179,6 @@ class DiscoveryFilterVC: UIViewController
     @IBAction func applyButtonPressed(sender : AnyObject)
     {
         var filter = [String: String]()
-        let today = NSDate().aws_stringValue("M/dd/yyyy")
         if(self.nameTF.text != "")
         {
             filter["Name"] = self.nameTF.text
@@ -223,10 +231,6 @@ class DiscoveryFilterVC: UIViewController
         {
             filter["Eye Color"] = self.eyeColorSegments.titleForSegmentAtIndex(self.eyeColorSegments.selectedSegmentIndex)
         }
-        if(self.birthdatePicker.date.aws_stringValue("M/dd/yyyy") != today)
-        {
-            filter["Birth Date"] = self.birthdatePicker.date.aws_stringValue("M/dd/yyyy")
-        }
         if(self.familyMemberNameTF.text != "")
         {
             filter["Family Member Name"] = self.familyMemberNameTF.text
@@ -251,10 +255,8 @@ class DiscoveryFilterVC: UIViewController
         {
             filter["Family Member High School"] = self.familyMemberHighSchoolTF.text
         }
-        if(self.familyMemberBirthDatePicker.date.aws_stringValue("M/dd/yyyy") != today)
-        {
-            filter["Family Member Birth Date"] = self.familyMemberBirthDatePicker.date.aws_stringValue("M/dd/yyyy")
-        }
+        filter["Family Member Age Range"] = "\(Int(self.familyAgeSlider.selectedMinimum)):\(Int(self.familyAgeSlider.selectedMaximum))"
+        filter["Age Range"] = "\(Int(self.ageSlider.selectedMinimum)):\(Int(self.ageSlider.selectedMaximum))"
         self.discoveryCollection.applyFilter(filter)
         self.dismissViewControllerAnimated(true, completion: nil)
     }

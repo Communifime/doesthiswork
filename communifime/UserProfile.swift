@@ -336,6 +336,28 @@ class UserProfile: NSObject, ImageContainer
         return [personalPairs, workPairs, educationPairs, familyPairs]
     }
     
+    func hasAgeInRange(min: Int, max: Int) -> Bool
+    {
+        let calendar : NSCalendar = NSCalendar.currentCalendar()
+        let ageComponents = calendar.components(.Year, fromDate: self.birthDate, toDate: NSDate(), options: [])
+        return ageComponents.year >= min && ageComponents.year <= max
+    }
+    
+    func hasFamilyMemberWithAgeInRange(min: Int, max: Int) -> Bool
+    {
+        let calendar : NSCalendar = NSCalendar.currentCalendar()
+        let now = NSDate()
+        for fm in self.familyMembers
+        {
+            let ageComponents = calendar.components(.Year, fromDate: fm.birthDate, toDate: now, options: [])
+            if(ageComponents.year >= min && ageComponents.year <= max)
+            {
+                return true
+            }
+        }
+        return false
+    }
+    
     func hasEmailContaining(s : String) -> Bool
     {
         for pair in self.emails
