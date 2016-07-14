@@ -50,7 +50,7 @@ class ProfileList: UITableViewController, UITextFieldDelegate
         }
         else if(section == 1)
         {
-            return "Work Data"
+            return "Family Data"
         }
         else if(section == 2)
         {
@@ -58,7 +58,7 @@ class ProfileList: UITableViewController, UITextFieldDelegate
         }
         else if(section == 3)
         {
-            return "Family Data"
+            return "Work Data"
         }
         else
         {

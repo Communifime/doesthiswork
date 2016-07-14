@@ -291,6 +291,10 @@ class UserProfile: NSObject, ImageContainer
         
         personalPairs.append(FormPair(name: "Last Name", value: self.lastName, type: "Text"))
         
+        personalPairs.append(FormPair(name: "emails", value: emails, type: "PairList"))
+        
+        personalPairs.append(FormPair(name: "phone numbers", value: phoneNumbers, type: "PairList"))
+        
         personalPairs.append(FormPair(name: "Gender", value: self.gender, type: "Segments"))
         
         personalPairs.append(FormPair(name: "Hair Color", value: self.hairColor, type: "Segments"))
@@ -299,15 +303,7 @@ class UserProfile: NSObject, ImageContainer
         
         personalPairs.append(FormPair(name: "Eye Color", value: self.eyeColor, type: "Segments"))
         
-        personalPairs.append(FormPair(name: "Home Address", value: homeAddress, type: "Address"))
-        
-        personalPairs.append(FormPair(name: "Home Town", value: self.hometown, type: "Text"))
-        
         personalPairs.append(FormPair(name: "Birth Date", value: self.birthDate, type: "Date"))
-        
-        personalPairs.append(FormPair(name: "emails", value: emails, type: "PairList"))
-        
-        personalPairs.append(FormPair(name: "phone numbers", value: phoneNumbers, type: "PairList"))
         
         personalPairs.append(FormPair(name: "Facebook", value: self.facebook, type: "Text"))
         
@@ -315,25 +311,26 @@ class UserProfile: NSObject, ImageContainer
         
         personalPairs.append(FormPair(name: "LinkedIn", value: self.linkedIn, type: "Text"))
         
+        personalPairs.append(FormPair(name: "Home Address", value: homeAddress, type: "Address"))
         
+        personalPairs.append(FormPair(name: "Home Town", value: self.hometown, type: "Text"))
+        
+        //Education
+        educationPairs.append(FormPair(name: "High School", value: self.highSchool, type: "Text"))
+        
+        educationPairs.append(FormPair(name: "colleges", value: colleges, type: "PairList"))
+
         //Work
         workPairs.append(FormPair(name: "Company", value: self.company, type: "Text"))
         
         workPairs.append(FormPair(name: "Position", value: self.position, type: "Text"))
         
         workPairs.append(FormPair(name: "Work Address", value: workAddress, type: "Address"))
-  
-        
-        //Education
-        educationPairs.append(FormPair(name: "High School", value: self.highSchool, type: "Text"))
-        
-        educationPairs.append(FormPair(name: "colleges", value: colleges, type: "PairList"))
         
         //Family
         familyPairs.append(FormPair(name: "Family Members", value: familyMembers, type: "FamilyList"))
         
-        
-        return [personalPairs, workPairs, educationPairs, familyPairs]
+        return [personalPairs, familyPairs, educationPairs, workPairs]
     }
     
     func hasAgeInRange(min: Int, max: Int) -> Bool

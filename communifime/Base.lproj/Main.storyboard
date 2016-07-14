@@ -137,7 +137,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FxF-AS-jkq">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <subviews>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" image="Loading-Data" translatesAutoresizingMaskIntoConstraints="NO" id="PeE-I0-YRp">
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="Loading-Data" translatesAutoresizingMaskIntoConstraints="NO" id="PeE-I0-YRp">
                                         <rect key="frame" x="0.0" y="8" width="414" height="316"/>
                                     </imageView>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="fTF-wS-aoV">
@@ -1190,7 +1190,7 @@
                         <viewControllerLayoutGuide type="bottom" id="DEK-yr-yAZ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="eca-5J-U1i">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="YGG-nb-gms">
@@ -1240,7 +1240,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="wpQ-S0-0fU">
-                                                <rect key="frame" x="26" y="30" width="145" height="30"/>
+                                                <rect key="frame" x="25" y="30" width="145" height="30"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lob-Kg-Lge">
                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="30"/>
@@ -3763,6 +3763,6 @@
         <image name="settings_icon.png" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="8Gj-gx-3vT"/>
+        <segue reference="zhI-bB-iwF"/>
     </inferredMetricsTieBreakers>
 </document>
